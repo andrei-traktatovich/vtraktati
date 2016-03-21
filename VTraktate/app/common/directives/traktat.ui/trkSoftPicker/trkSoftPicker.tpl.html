@@ -1,8 +1,8 @@
 ﻿<div>
     <ui-select ng-model="model.selection" multiple search-enabled="true"
                theme="select2" style="width: 200px;">
-        <ui-select-match placeholder="софт">{{$item.title}}</ui-select-match>
-        <ui-select-choices repeat="item.id as item in items | filter: { title : $select.search }">
+        <ui-select-match class="ui-select-match" placeholder="софт">{{$item.title}}</ui-select-match>
+        <ui-select-choices class="ui-select-choices" repeat="item.id as item in items | filter: { title : $select.search }">
             <div ng-bind-html="item.title | highlight: $select.search"></div>
         </ui-select-choices>
     </ui-select>

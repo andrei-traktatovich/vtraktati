@@ -16,8 +16,8 @@
                                ng-required="!editing && createMode === 'office'"
                                on-select="getProfile($item, $model)"
                                theme="bootstrap" style="width: 400px;">
-                        <ui-select-match placeholder="Офис...">{{$select.selected.title }}</ui-select-match>
-                        <ui-select-choices repeat="item.providerId as item in lists.officeProviders track by $index | filter : { title: $select.search }">
+                        <ui-select-match class="ui-select-match" placeholder="Офис...">{{$select.selected.title }}</ui-select-match>
+                        <ui-select-choices class="ui-select-choices" repeat="item.providerId as item in lists.officeProviders track by $index | filter : { title: $select.search }">
                             <div ng-bind-html="item.title | highlight: $select.search"></div>
                         </ui-select-choices>
                     </ui-select>
@@ -40,8 +40,8 @@
                                ng-required="!editing && createMode === 'any'"
                                on-select="getProfile($item, $model)"
                                theme="bootstrap" style="width: 400px;">
-                        <ui-select-match placeholder="Исполнитель...">{{$select.selected.name}}</ui-select-match>
-                        <ui-select-choices repeat="item.id as item in providers track by $index"
+                        <ui-select-match class="ui-select-match" placeholder="Исполнитель...">{{$select.selected.name}}</ui-select-match>
+                        <ui-select-choices class="ui-select-choices" repeat="item.id as item in providers track by $index"
                                            refresh="refreshProviders($select.search)"
                                            refresh-delay="100">
 
@@ -112,8 +112,8 @@
                                required
                                on-select="onJobTypeChanged($item, $model)"
                                theme="bootstrap" style="width: 200px;">
-                        <ui-select-match placeholder="Вид работ...">{{$select.selected.name}}</ui-select-match>
-                        <ui-select-choices repeat="item.id as item in lists.jobTypes track by $index | filter: $select.search">
+                        <ui-select-match class="ui-select-match" placeholder="Вид работ...">{{$select.selected.name}}</ui-select-match>
+                        <ui-select-choices class="ui-select-choices" repeat="item.id as item in lists.jobTypes track by $index | filter: $select.search">
                             <div ng-bind-html="item.name | highlight: $select.search"></div>
                         </ui-select-choices>
                     </ui-select>
@@ -127,8 +127,8 @@
                                ng-required="isJobTypeLinguistic"
                                name="inputLanguage"
                                theme="bootstrap" style="width: 200px;">
-                        <ui-select-match placeholder="Вид работ...">{{$select.selected.title }}</ui-select-match>
-                        <ui-select-choices repeat="item.id as item in lists.languages track by $index | filter: $select.search">
+                        <ui-select-match class="ui-select-match" placeholder="Вид работ...">{{$select.selected.title }}</ui-select-match>
+                        <ui-select-choices class="ui-select-choices" repeat="item.id as item in lists.languages track by $index | filter: $select.search">
                             <div ng-bind-html="item.title | highlight: $select.search"></div>
                         </ui-select-choices>
                     </ui-select>

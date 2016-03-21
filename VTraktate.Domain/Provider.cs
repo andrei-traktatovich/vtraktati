@@ -68,6 +68,4 @@ namespace VTraktate.Domain
 
         public bool WorksNightly { get; set; }
     }
-
-
 }

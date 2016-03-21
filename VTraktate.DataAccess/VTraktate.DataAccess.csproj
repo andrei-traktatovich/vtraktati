@@ -471,6 +471,14 @@
     <Compile Include="Migrations\201603181532532_add timedifference.Designer.cs">
       <DependentUpon>201603181532532_add timedifference.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201603211350295_temp.cs" />
+    <Compile Include="Migrations\201603211350295_temp.Designer.cs">
+      <DependentUpon>201603211350295_temp.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201603211355367_fix-legalform.cs" />
+    <Compile Include="Migrations\201603211355367_fix-legalform.Designer.cs">
+      <DependentUpon>201603211355367_fix-legalform.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TraktatContext.cs" />
@@ -794,6 +802,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201603181532532_add timedifference.resx">
       <DependentUpon>201603181532532_add timedifference.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201603211350295_temp.resx">
+      <DependentUpon>201603211350295_temp.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201603211355367_fix-legalform.resx">
+      <DependentUpon>201603211355367_fix-legalform.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

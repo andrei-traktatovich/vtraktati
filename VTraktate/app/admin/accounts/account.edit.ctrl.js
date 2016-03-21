@@ -1,6 +1,7 @@
 ﻿angular.module('app')
 .controller('accountEditCtrl', function ($http, $q, $scope, $state, AccountNamePreview, GlobalsService) {
     $scope.roles = GlobalsService.get('roles');
+    console.log("roles are:", roles);
     $scope.service = AccountNamePreview;
     $scope.creatingAccount = false;
     $scope.changingPassword = false;

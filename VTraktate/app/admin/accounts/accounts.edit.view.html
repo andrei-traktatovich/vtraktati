@@ -82,8 +82,8 @@
         <label for="inputUserRoles" class="col-sm-2 control-label">Роли</label>
         <div class="col-sm-10">
             <ui-select name="inputUserRoles" trk-require-multiple multiple ng-model="account.roles" theme="select2" ng-disabled="disabled" style="width: 800px;">
-                <ui-select-match placeholder="Выберите хотя бы одну роль...">{{$item.title}}</ui-select-match>
-                <ui-select-choices repeat="role.title as role in roles | orderBy : 'title' | propsFilter: {title: $select.search, description : $select.search }">
+                <ui-select-match  class="ui-select-match" placeholder="Выберите хотя бы одну роль...">{{$item.title}}</ui-select-match>
+                <ui-select-choices class="ui-select-choices" repeat="role.title as role in roles | orderBy : 'title' | propsFilter: {title: $select.search, description : $select.search }">
                     <div ng-bind-html="role.title | highlight: $select.search"></div>
                     <small>
                         <strong>{{role.title}}</strong><br /> {{ role.description }}

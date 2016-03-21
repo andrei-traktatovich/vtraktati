@@ -10,8 +10,8 @@
         <!-- TODO: REFACTOR! This is almost the servicetype picker except it works with whole service types rather than their ids -->
         <ui-select ng-model="newItems.services" multiple search-enabled="true"
                    theme="select2" style="width: 200px;">
-            <ui-select-match>{{$item.title}}</ui-select-match>
-            <ui-select-choices repeat="item as item in serviceTypes | filter: { title : $select.search }">
+            <ui-select-match class="ui-select-match">{{$item.title}}</ui-select-match>
+            <ui-select-choices class="ui-select-choices" repeat="item as item in serviceTypes | filter: { title : $select.search }">
                 <div ng-bind-html="item.title | highlight: $select.search"></div>
             </ui-select-choices>
         </ui-select>

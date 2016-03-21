@@ -11,8 +11,8 @@
         <!-- TODO: REFACTOR! This is almost the servicetype picker except it works with whole service types rather than their ids -->
         <ui-select ng-model="newItems.languages" multiple search-enabled="true" name="inputLanguages" id="inputLanguages"
                    theme="select2" style="width: 200px;">
-            <ui-select-match>{{$item.title}}</ui-select-match>
-            <ui-select-choices repeat="item as item in languages | filter: { title : $select.search }">
+            <ui-select-match class="ui-select-match">{{$item.title}}</ui-select-match>
+            <ui-select-choices class="ui-select-choices" repeat="item as item in languages | filter: { title : $select.search }">
                 <div ng-bind-html="item.title | highlight: $select.search"></div>
             </ui-select-choices>
         </ui-select>
@@ -21,8 +21,8 @@
         <label for="inputDomains" class="control-label">Тематики</label>
         <ui-select ng-model="newItems.domains" multiple search-enabled="true" name="inputDomains" id="inputDomains"
                    theme="select2" style="width: 200px;">
-            <ui-select-match>{{$item.title}}</ui-select-match>
-            <ui-select-choices repeat="item as item in domains | filter: { title : $select.search }">
+            <ui-select-match class="ui-select-match">{{$item.title}}</ui-select-match>
+            <ui-select-choices class="ui-select-choices" repeat="item as item in domains | filter: { title : $select.search }">
                 <div ng-bind-html="item.title | highlight: $select.search"></div>
             </ui-select-choices>
         </ui-select>

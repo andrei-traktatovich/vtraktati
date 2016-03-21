@@ -17,8 +17,8 @@
 
                                 <ui-select ng-model="model.customerId" theme="bootstrap" reset-search-input="false" autofocus on-select="onCustomerChanged($item, $model)"
                                            required name="inputCustomer">
-                                    <ui-select-match placeholder="Заказчик ...">{{$select.selected.shortName }}</ui-select-match>
-                                    <ui-select-choices repeat="customer.id as customer in customers track by $index | filter: $select.search" refresh="refreshCustomers($select.search)"
+                                    <ui-select-match class="ui-select-match" placeholder="Заказчик ...">{{$select.selected.shortName }}</ui-select-match>
+                                    <ui-select-choices class="ui-select-choices" repeat="customer.id as customer in customers track by $index | filter: $select.search" refresh="refreshCustomers($select.search)"
                                                        refresh-delay="0">
                                         <div ng-bind-html="customer.longName | highlight: $select.search"></div>
                                         <div ng-bind-html="customer.shortName | highlight: $select.search"></div>
@@ -72,8 +72,8 @@
                                        reset-search-input="false"
                                        on-select="onContactPersonSelected($item, $model)"
                                        required name="inputCustomerContactPerson">
-                                <ui-select-match placeholder="Контактное лицо ...">{{$select.selected.fullName }}</ui-select-match>
-                                <ui-select-choices repeat="contactPerson.id as contactPerson  in contactPersons track by $index | filter: $select.search"
+                                <ui-select-match class="ui-select-match" placeholder="Контактное лицо ...">{{$select.selected.fullName }}</ui-select-match>
+                                <ui-select-choices class="ui-select-choices" repeat="contactPerson.id as contactPerson  in contactPersons track by $index | filter: $select.search"
                                                    refresh="refreshContactPersons($select.search)"
                                                    refresh-delay="0">
                                     <div bind-html-unsafe="match.model.fullName | highlight: $select.search"></div>
