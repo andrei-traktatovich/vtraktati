@@ -16,7 +16,8 @@
         freelanceStatuses: GlobalsService.get('freelanceStatuses'),
         employmentStatuses: GlobalsService.get('employmentStatuses'),
         titles: GlobalsService.get('titles'),
-        offices: GlobalsService.get('offices')
+        offices: GlobalsService.get('offices'),
+        legalForms: GlobalsService.get("legalForms")
     };
     
     $scope.save = function () {
@@ -46,7 +47,9 @@
                 name: { firstName : null, middleName : null, lastName : null }
             },
             details: {
-                regionId: 2 // Russia
+                regionId: 2, // Russia,
+                legalFormId: 0, // individual,
+                worksNightly: false 
             },
             freelance: {
                 statusId : 1 // unchecked

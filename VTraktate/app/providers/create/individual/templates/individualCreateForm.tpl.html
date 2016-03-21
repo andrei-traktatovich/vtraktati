@@ -35,9 +35,20 @@
                     <textarea id="inputDetailsAddress" style="height: 200px;" class="form-control" ng-model="model.details.address"></textarea>
                 </div>
                 <div class="form-group">
-                    <label for="inputDetailsAddress">Город</label>
-                    <textarea id="inputDetailsAddress" style="height: 200px;" class="form-control" ng-model="model.details.city"></textarea>
+                    <label for="inputDetailsCity">Город</label>
+                    <textarea id="inputDetailsCity" style="height: 200px;" class="form-control" ng-model="model.details.city"></textarea>
                 </div>
+                
+                <div class="form-group">
+                    <label for="inputDetailsTimeDiff">Разница времени с МСК</label>
+                    <trk-time-diff id="inputDetailsTimeDiff" diff="model.details.timeDifference"></trk-time-diff>
+                </div>
+
+                <div class="form-group">
+                    <label for="inputDetailsWorksAtNight">Работает ночью</label>
+                    <input type="checkbox" id="inputDetailsWorksAtNight" diff="model.details.worksNightly"></input>
+                </div>
+
                 <div class="form-group">
                     <label for="inputDetailsComment">Комментарий</label>
                     <textarea id="inputDetailsComment" style="height: 200px;" class="form-control" ng-model="model.details.comment"></textarea>
@@ -70,8 +81,9 @@
                 </div>
 
                 <div class="form-group">
-                    <label for="inputIsIp">ИП</label>
-                    <input type="checkbox" ng-model="model.details.isIP" /> зарегистрирован как индивидуальный предприниматель
+                    <label for="inputIsIp">Организационно-правовая форма</label>
+                    <select id="inputFreeLanceStatus" ng-model="model.details.legalFormId" class="form-control"
+                            ng-options="item.id as item.name for item in lists.legalForms"></select>
                 </div>
 
                 <div class="form-group">
