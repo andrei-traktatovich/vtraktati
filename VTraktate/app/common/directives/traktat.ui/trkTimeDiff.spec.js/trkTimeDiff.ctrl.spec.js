@@ -1,67 +1,6 @@
-﻿/// <reference path="../../../../../Scripts/jasmine/jasmine.js" />
-/// <reference path="../../../../../Scripts/angular.min.js" />
-/// <reference path="../../../../../Scripts/angular-mocks.js" />
-
+﻿/// <reference path="../../../../../app.test-helpers/app-test-helpers.js"/>
+/// <reference path="../trkTimeDiff/trkTimeDiff.ctrl.js"/>
 "use strict";
-
-((global, isDebug) => {
-
-    global.createModule = (name, deps) => {
-        deps = deps || [];
-        try {
-            return angular.module(name);
-        } catch (e) {
-            if (isDebug)
-                console.info(`createModule: module ${  name } is unavailable, creating it ... (${ e })`);
-
-            return angular.module(name, deps);
-        }
-    }
-
-    global.instantiateController = (name, props) => {
-        var scope, controller;
-        inject(($controller, $rootScope) => {
-            scope = $rootScope.$new();
-            Object.assign(scope, props);
-            controller = $controller(name, { $scope: scope });
-        });
-        return { scope, controller };
-    };
-
-})(window, true);
-
-(() => {
-    
-    var mod = window.createModule("traktat.ui");
-    mod.controller("TimeDiffController", timeDiffController);
-
-    function timeDiffController($scope) {
-
-        normalizeDiffValue();
-
-        $scope.inc = inc;
-
-        $scope.dec = dec;
-
-        function normalizeDiffValue() {
-            $scope.diff = $scope.diff || 0;
-
-            if (Math.abs($scope.diff) > 12)
-                $scope.diff = 0;
-        }
-
-        function dec() {
-            if ($scope.diff > -12)
-                $scope.diff -= 1;
-        }
-
-        function inc() {
-            if ($scope.diff < 12)
-                $scope.diff += 1;
-        }
-    }
-})();
-
 
 describe("time diff controller", () => {
 

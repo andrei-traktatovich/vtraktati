@@ -213,6 +213,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="app.test-helpers\app-test-helpers.js" />
     <Content Include="app\app_specs\orders\create\order.create.ctrl.js" />
     <Content Include="app\app_specs\orders\jobs\jobFactory.js" />
     <Content Include="app\app_specs\orders\services\ordermanager.js" />
@@ -224,6 +225,7 @@
     <Content Include="app\common\directives\ThirdParty\ui-grid\ui-grid.js" />
     <Content Include="app\common\directives\ThirdParty\ui-grid\ui-grid.min.js" />
     <Content Include="app\common\directives\ThirdParty\ui-grid\ui-grid.svg" />
+    <Content Include="app\common\directives\traktat.ui\standardButtons\customButtons\standardButtons.dir.js" />
     <Content Include="app\common\directives\traktat.ui\standardButtons\standardButtonsController.ctrl.js" />
     <Content Include="app\common\directives\traktat.ui\standardButtons\trkCancelButton\trkCancelButton.dir.js" />
     <Content Include="app\common\directives\traktat.ui\standardButtons\trkCancelButton\trkCancelButton.tpl.html" />
@@ -232,13 +234,16 @@
     <Content Include="app\common\directives\traktat.ui\standardButtons\trkSaveButton\trkSaveButton.dir.js" />
     <Content Include="app\common\directives\traktat.ui\standardButtons\trkSaveButton\trkSaveButton.tpl.html" />
     <Content Include="app\common\directives\traktat.ui\trkTimeDiff.spec.js\trkTimeDiff.ctrl.spec.js" />
+    <Content Include="app\common\directives\traktat.ui\trkTimeDiff\trkTimeDiff.ctrl.js" />
     <Content Include="app\common\directives\traktat.ui\trkTimeDiff\trkTimeDiff.dir.js" />
+    <Content Include="app\common\directives\traktat.ui\trkTimeDiff\trkTimeDiff.tpl.html" />
     <Content Include="app\customerContactPersons\edit\customerContactPersonEditor.dir.js" />
     <Content Include="app\customerContactPersons\edit\customerContactPersonEditor.tpl.html" />
     <Content Include="app\customerContactPersons\customerContactPersons.mdl.js" />
     <Content Include="app\customerContactPersons\trkCustomerContactPersonGeneral\trkCustomerContactPersonGeneral.dir.js" />
     <Content Include="app\customerContactPersons\trkCustomerContactPersonGeneral\trkCustomerContactPersonGeneral.tpl.html" />
     <Content Include="app\customerContactPersons\trkCustomerContactPersonGeneral\trkCustomerContactPersonGeneral.ctrl.js" />
+    <Content Include="app\helpers\create-module.js" />
     <Content Include="app\infrastructure\constants.js" />
     <Content Include="app\infrastructure\dateTimeUtils\dateTimeUtils.mdl.js" />
     <Content Include="app\infrastructure\dateTimeUtils\taskDurationManager.js" />
