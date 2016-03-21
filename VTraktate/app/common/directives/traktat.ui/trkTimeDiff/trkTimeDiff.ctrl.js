@@ -7,6 +7,9 @@
     function timeDiffController($scope) {
 
         normalizeDiffValue();
+        
+        if ($scope.enabled === undefined)
+            $scope.enabled = true;
 
         $scope.inc = inc;
 

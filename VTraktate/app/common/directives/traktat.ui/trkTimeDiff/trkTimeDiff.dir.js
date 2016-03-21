@@ -9,9 +9,10 @@
         return {
             scope: {
                 diff: "=",
-                templateUrl: "/common/directive/traktat.ui/trkTimeDiff.trkTimeDiff.tpl.html",
-                controller: "TimeDiffController"
-            }
+                enabled: "="
+            },
+            templateUrl: "/common/directive/traktat.ui/trkTimeDiff.trkTimeDiff.tpl.html",
+            controller: "TimeDiffController"
         };
     }
 });

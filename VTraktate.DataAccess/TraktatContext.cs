@@ -81,6 +81,8 @@ namespace VTraktate.DataAccess
         public virtual IDbSet<JobUOM> JobUOMs { get; set; }
         public virtual IDbSet<JobType> JobTypes { get; set; }
 
+        public virtual IDbSet<LegalForm> LegalForms { get; set; }
+
         public virtual IQueryable<T> Existing<T>() where T : class, ISoftDelete
         {
             return this.Set<T>().Where(x => !x.IsDeleted);

@@ -145,8 +145,11 @@ namespace VTraktate.Repository
 
             var jobCompletionStatuses = _ctx.JobCompletionStatuses.OrderBy(x => x.Id).ToList();
 
+            var legalForms = _ctx.LegalForms.Select(x => new IdNamePair() {Id = x.Id, Name = x.Name}).ToList();
+
             var result = new AppGlobals 
-            { 
+            {
+                LegalForms = legalForms,
                 EmploymentStatuses = employmentStatuses, 
                 FreelanceStatuses = freelanceStatuses,
                 Offices = offices,

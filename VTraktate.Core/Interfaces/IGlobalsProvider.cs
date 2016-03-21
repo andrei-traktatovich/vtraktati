@@ -86,5 +86,7 @@ namespace VTraktate.Core.Interfaces
         public IEnumerable<JobCompletionStatus> JobCompletionStatuses { get; set; }
 
         public IEnumerable<OfficeProfileModel> OfficeProviders { get; set; }
+
+        public IEnumerable<IdNamePair> LegalForms { get; set; }
     }
 }

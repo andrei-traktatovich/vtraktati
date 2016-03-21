@@ -1,9 +1,9 @@
 ﻿
-<btn-plus onclick="inc()"></btn-plus>
+<btn-plus ng-show="enabled" onclick="inc()"></btn-plus>
 
 <span> {{ diff | addPlus }}</span>
 
-<btn-minus onclick="inc()"></btn-minus>
+<btn-minus ng-show="enabled"onclick="inc()"></btn-minus>
 
 &nbsp;
 

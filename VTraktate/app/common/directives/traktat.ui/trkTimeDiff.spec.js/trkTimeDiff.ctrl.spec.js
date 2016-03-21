@@ -60,4 +60,10 @@ describe("time diff controller", () => {
         expect(scope.diff).toEqual(12);
     });
 
+    it("if enabled is undefined, set it to true", () => {
+
+        getController({ diff: 0 });
+        expect(scope.enabled).toEqual(true);
+    });
+
 })
