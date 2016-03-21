@@ -1,0 +1,55 @@
+﻿
+<div>
+    
+    <div class="col-sm-3" trk-grade-semaphore="item.qaGrade">
+        <h4 ng-show="item.qaGrade">Балл: <strong>{{ item.qaGrade }}</strong></h4>
+        <h4 ng-hide="item.qaGrade" class="text-muted">Оценки еще нет</h4>
+    </div>
+    <div class="col-sm-3">
+        <h4 ng-if="!item.needsLanguage">
+            Тариф: <strong>{{ item.minRate }} ... {{ item.maxRate }}</strong>
+        </h4>
+    </div>
+    <div class="col-sm-2">
+        <h4>Валюта: <strong>{{ item.currencyName }}</strong></h4>
+    </div>
+    <div class="col-sm-3">
+        <h4 ng-show="item.serviceUOMId > 1">Ед.: <strong>{{ item.serviceUOMName }}</strong></h4>
+    </div>
+    <div class="col-sm-1">
+        <button ng-hide="readonly" class="btn btn-sm btn-danger pull-right" ng-click="remove(service)">
+            <span class="glyphicon glyphicon-trash"></span>
+
+        </button>
+
+        <button ng-hide="readonly" class="btn btn-sm btn-default pull-right" ng-click="edit(service)">
+            <span class="glyphicon glyphicon-pencil"></span>
+
+        </button>
+    </div>
+    <trk-time-stamp item="item"></trk-time-stamp>
+
+    <hr />
+
+    <div ng-show="item.comment">
+        <div class="well">
+            <i class="glyphicon glyphicon-hand-right"></i>
+            {{ item.comment }}
+        </div>
+    </div>
+
+    <div ng-show="item.qaComment">
+        <div class="well">
+            <i class="glyphicon glyphicon-hand-right"></i>
+            {{ item.qaComment }}
+        </div>
+    </div>
+
+
+</div>
+
+<div>
+
+    <trk-provider-languages-list items="item.languages" readonly="readonly" parent="item.id"></trk-provider-languages-list>
+
+</div>

@@ -1,0 +1,372 @@
+﻿<div ui-layout="{ flow : 'column' }" style="margin-top: 50px;">
+    <div ui-layout-container class="layout-container">
+        <div class="panel panel-info">
+            <div class="panel-heading">
+                <div class="row">
+                    <div class="col-sm-3">
+                        <div class="btn-toolbar" role="toolbar" ng-hide="readonly">
+                            <div class="btn-group btn-group-sm" role="group">
+                                <!-- create provider -->
+                                <button type="button" class="btn btn-sm btn-success dropdown-toggle" ng-hide="readonly"
+                                        data-toggle="dropdown" aria-expanded="false">
+                                    <i class="glyphicon glyphicon-user"></i>Новый
+                                    <span class="caret"></span>
+                                </button>
+
+                                <ul class="dropdown-menu success" role="menu">
+                                    <li>
+
+                                        <a ui-sref="hr.createIndividual({ type : data.freeLancer })">
+                                            <i class="glyphicon glyphicon glyphicon-globe text-default"></i>
+                                            {{ data.freelancer.title }}
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a ui-sref="hr.createIndividual({ type : data.employee })">
+                                            <i class="glyphicon glyphicon glyphicon-globe text-success"></i>
+                                            {{ data.employee.title }}
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-sm-9">
+                        <div class="btn-group btn-group-sm pull-right">
+                            <btn class="btn btn-sm btn-default" ng-click="reloadTable()" tooltip="Обновить" tooltip-placement="bottom">
+                                <i class="glyphicon glyphicon-refresh"></i>
+                            </btn>
+                            <btn class="btn btn-sm btn-default" ng-click="saveFilterSettings()" tooltip="Сохранить эти настройки фильтра" tooltip-placement="bottom">
+                                <i class="glyphicon glyphicon-floppy-save"></i>
+                            </btn>
+                            <btn class="btn btn-sm btn-default" ng-click="loadFilterSettings()" tooltip="Восстановить настройки фильтра" tooltip-placement="bottom">
+                                <i class="glyphicon glyphicon-floppy-open"></i>
+                            </btn>
+                            <btn class="btn btn-sm btn-default" ng-click="clearFilterSettings()" tooltip="Сбросить настройки фильтра" tooltip-placement="bottom">
+                                <i class="glyphicon glyphicon-unchecked"></i>
+                            </btn>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            <div class="panel-body">
+                <div class="text-small">
+                    <div class="row">
+                        <div class="form-horizontal">
+                            <div class="col-lg-3">
+                                <div class="form-group">
+                                    <div class="input-group">
+                                        <input type="text" id="inputName"
+                                               class="form-control"
+                                               placeholder="Имя (наименование)"
+                                               ng-model="tableParams.filter()['name']"
+                                               ng-change="toggleFilters()"
+                                               aria-describedby="search-addon" />
+                                        <!--<span class="input-group-addon" id="search-addon">
+                                            <i class="glyphicon glyphicon-search"></i>
+                                        </span>-->
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-1">
+                                <!--<button class="btn btn-sm btn-default"
+                                        ng-show="filtersVisible"
+                                        tooltip="Дополнительные фильтры"
+                                        ns-popover
+                                        ns-popover-template='app/providers/providersFilter/providersFilter.tpl.html' ns-placement='bottom'
+                                        ns-popover-hide-on-click="false">
+                                    <i class="glyphicon glyphicon-filter"></i>
+                                </button>-->
+
+                            </div>
+                            <div class="col-lg-4">
+                                <div class="form-group">
+                                    <trk-freelancestatus-picker ng-show="filtersVisible" selection="tableParams.filter()['freelanceStatuses']" id="freelanceStatusFilter"></trk-freelancestatus-picker>
+
+                                </div>
+                            </div>
+                            <div class="col-lg-4">
+                                <div class="form-group">
+
+                                    <trk-availabilitystatus-picker ng-show="filtersVisible" selection="tableParams.filter()['availabilityStatuses']" id="availabilityFilter"></trk-availabilitystatus-picker>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="form-horizontal">
+                            <div class="col-lg-4">
+                                <div class="form-group">
+                                    <trk-servicetype-picker selection="tableParams.filter()['serviceTypes']"
+                                                            ng-show="filtersVisible"
+                                                            id="serviceTypesFilter"></trk-servicetype-picker>
+                                </div>
+                            </div>
+                            <div class="col-lg-4">
+                                <div class="form-group">
+                                    <trk-language-picker ng-show="filtersVisible && tableParams.filter()['serviceTypes'].length"
+                                                         selection="tableParams.filter()['languages']"
+                                                         id="languagesFilter">
+                                    </trk-language-picker>
+
+                                </div>
+                            </div>
+                            <div class="col-lg-4">
+                                <div class="form-group">
+                                    <trk-domain-picker ng-show="filtersVisible && tableParams.filter()['serviceTypes'].length"
+                                                       selection="tableParams.filter()['domains']"
+                                                       id="domainsFilter">
+                                    </trk-domain-picker>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+
+
+
+                        <div class="panel panel-default" ng-show="filtersVisible">
+                            <div class="panel-heading">
+                                <h4 class="panel-title">
+                                    <a href="" ng-click="toggleAdditionalFilter()">
+                                        Дополнительные параметры
+
+                                        <i ng-show="showAdditionalFilter" class="glyphicon glyphicon-chevron-down pull-right"></i>
+                                        <i ng-hide="showAdditionalFilter" class="glyphicon glyphicon-chevron-up pull-right"></i>
+                                    </a>
+                                </h4>
+
+                            </div>
+                            <div class="panel-body" style="overflow:auto;" ng-show="showAdditionalFilter">
+
+                                <div class="col-lg-6">
+
+                                    <div class=" form-group">
+
+                                        <trk-providertype-picker selection="tableParams.filter()['providerTypes']" id="providerTypeFilter"></trk-providertype-picker>
+                                    </div>
+
+                                    <div class="form-group">
+
+                                        <trk-office-picker selection="tableParams.filter()['offices']" id="officeFilter"></trk-office-picker>
+                                    </div>
+
+                                    <div class="form-group">
+
+                                        <trk-employmentstatus-picker selection="tableParams.filter()['emplStatuses']" id="employmentStatusFilter"></trk-employmentstatus-picker>
+                                    </div>
+
+                                    <div class="form-group">
+
+                                        <trk-title-picker selection="tableParams.filter()['titles']" id="employeeTitleFilter"></trk-title-picker>
+                                    </div>
+
+
+                                    <div class="form-group">
+
+                                        <trk-region-picker selection="tableParams.filter()['regions']" id="regionFilter"></trk-region-picker>
+                                    </div>
+
+                                    <div class="form-group">
+
+                                        <trk-providergroup-picker selection="tableParams.filter()['providerGroups']" id="providergroupsFilter"></trk-providergroup-picker>
+                                    </div>
+
+                                    <div class="form-group">
+
+                                        <trk-soft-picker selection="tableParams.filter()['soft']" id="softwareFilter"></trk-soft-picker>
+                                    </div>
+
+
+                                </div>
+
+                                <div class="col-lg-6">
+
+                                    <div class="form-group">
+
+                                        <input type="number" ng-model="tableParams.filter()['minRate']" placeholder="тариф неср." class="form-control" style="width: 200px;" />
+                                    </div>
+                                    <div class="form-group">
+
+                                        <input type="number" ng-model="tableParams.filter()['maxRate']" placeholder="тариф сроч." class="form-control" style="width: 200px;" />
+                                    </div>
+                                    <div class="form-group">
+
+                                        <trk-serviceuom-picker selection="tableParams.filter()['uoms']"></trk-serviceuom-picker>
+                                    </div>
+                                    <div class="form-group">
+
+                                        <trk-currency-picker selection="tableParams.filter()['currencies']"></trk-currency-picker>
+                                    </div>
+
+
+
+                                    <div class="form-group">
+
+                                        <trk-stars-picker selection="tableParams.filter()['stars']" id="starFilter"></trk-stars-picker>
+                                    </div>
+
+                                    <div class="form-group">
+
+
+
+                                        <input type="number" ng-model="tableParams.filter()['minGrade']" placeholder="оценка min" class="form-control" style="width: 200px;" />
+                                    </div>
+                                    <div class="form-group">
+                                        <input type="number" ng-model="tableParams.filter()['maxGrade']" placeholder="оценка max" class="form-control" style="width: 200px;" />
+                                    </div>
+
+
+
+
+                                </div>
+                                <hr />
+
+                                <div class="form-group">
+                                    <label>Носитель</label>
+                                    <select ng-model="tableParams.filter()['native']" placeholder="Носитель" ng-options="item.id as item.title for item in lists.tripleChoice"></select>
+                                </div>
+                            </div>
+
+
+
+                        </div>
+
+
+                    </div>
+                </div>
+                <p ng-hide="filtersVisible">Поиск по имени (наименованию)</p>
+                <div>
+
+                    <table ng-table="tableParams" class="table noselect table-condensed ng-table-responsive text-small">
+                        <tbody>
+                            <tr ng-repeat="item in $data" ng-class="{ 'item-deleted' : item.isDeleted, 'provider-busy' : item.isBusy, 'provider-unavailable' : item.isUnavailable }"
+                                ng-click="select(item.id)">
+
+                                <td data-title="' '" ng-class=" { 'selected-table-row' : item.id === selectedItemId }" sortable="'promotion'">
+                                    <span ng-if="item.isPromoted" class="glyphicon glyphicon-arrow-up text-success"></span>
+                                </td>
+
+                                <td data-title="'Тип'" sortable="'typeName'">
+                                    <trk-glyphicon trk-gl-data="item.typeName"></trk-glyphicon>
+                                    <a class="cell-action" ng-hide="readonly" ns-popover ns-popover-template="providertypepopover" ns-placement="right">
+                                        <i class="glyphicon glyphicon-pencil"></i>
+                                    </a>
+
+                                </td>
+
+                                <td data-title="'Наименование'" sortable="'name'">
+                                    <a ui-sref=".profile({ id : item.id })" tooltip="Кликните, чтобы отобразить подробности">
+                                        <span ng-text-truncate="item.name" ng-tt-chars-threshold="30" ng-tt-no-toggling></span>
+                                    </a>
+                                </td>
+
+                                <!-- this is only shown if model includes rate & QA -->
+                                <td data-title="'Нос.'" ng-show="showRateAndQA" sortable="'native'">
+                                    <span ng-class="{ 'provider-native' : item.isNativeSpeaker }"></span>
+                                </td>
+
+                                <td data-title="'Тариф'" ng-show="showRateAndQA" sortable="'MinRate'">
+                                    <trk-glyphicon trk-gl-data="item.rate.currencyName"></trk-glyphicon>
+                                    <span ng-show="item.rate">{{ item.rate.minRate }}..{{ item.rate.maxRate }} </span>
+                                </td>
+                                <td data-title="'Ед.изм.'" ng-show="showRateAndQA" sortable="'UomName'">
+                                    {{ item.rate.uomName }}
+                                </td>
+
+                                <td data-title="'Звезды'" ng-show="showRateAndQA" sortable="'stars'">
+                                    <rating ng-model="item.qa.stars" max="3" readonly="true"></rating>
+                                </td>
+                                <td data-title="'Оценка'" ng-show="showRateAndQA" sortable="'grade'">
+                                    <trk-grade grade="item.qa.grade"></trk-grade>
+                                    <trk-conditional-comment message="item.qa.comment" heading="Комментарий"></trk-conditional-comment>
+                                </td>
+
+                                <td data-title="'Подразделение'" ng-show="includeInhouse">
+                                    <div ng-show="isEmployee(item)">
+                                        <span ng-text-truncate="item.employment.officeName" ng-tt-chars-threshold="20"></span>
+                                        <trk-conditional-comment message="item.employment.comment" heading="Комментарий"></trk-conditional-comment>
+                                        <a ng-hide="readonly" ng-click="changeEmployment(item)" class="cell-action"><span class="glyphicon glyphicon-pencil" tooltip="Кликните, чтобы изменить место работы"></span></a>
+                                        <div ng-if="item.calendar && item.calendar.officeId != item.employment.officeId" class="text-small">
+                                            временно {{ item.calendar.officeName }}
+                                        </div>
+                                    </div>
+                                </td>
+
+                                <td data-title="'Должность'" ng-show="includeInhouse">
+                                    <div ng-show="isEmployee(item)">
+                                        <span ng-text-truncate="item.employment.titleName" ng-tt-words-threshold="2"></span>
+                                        <a ng-hide="readonly" ng-click="changeEmployment(item)" class="cell-action" tooltip="Кликните, чтобы изменить должность">
+                                            <span class="glyphicon glyphicon-pencil"></span>
+                                        </a>
+                                    </div>
+                                </td>
+
+                                <td data-title="'Статус/активность'">
+                                    <span ng-show="isEmployee(item)">
+                                        {{ item.employment.statusName }}
+                                        <a ng-hide="readonly" ng-click="changeEmployment(item)" class="cell-action"><span class="glyphicon glyphicon-pencil" tooltip="Кликните, чтобы изменить статус штатной работы"></span></a>
+                                    </span>
+                                    <span ng-show="!isEmployee(item)">
+                                        {{item.freelance.statusName }}
+                                        <trk-conditional-comment message="item.freelance.comment" heading="Комментарий"></trk-conditional-comment>
+                                        <a ng-hide="readonly" ng-click="changeFreelance(item)" class="cell-action"><span class="glyphicon glyphicon-pencil" tooltip="Кликните, чтобы изменить статус внештатной работы"></span></a>
+                                    </span>
+                                </td>
+
+                                <td data-title="'Занятость'">
+                                    {{ item.availability.statusName }}
+                                    <span ng-if="item.availability.statusThrough" class="text-small">
+                                        до <trk-datetime trk-dt-mode="date" trk-dt-val="item.availability.statusThrough"></trk-datetime>
+                                    </span>
+                                    <span ng-show="item.availability.pendingJobsCount > 0" class="text-small">
+                                        &nbsp;{{ item.availability.pendingJobsCount }} заказов к <trk-datetime trk-dt-val="item.availability.latestDueDate"></trk-datetime>
+                                    </span>
+                                    <trk-conditional-comment message="item.availability.comment" heading="Комментарий"></trk-conditional-comment>
+                                    <a ng-click="showAvailabilityCalendar(item)" class="cell-action"><span class="glyphicon glyphicon-calendar" tooltip="Посмотреть занятость"></span></a>
+                                </td>
+
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+
+    <div ui-layout-container size="60%" class="layout-container">
+
+        <ui-view>
+
+            <div class="alert alert-info">
+                <h3>Подробная информация об исполнителе.</h3>
+                <p>Кликните на фамилию исполнителя, чтобы отобразить подробную информацию о нем.</p>
+            </div>
+
+        </ui-view>
+
+    </div>
+</div>
+
+
+
+<script type="text/ng-template" id="providertypepopover">
+    <div class="popover-wrapper">
+        <ul class="list list-unstyled popover-list">
+            <li ng-repeat="providerType in lists.providerTypes"
+                ng-hide="providerType.id === item.typeId || providerType.id === 2" class="ns-popover-list-item"
+                ng-click="changeType(item, providerType.id)">
+                <!-- magic number!!! -->
+                {{ providerType.title }}
+            </li>
+        </ul>
+    </div>
+</script>
+
+

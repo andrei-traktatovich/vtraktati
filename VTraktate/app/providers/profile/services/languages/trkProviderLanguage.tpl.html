@@ -1,0 +1,64 @@
+﻿<div class="container">
+
+    <div class="row">
+
+        <div>
+            <h4>
+                <rating ng-model="item.qaStars" max="3" readonly="true" tooltip="Чем больше звезд, тем выше приоритет"></rating>
+                <strong>{{ item.languagePairName}}</strong>
+            </h4>
+            <div class="btn-group-sm" ng-if="!readonly">
+                <button class="btn btn-small btn-danger" ng-click="remove()" tooltip="Удалить это языковое направление">
+                    <i class="glyphicon glyphicon-trash"></i>
+                </button>
+                <button class="btn btn-small btn-default" ng-click="edit()" tooltip="Изменить это языковое направление">
+                    <i class="glyphicon glyphicon-pencil"></i>
+                </button>
+            </div>
+        </div>
+        <h3 ng-show="item.qaGrade">Балл: <strong tooltip="Оценка - среднее арифметическое оценок, выставленных редакторами">{{ item.qaGrade }}</strong></h3>
+        <h3 ng-hide="item.qaGrade" class="text-muted">Оценки еще нет</h3>
+
+        <p ng-if="item.nativeSpeaker" tooltip="Считается, что владеет целевым языком на уровне носителя">НОСИТЕЛЬ</p>
+
+        <p tooltip="Согласованный коридор стандартных тарифов">Тариф несрочный {{ item.minRate || '?' }} срочный {{ item.maxRate || '?' }}</p>
+        <p tooltip="Согласованный коридор стандартных тарифов">Производительность от {{ item.productivityMin || '?' }} до {{ item.productivityMax || '?' }}</p>
+
+
+        <div ng-show="item.qaComment">
+            <p>
+                <i class="glyphicon glyphicon-hand-right"></i>
+                <strong>Комментарий к рейтингу</strong>
+            </p>
+            <p>{{ item.qaComment }}</p>
+        </div>
+
+        <!-- I probably do not have this at all -->
+        <div ng-show="item.comment">
+            <p><i class="glyphicon glyphicon-hand-right"></i>Комментарий к языковой паре</p>
+            <p>{{ item.comment }}</p>
+        </div>
+        <trk-time-stamp item="item"></trk-time-stamp>
+    </div>
+
+
+
+
+
+
+
+    <h4 tooltip="Тематики, официально включенные в число тематик этого исполнителя">Утвержденные тематики</h4>
+    <trk-provider-domains-list readonly="readonly" items="item.domains" parent="item.id"></trk-provider-domains-list>
+
+
+
+
+
+    <h4 tooltip="Включены оценки редакторов за работы, на которые исполнитель был фактически назначен (вне зависимости от того, является ли тематика утвержденной или нет)">Отзывы</h4>
+    <p class="text-small text-muted">
+        Оценки по утвержденным и <u>неутвержденным</u> тематикам
+    </p>
+    <trk-grade-viewer language-id="item.id"></trk-grade-viewer>
+
+
+</div>

@@ -1,0 +1,69 @@
+﻿<div>
+    <div class="form">
+        <div class="panel panel-info">
+            <div class="panel-heading">
+                <h4 class="panel-title">
+                    <strong>{{ item.languagePair.name }}</strong>
+
+                    <rating ng-model="item.stars" max="3" />
+                    
+                    <button class="btn btn-sm btn-default pull-right" ng-click="remove()">
+                        <i class="glyphicon glyphicon-trash"></i>
+                    </button>
+                </h4>
+            </div>
+            <div class="panel-body">
+
+                <div class="row">
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label for="">Тариф несрочный</label>
+                            <input type="number" ng-model="item.minRate" class="form-control" />
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label for="">Тариф срочный</label>
+                            <input type="number" ng-model="item.maxRate" class="form-control" />
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label for="">Производительность, мин.</label>
+                            <input type="number" ng-model="item.productivityMin" class="form-control" />
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label for="">Производительность, макс.</label>
+                            <input type="number" ng-model="item.productivityMax" class="form-control" />
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label for="">Комментарий</label>
+                            <textarea ng-model="item.comment" class="form-control"></textarea>
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label for="">Носитель</label>
+                            <input type="checkbox" ng-model="item.native"/> Является носителем целевого языка
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <h4>Тематики</h4>
+                    <trk-provider-service-language-domains items="item.domains"></trk-provider-service-language-domains>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

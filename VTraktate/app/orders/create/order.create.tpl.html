@@ -1,0 +1,191 @@
+﻿<div class="container" style="min-width: 100%">
+    <div class="row">
+        <h3>Создание нового заказа</h3>
+
+        <div class="form" ng-form name="orderCreateForm">
+            <div class="row">
+
+                <div class="col-sm-12">
+                    <!-- customer selector area && customer data display area -->
+                    <div class="row">
+
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label class="control-label">
+                                    Выбор заказчика
+                                </label>
+
+                                <ui-select ng-model="model.customerId" theme="bootstrap" reset-search-input="false" autofocus on-select="onCustomerChanged($item, $model)"
+                                           required name="inputCustomer">
+                                    <ui-select-match placeholder="Заказчик ...">{{$select.selected.shortName }}</ui-select-match>
+                                    <ui-select-choices repeat="customer.id as customer in customers track by $index | filter: $select.search" refresh="refreshCustomers($select.search)"
+                                                       refresh-delay="0">
+                                        <div ng-bind-html="customer.longName | highlight: $select.search"></div>
+                                        <div ng-bind-html="customer.shortName | highlight: $select.search"></div>
+                                        <div ng-bind-html="customer.code | highlight: $select.search"></div>
+                                    </ui-select-choices>
+                                </ui-select>
+
+                                <trk-error-summary for="orderCreateForm.inputCustomer"></trk-error-summary>
+                            </div>
+                        </div>
+
+                        <div class="col-md-9  text-small">
+                            <div class="row" ng-show="model.customerId">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label class="control-label">
+                                            Официальное название
+                                        </label>
+                                        <p>{{ customer.longName }}</p>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label class="control-label">
+                                            Краткое название
+                                        </label>
+                                        <p>{{ customer.shortName }}</p>
+                                    </div>
+                                </div>
+                                <div class="col-md-2">
+                                    <div class="form-group">
+                                        <label class="control-label">
+                                            Код
+                                        </label>
+                                        <p>{{ customer.code }}</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <!-- contact person selector area -->
+
+                        <div class="form-group">
+                            <label class="control-label">
+                                Контактное лицо
+                            </label>
+                            <ui-select ng-model="model.contactPersonId"
+                                       theme="bootstrap"
+                                       reset-search-input="false"
+                                       on-select="onContactPersonSelected($item, $model)"
+                                       required name="inputCustomerContactPerson">
+                                <ui-select-match placeholder="Контактное лицо ...">{{$select.selected.fullName }}</ui-select-match>
+                                <ui-select-choices repeat="contactPerson.id as contactPerson  in contactPersons track by $index | filter: $select.search"
+                                                   refresh="refreshContactPersons($select.search)"
+                                                   refresh-delay="0">
+                                    <div bind-html-unsafe="match.model.fullName | highlight: $select.search"></div>
+                                    <div class="text-small" bind-html-unsafe="match.model.phone | highlight: $select.search"></div>
+                                    <div class="text-small" bind-html-unsafe="match.model.email | highlight: $select.search"></div>
+
+                                </ui-select-choices>
+                            </ui-select>
+
+                        </div>
+                        <!-- add contact person -->
+                        <!-- TODO: button to add contact person to customer -->
+
+                        <!-- contact person details -->
+                        <div ng-show="model.contactPersonId"> <!-- only show if some contact person is selected -->
+                            <!-- display contact person data -->    
+                            <div ng-include="'app/customerContactPersons/customerContactPersonProfile.tpl.html'"></div>
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="row well text-small" ng-disabled="!model.customerId">
+                <h4 ng-show="model.customerId">
+                    {{ orderOptions.orderLiteral }}
+
+                    <span ng-hide="manualNumberEnabled">...</span>
+                    <input type="number" ng-model="model.number" name="inputOrderNo" ng-show="manualNumberEnabled"
+                           ng-required="manualNumberEnabled" />
+                    <trk-error-summary for="orderCreateForm.inputOrderNo"></trk-error-summary>
+                    <button class="btn-sm btn-default" tabindex="-1" ng-show="manualNumberEnabled" ng-click="disableManualNumber()">
+                        <i class="glyphicon glyphicon-remove" tooltip="Присвоить номер автоматически"></i>
+                    </button>
+
+                    <small ng-hide="manualNumberEnabled">
+                        Номер будет присвоен при сохранении заказа.
+                        <button class="btn-sm btn-default" ng-click="enableManualNumber()">
+                            <i class="glyphicon glyphicon-pencil" tooltip="Присвоить номер вручную"></i>
+                        </button>
+
+
+                    </small>
+                </h4>
+                <jobs-table jobs="model.jobs" initial-total="initialTotal" order="model" order-options="orderOptions"></jobs-table>
+                <hr />
+            </div>
+
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form form-horizontal">
+                        <div class="form-group">
+                            <label class="control-label">
+                                Дата и время получения
+                            </label>
+                            <datetimepicker placeholder="дд.мм.гггг" required name="inputEndDate" hour-step="1" minute-step="10"
+                                            ng-model="model.startDate"
+                                            show-meridian="false" tabindex="-1" date-format="dd-MMM-yyyy" date-options="dateOptions" readonly-time="false">
+                            </datetimepicker>
+                            <trk-error-summary for="orderCreateForm.inputStartDate"></trk-error-summary>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form form-horizontal">
+                        <div class="form-group">
+                            <label class="control-label">
+                                Дата и время сдачи
+                            </label>
+                            <datetimepicker placeholder="дд.мм.гггг" required name="inputEndDate" hour-step="1" minute-step="10" ng-model="model.plannedDeliveryDate"
+                                            show-meridian="false" date-format="dd-MMM-yyyy" date-options="dateOptions" tabindex="-1" readonly-time="false">
+                            </datetimepicker>
+                            <trk-error-summary for="orderCreateForm.inputEndDate"></trk-error-summary>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label class="control-label" for="inputComments">
+                            Примечания
+                        </label>
+                        <textarea class="form-control" name="inputComments" style="min-height: 200px; min-width: 100%;" ng-model="model.comment"></textarea>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label class="control-label" for="inputTranslteration">
+                            Требования к транслитерации
+                        </label>
+                        <textarea class="form-control" name="inputTranslteration" style="min-height: 200px; min-width: 100%;" ng-model="model.transliterationRequirements"></textarea>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="row">
+                <div class="col-sm-12">
+                    <trk-form-error text="errorMessage"></trk-form-error>
+                    <div class="pull-right">
+                        <!--<button class="btn btn-lg btn-default">Сделать шаблон</button>-->
+                        <input type="checkbox" ng-model="storeTemplate" />
+                        <input type="text" ng-model="templateName" ng-show="storeTemplate" />
+                        <a class="btn btn btn-success" ng-disabled="orderCreateForm.$invalid || !model.jobs.length || checkTemplate()" ng-click="save()">Сохранить</a>
+                        <a ui-sref="orders.list" class="btn btn btn-default">Отмена</a>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

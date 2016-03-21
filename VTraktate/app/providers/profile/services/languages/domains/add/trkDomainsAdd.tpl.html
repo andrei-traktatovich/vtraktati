@@ -1,0 +1,40 @@
+﻿
+<div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+    <h4 class="modal-title">Добавление тематик</h4>
+</div>
+<div class="modal-body">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12">
+                <div ng-form class="form-horizontal">
+
+                    <div class="form-group">
+                        <label>Тематики</label>
+                        <trk-domain-picker selection="model.domainIds" except="existingDomains"></trk-domain-picker>
+                        <p ng-show="!model.domainIds.length"
+                           class="text-danger text-small">
+                            Необходимо выбрать хотя бы одну тематику
+                        </p>
+                    </div>
+                    <div class="form-group">
+                        <label>Звезды</label>
+                        <rating ng-model="model.stars" max="3"></rating>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>Комментарий</label>
+                        <textarea ng-model="model.comment" class="form-control"></textarea>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal-footer">
+        <trk-form-error text="errorMessage"></trk-form-error>
+        <button class="btn btn-sm glyphicon glyphicon-save btn-success" ng-disabled="!model.domainIds.length" ng-click="ok()">Сохранить</button>
+        <button class="btn btn-sm glyphicon glyphicon-remove btn-danger" ng-click="cancel()">Отмена</button>
+    </div>
+
+</div>

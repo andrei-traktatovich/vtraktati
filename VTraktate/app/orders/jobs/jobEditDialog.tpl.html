@@ -1,0 +1,71 @@
+﻿<div class="modal-header">
+    <h4 class="modal-title">
+        <span ng-if="mode === 'clone'">
+        Добавление вида работ {{ job.order.name }}
+        </span>
+        <span ng-if="mode === 'edit'">
+            Редактирование вида работ {{ job.order.name }}
+        </span>
+        
+    </h4>
+</div>
+<div class="modal-body" ng-form name="jobEditForm">
+
+    <div class="row">
+        <!-- дата начала и дата конца -->
+        <div class="col-md-6">
+            <div class="form-group">
+                <label class="control-label">Дата начала</label>
+                <datetimepicker placeholder="дд.мм.гггг"
+                                            required
+                                            name="inputStartDate"
+                                            hour-step="1"
+                                            minute-step="10"
+                                            ng-model="job.startDate"
+                                            show-meridian="false"
+                                            date-format="dd-MMM-yyyy"
+                                            date-options="dateOptions"
+                                            tabindex="-1"
+                                            readonly-time="false">
+                            </datetimepicker>
+                <trk-error-summary for="inputStartDate"></trk-error-summary>
+            </div>    
+        </div>
+        <div class="col-md-6">
+            <div class="form-group">
+                <label class="control-label">Дата конца</label>
+                <datetimepicker placeholder="дд.мм.гггг"
+                                            required
+                                            name="inputStartDate"
+                                            hour-step="1"
+                                            minute-step="10"
+                                            ng-model="job.endDate"
+                                            show-meridian="false"
+                                            date-format="dd-MMM-yyyy"
+                                            date-options="dateOptions"
+                                            tabindex="-1"
+                                            readonly-time="false">
+                            </datetimepicker>
+                <trk-error-summary for="inputEndDate"></trk-error-summary>
+            </div>    
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-12">
+            <trk-job-line></trk-job-line>
+        </div>
+    </div>
+
+
+
+</div>
+
+<div class="modal-footer">
+    <trk-form-error text="errorMessage"></trk-form-error>
+    <button class="btn btn-sm btn-success" ng-click="save()">
+        <i class="glyphicon glyphicon-save"></i> Ок
+    </button>
+    <button class="btn btn-sm btn-danger" ng-click="cancel()">
+        <i class="glyphicon glyphicon-remove"></i> Отмена
+    </button>
+</div>

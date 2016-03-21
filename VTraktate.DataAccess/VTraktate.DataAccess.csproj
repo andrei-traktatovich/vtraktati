@@ -1,0 +1,807 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{1D3E0AC0-2667-4A53-AF0D-5A3CB74E6F1D}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>VTraktate.DataAccess</RootNamespace>
+    <AssemblyName>VTraktate.DataAccess</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <UseVSHostingProcess>false</UseVSHostingProcess>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="ExtendIQueryable.cs" />
+    <Compile Include="ExtensionMethods\FilterExpressions.cs" />
+    <Compile Include="Mappings\CalendarPeriodmap.cs" />
+    <Compile Include="Mappings\JobMapping.cs" />
+    <Compile Include="Mappings\JobPartMapping.cs" />
+    <Compile Include="Mappings\OfficeMap.cs" />
+    <Compile Include="Mappings\PersonMap.cs" />
+    <Compile Include="Mappings\EmploymentMap.cs" />
+    <Compile Include="Migrations\201504142004399_initial.cs" />
+    <Compile Include="Migrations\201504142004399_initial.Designer.cs">
+      <DependentUpon>201504142004399_initial.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201504142008135_personname.cs" />
+    <Compile Include="Migrations\201504142008135_personname.Designer.cs">
+      <DependentUpon>201504142008135_personname.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201504142028226_person_completed.cs" />
+    <Compile Include="Migrations\201504142028226_person_completed.Designer.cs">
+      <DependentUpon>201504142028226_person_completed.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201504142047075_provider.cs" />
+    <Compile Include="Migrations\201504142047075_provider.Designer.cs">
+      <DependentUpon>201504142047075_provider.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201504142051075_person_and_provider.cs" />
+    <Compile Include="Migrations\201504142051075_person_and_provider.Designer.cs">
+      <DependentUpon>201504142051075_person_and_provider.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201504142052332_provider_person_optional_rel.cs" />
+    <Compile Include="Migrations\201504142052332_provider_person_optional_rel.Designer.cs">
+      <DependentUpon>201504142052332_provider_person_optional_rel.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201504142106519_offices.cs" />
+    <Compile Include="Migrations\201504142106519_offices.Designer.cs">
+      <DependentUpon>201504142106519_offices.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201504142109409_fix_office_provider.cs" />
+    <Compile Include="Migrations\201504142109409_fix_office_provider.Designer.cs">
+      <DependentUpon>201504142109409_fix_office_provider.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201504150848200_employments.cs" />
+    <Compile Include="Migrations\201504150848200_employments.Designer.cs">
+      <DependentUpon>201504150848200_employments.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201504150911589_freelances.cs" />
+    <Compile Include="Migrations\201504150911589_freelances.Designer.cs">
+      <DependentUpon>201504150911589_freelances.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201504150923523_emails.cs" />
+    <Compile Include="Migrations\201504150923523_emails.Designer.cs">
+      <DependentUpon>201504150923523_emails.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201504151357336_calendar_periods.cs" />
+    <Compile Include="Migrations\201504151357336_calendar_periods.Designer.cs">
+      <DependentUpon>201504151357336_calendar_periods.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201504151407002_fix_provider_id.cs" />
+    <Compile Include="Migrations\201504151407002_fix_provider_id.Designer.cs">
+      <DependentUpon>201504151407002_fix_provider_id.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201504171505416_services_languages_Domains.cs" />
+    <Compile Include="Migrations\201504171505416_services_languages_Domains.Designer.cs">
+      <DependentUpon>201504171505416_services_languages_Domains.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201504200706274_FromRussianInLanguagePair.cs" />
+    <Compile Include="Migrations\201504200706274_FromRussianInLanguagePair.Designer.cs">
+      <DependentUpon>201504200706274_FromRussianInLanguagePair.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201504200719084_legacyIDs.cs" />
+    <Compile Include="Migrations\201504200719084_legacyIDs.Designer.cs">
+      <DependentUpon>201504200719084_legacyIDs.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201504200816362_offices_and_office_types_and_legalEntities.cs" />
+    <Compile Include="Migrations\201504200816362_offices_and_office_types_and_legalEntities.Designer.cs">
+      <DependentUpon>201504200816362_offices_and_office_types_and_legalEntities.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201504200819127_Business_details.cs" />
+    <Compile Include="Migrations\201504200819127_Business_details.Designer.cs">
+      <DependentUpon>201504200819127_Business_details.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201504200822171_office_sotfDelete.cs" />
+    <Compile Include="Migrations\201504200822171_office_sotfDelete.Designer.cs">
+      <DependentUpon>201504200822171_office_sotfDelete.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201504200833081_office_sotf_f0x.cs" />
+    <Compile Include="Migrations\201504200833081_office_sotf_f0x.Designer.cs">
+      <DependentUpon>201504200833081_office_sotf_f0x.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201504200957069_oldids_person_provider.cs" />
+    <Compile Include="Migrations\201504200957069_oldids_person_provider.Designer.cs">
+      <DependentUpon>201504200957069_oldids_person_provider.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201504240847471_calendar_period_confirmed_by.cs" />
+    <Compile Include="Migrations\201504240847471_calendar_period_confirmed_by.Designer.cs">
+      <DependentUpon>201504240847471_calendar_period_confirmed_by.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201504240858321_freelanceCalendarPeriodsAndPromotionsAdded.cs" />
+    <Compile Include="Migrations\201504240858321_freelanceCalendarPeriodsAndPromotionsAdded.Designer.cs">
+      <DependentUpon>201504240858321_freelanceCalendarPeriodsAndPromotionsAdded.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201504241115102_add_reference_to_language_from_domains.cs" />
+    <Compile Include="Migrations\201504241115102_add_reference_to_language_from_domains.Designer.cs">
+      <DependentUpon>201504241115102_add_reference_to_language_from_domains.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201504291325240_rename_freelance_calendar_statuses_to_availability_statuses.cs" />
+    <Compile Include="Migrations\201504291325240_rename_freelance_calendar_statuses_to_availability_statuses.Designer.cs">
+      <DependentUpon>201504291325240_rename_freelance_calendar_statuses_to_availability_statuses.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201505051346201_jobPart_job_added.cs" />
+    <Compile Include="Migrations\201505051346201_jobPart_job_added.Designer.cs">
+      <DependentUpon>201505051346201_jobPart_job_added.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201505051540232_added_pending_to_jobPartComletionSTatus.cs" />
+    <Compile Include="Migrations\201505051540232_added_pending_to_jobPartComletionSTatus.Designer.cs">
+      <DependentUpon>201505051540232_added_pending_to_jobPartComletionSTatus.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201505060939542_added_regions.cs" />
+    <Compile Include="Migrations\201505060939542_added_regions.Designer.cs">
+      <DependentUpon>201505060939542_added_regions.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201505060941432_fix_regions.cs" />
+    <Compile Include="Migrations\201505060941432_fix_regions.Designer.cs">
+      <DependentUpon>201505060941432_fix_regions.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201505060946113_fix_regions2.cs" />
+    <Compile Include="Migrations\201505060946113_fix_regions2.Designer.cs">
+      <DependentUpon>201505060946113_fix_regions2.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201505061125114_add_providerGroups.cs" />
+    <Compile Include="Migrations\201505061125114_add_providerGroups.Designer.cs">
+      <DependentUpon>201505061125114_add_providerGroups.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201505061129059_fix_providerGroups.cs" />
+    <Compile Include="Migrations\201505061129059_fix_providerGroups.Designer.cs">
+      <DependentUpon>201505061129059_fix_providerGroups.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201505071117303_fix.cs" />
+    <Compile Include="Migrations\201505071117303_fix.Designer.cs">
+      <DependentUpon>201505071117303_fix.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201505071205222_additionalstuff.cs" />
+    <Compile Include="Migrations\201505071205222_additionalstuff.Designer.cs">
+      <DependentUpon>201505071205222_additionalstuff.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201505181330436_software_added.cs" />
+    <Compile Include="Migrations\201505181330436_software_added.Designer.cs">
+      <DependentUpon>201505181330436_software_added.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201505191011288_add_phonetypes.cs" />
+    <Compile Include="Migrations\201505191011288_add_phonetypes.Designer.cs">
+      <DependentUpon>201505191011288_add_phonetypes.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201505200918054_added_phones_other_contacts.cs" />
+    <Compile Include="Migrations\201505200918054_added_phones_other_contacts.Designer.cs">
+      <DependentUpon>201505200918054_added_phones_other_contacts.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201505200935162_fix_bugs.cs" />
+    <Compile Include="Migrations\201505200935162_fix_bugs.Designer.cs">
+      <DependentUpon>201505200935162_fix_bugs.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201505261553181_fix_email.cs" />
+    <Compile Include="Migrations\201505261553181_fix_email.Designer.cs">
+      <DependentUpon>201505261553181_fix_email.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201505270911477_fix_double_key_in_email_step1.cs" />
+    <Compile Include="Migrations\201505270911477_fix_double_key_in_email_step1.Designer.cs">
+      <DependentUpon>201505270911477_fix_double_key_in_email_step1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201505270914190_fix_double_key_in_email_step2.cs" />
+    <Compile Include="Migrations\201505270914190_fix_double_key_in_email_step2.Designer.cs">
+      <DependentUpon>201505270914190_fix_double_key_in_email_step2.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201505270949199_fix_double_key_in_phone.cs" />
+    <Compile Include="Migrations\201505270949199_fix_double_key_in_phone.Designer.cs">
+      <DependentUpon>201505270949199_fix_double_key_in_phone.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201505281749237_add_soft_delete_to_freelance.cs" />
+    <Compile Include="Migrations\201505281749237_add_soft_delete_to_freelance.Designer.cs">
+      <DependentUpon>201505281749237_add_soft_delete_to_freelance.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201506081058385_update_calendarPeriods.cs" />
+    <Compile Include="Migrations\201506081058385_update_calendarPeriods.Designer.cs">
+      <DependentUpon>201506081058385_update_calendarPeriods.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201506081710423_add_native_speaker.cs" />
+    <Compile Include="Migrations\201506081710423_add_native_speaker.Designer.cs">
+      <DependentUpon>201506081710423_add_native_speaker.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201506092009352_fix_providersoft.cs" />
+    <Compile Include="Migrations\201506092009352_fix_providersoft.Designer.cs">
+      <DependentUpon>201506092009352_fix_providersoft.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201506182046272_add_grades.cs" />
+    <Compile Include="Migrations\201506182046272_add_grades.Designer.cs">
+      <DependentUpon>201506182046272_add_grades.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201506182138458_add_grades_v2.cs" />
+    <Compile Include="Migrations\201506182138458_add_grades_v2.Designer.cs">
+      <DependentUpon>201506182138458_add_grades_v2.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201506190727396_grades_add_style.cs" />
+    <Compile Include="Migrations\201506190727396_grades_add_style.Designer.cs">
+      <DependentUpon>201506190727396_grades_add_style.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201506251214254_modifyGradeModel.cs" />
+    <Compile Include="Migrations\201506251214254_modifyGradeModel.Designer.cs">
+      <DependentUpon>201506251214254_modifyGradeModel.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201506251216529_modifyGradeModel1.cs" />
+    <Compile Include="Migrations\201506251216529_modifyGradeModel1.Designer.cs">
+      <DependentUpon>201506251216529_modifyGradeModel1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201506251923175_updateGrades.cs" />
+    <Compile Include="Migrations\201506251923175_updateGrades.Designer.cs">
+      <DependentUpon>201506251923175_updateGrades.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201506251931314_connectGradesToProviders.cs" />
+    <Compile Include="Migrations\201506251931314_connectGradesToProviders.Designer.cs">
+      <DependentUpon>201506251931314_connectGradesToProviders.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201506251934302_connectGradesToProviders1.cs" />
+    <Compile Include="Migrations\201506251934302_connectGradesToProviders1.Designer.cs">
+      <DependentUpon>201506251934302_connectGradesToProviders1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201506251936271_connectGradesToProviders2.cs" />
+    <Compile Include="Migrations\201506251936271_connectGradesToProviders2.Designer.cs">
+      <DependentUpon>201506251936271_connectGradesToProviders2.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201506251937421_connectGradesToProviders3.cs" />
+    <Compile Include="Migrations\201506251937421_connectGradesToProviders3.Designer.cs">
+      <DependentUpon>201506251937421_connectGradesToProviders3.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201506251939233_connectGradesToProviders4.cs" />
+    <Compile Include="Migrations\201506251939233_connectGradesToProviders4.Designer.cs">
+      <DependentUpon>201506251939233_connectGradesToProviders4.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201506251941195_connectGradesToProviders5.cs" />
+    <Compile Include="Migrations\201506251941195_connectGradesToProviders5.Designer.cs">
+      <DependentUpon>201506251941195_connectGradesToProviders5.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201506251943419_fix_grade_extra_foreignKey.cs" />
+    <Compile Include="Migrations\201506251943419_fix_grade_extra_foreignKey.Designer.cs">
+      <DependentUpon>201506251943419_fix_grade_extra_foreignKey.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201506301005307_add_productivity.cs" />
+    <Compile Include="Migrations\201506301005307_add_productivity.Designer.cs">
+      <DependentUpon>201506301005307_add_productivity.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201506301010014_dd.cs" />
+    <Compile Include="Migrations\201506301010014_dd.Designer.cs">
+      <DependentUpon>201506301010014_dd.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201506301010449_add_productivity1.cs" />
+    <Compile Include="Migrations\201506301010449_add_productivity1.Designer.cs">
+      <DependentUpon>201506301010449_add_productivity1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201507071943545_fix_otherContacts_reverseProperty.cs" />
+    <Compile Include="Migrations\201507071943545_fix_otherContacts_reverseProperty.Designer.cs">
+      <DependentUpon>201507071943545_fix_otherContacts_reverseProperty.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201507071950383_add_address_to_provider.cs" />
+    <Compile Include="Migrations\201507071950383_add_address_to_provider.Designer.cs">
+      <DependentUpon>201507071950383_add_address_to_provider.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201507230906139_addcustomer.cs" />
+    <Compile Include="Migrations\201507230906139_addcustomer.Designer.cs">
+      <DependentUpon>201507230906139_addcustomer.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201507230939406_addcustomer1.cs" />
+    <Compile Include="Migrations\201507230939406_addcustomer1.Designer.cs">
+      <DependentUpon>201507230939406_addcustomer1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201507230942172_customer_unique.cs" />
+    <Compile Include="Migrations\201507230942172_customer_unique.Designer.cs">
+      <DependentUpon>201507230942172_customer_unique.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201507241310251_addjobtypes.cs" />
+    <Compile Include="Migrations\201507241310251_addjobtypes.Designer.cs">
+      <DependentUpon>201507241310251_addjobtypes.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201507241332168_addToJobTypes.cs" />
+    <Compile Include="Migrations\201507241332168_addToJobTypes.Designer.cs">
+      <DependentUpon>201507241332168_addToJobTypes.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201507241334149_addToJobTypesIsInternal.cs" />
+    <Compile Include="Migrations\201507241334149_addToJobTypesIsInternal.Designer.cs">
+      <DependentUpon>201507241334149_addToJobTypesIsInternal.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201507301640023_a.cs" />
+    <Compile Include="Migrations\201507301640023_a.Designer.cs">
+      <DependentUpon>201507301640023_a.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201507301805060_bindcontactPersonsToCustomer.cs" />
+    <Compile Include="Migrations\201507301805060_bindcontactPersonsToCustomer.Designer.cs">
+      <DependentUpon>201507301805060_bindcontactPersonsToCustomer.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201507301829078_modifyCustomer.cs" />
+    <Compile Include="Migrations\201507301829078_modifyCustomer.Designer.cs">
+      <DependentUpon>201507301829078_modifyCustomer.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201507301834590_modifyCustomer1.cs" />
+    <Compile Include="Migrations\201507301834590_modifyCustomer1.Designer.cs">
+      <DependentUpon>201507301834590_modifyCustomer1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201507301838149_modifyCustomer2.cs" />
+    <Compile Include="Migrations\201507301838149_modifyCustomer2.Designer.cs">
+      <DependentUpon>201507301838149_modifyCustomer2.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201507311010550_add_orders.cs" />
+    <Compile Include="Migrations\201507311010550_add_orders.Designer.cs">
+      <DependentUpon>201507311010550_add_orders.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201507311205072_document_added_to_order.cs" />
+    <Compile Include="Migrations\201507311205072_document_added_to_order.Designer.cs">
+      <DependentUpon>201507311205072_document_added_to_order.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201507311256140_add_office_to_order.cs" />
+    <Compile Include="Migrations\201507311256140_add_office_to_order.Designer.cs">
+      <DependentUpon>201507311256140_add_office_to_order.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201507311437231_make_number_optional.cs" />
+    <Compile Include="Migrations\201507311437231_make_number_optional.Designer.cs">
+      <DependentUpon>201507311437231_make_number_optional.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201508041014109_add_properties_to_order.cs" />
+    <Compile Include="Migrations\201508041014109_add_properties_to_order.Designer.cs">
+      <DependentUpon>201508041014109_add_properties_to_order.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201508041057495_specify_job.cs" />
+    <Compile Include="Migrations\201508041057495_specify_job.Designer.cs">
+      <DependentUpon>201508041057495_specify_job.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201508041059561_makejobtimestamped.cs" />
+    <Compile Include="Migrations\201508041059561_makejobtimestamped.Designer.cs">
+      <DependentUpon>201508041059561_makejobtimestamped.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201508041100490_add_finals_to_job.cs" />
+    <Compile Include="Migrations\201508041100490_add_finals_to_job.Designer.cs">
+      <DependentUpon>201508041100490_add_finals_to_job.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201508041132191_add_jobs_to_order.cs" />
+    <Compile Include="Migrations\201508041132191_add_jobs_to_order.Designer.cs">
+      <DependentUpon>201508041132191_add_jobs_to_order.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201508041134098_fix-job.cs" />
+    <Compile Include="Migrations\201508041134098_fix-job.Designer.cs">
+      <DependentUpon>201508041134098_fix-job.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201508041351569_relate_job_to_jobTypeAndLanguageAndDomains.cs" />
+    <Compile Include="Migrations\201508041351569_relate_job_to_jobTypeAndLanguageAndDomains.Designer.cs">
+      <DependentUpon>201508041351569_relate_job_to_jobTypeAndLanguageAndDomains.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201508051137423_make_volume_nullable.cs" />
+    <Compile Include="Migrations\201508051137423_make_volume_nullable.Designer.cs">
+      <DependentUpon>201508051137423_make_volume_nullable.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201508051446232_amplify_order_and_job-part.cs" />
+    <Compile Include="Migrations\201508051446232_amplify_order_and_job-part.Designer.cs">
+      <DependentUpon>201508051446232_amplify_order_and_job-part.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201508060754545_add_currency_to_job.cs" />
+    <Compile Include="Migrations\201508060754545_add_currency_to_job.Designer.cs">
+      <DependentUpon>201508060754545_add_currency_to_job.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201508060928120_full-fledged-participant.cs" />
+    <Compile Include="Migrations\201508060928120_full-fledged-participant.Designer.cs">
+      <DependentUpon>201508060928120_full-fledged-participant.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201508060931392_add_uom_to_job.cs" />
+    <Compile Include="Migrations\201508060931392_add_uom_to_job.Designer.cs">
+      <DependentUpon>201508060931392_add_uom_to_job.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201508070959573_modified_job_completion_statuses.cs" />
+    <Compile Include="Migrations\201508070959573_modified_job_completion_statuses.Designer.cs">
+      <DependentUpon>201508070959573_modified_job_completion_statuses.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201508071339165_modify_job_completion_status.cs" />
+    <Compile Include="Migrations\201508071339165_modify_job_completion_status.Designer.cs">
+      <DependentUpon>201508071339165_modify_job_completion_status.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201508100801073_add_delegated_office_toJob.cs" />
+    <Compile Include="Migrations\201508100801073_add_delegated_office_toJob.Designer.cs">
+      <DependentUpon>201508100801073_add_delegated_office_toJob.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201508101726575_fucking_elephant.cs" />
+    <Compile Include="Migrations\201508101726575_fucking_elephant.Designer.cs">
+      <DependentUpon>201508101726575_fucking_elephant.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201508111326374_make_jobPartITimeStamped.cs" />
+    <Compile Include="Migrations\201508111326374_make_jobPartITimeStamped.Designer.cs">
+      <DependentUpon>201508111326374_make_jobPartITimeStamped.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201508111404064_changePendingToIsPending.cs" />
+    <Compile Include="Migrations\201508111404064_changePendingToIsPending.Designer.cs">
+      <DependentUpon>201508111404064_changePendingToIsPending.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201508111438458_jobPartAddWorkInHouse.cs" />
+    <Compile Include="Migrations\201508111438458_jobPartAddWorkInHouse.Designer.cs">
+      <DependentUpon>201508111438458_jobPartAddWorkInHouse.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201508111507296_jobPartStatusRequiresCompletion.cs" />
+    <Compile Include="Migrations\201508111507296_jobPartStatusRequiresCompletion.Designer.cs">
+      <DependentUpon>201508111507296_jobPartStatusRequiresCompletion.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201510301146175_addOfficialInfoToContactPerson.cs" />
+    <Compile Include="Migrations\201510301146175_addOfficialInfoToContactPerson.Designer.cs">
+      <DependentUpon>201510301146175_addOfficialInfoToContactPerson.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201603181506092_fix1.cs" />
+    <Compile Include="Migrations\201603181506092_fix1.Designer.cs">
+      <DependentUpon>201603181506092_fix1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201603181531392_add IP.cs" />
+    <Compile Include="Migrations\201603181531392_add IP.Designer.cs">
+      <DependentUpon>201603181531392_add IP.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201603181532532_add timedifference.cs" />
+    <Compile Include="Migrations\201603181532532_add timedifference.Designer.cs">
+      <DependentUpon>201603181532532_add timedifference.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\Configuration.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="TraktatContext.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\VTraktate.Domain\VTraktate.Domain.csproj">
+      <Project>{cebdfb8c-be5d-4f8e-84d8-06bfd32c33eb}</Project>
+      <Name>VTraktate.Domain</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\201504142004399_initial.resx">
+      <DependentUpon>201504142004399_initial.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201504142008135_personname.resx">
+      <DependentUpon>201504142008135_personname.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201504142028226_person_completed.resx">
+      <DependentUpon>201504142028226_person_completed.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201504142047075_provider.resx">
+      <DependentUpon>201504142047075_provider.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201504142051075_person_and_provider.resx">
+      <DependentUpon>201504142051075_person_and_provider.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201504142052332_provider_person_optional_rel.resx">
+      <DependentUpon>201504142052332_provider_person_optional_rel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201504142106519_offices.resx">
+      <DependentUpon>201504142106519_offices.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201504142109409_fix_office_provider.resx">
+      <DependentUpon>201504142109409_fix_office_provider.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201504150848200_employments.resx">
+      <DependentUpon>201504150848200_employments.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201504150911589_freelances.resx">
+      <DependentUpon>201504150911589_freelances.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201504150923523_emails.resx">
+      <DependentUpon>201504150923523_emails.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201504151357336_calendar_periods.resx">
+      <DependentUpon>201504151357336_calendar_periods.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201504151407002_fix_provider_id.resx">
+      <DependentUpon>201504151407002_fix_provider_id.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201504171505416_services_languages_Domains.resx">
+      <DependentUpon>201504171505416_services_languages_Domains.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201504200706274_FromRussianInLanguagePair.resx">
+      <DependentUpon>201504200706274_FromRussianInLanguagePair.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201504200719084_legacyIDs.resx">
+      <DependentUpon>201504200719084_legacyIDs.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201504200816362_offices_and_office_types_and_legalEntities.resx">
+      <DependentUpon>201504200816362_offices_and_office_types_and_legalEntities.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201504200819127_Business_details.resx">
+      <DependentUpon>201504200819127_Business_details.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201504200822171_office_sotfDelete.resx">
+      <DependentUpon>201504200822171_office_sotfDelete.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201504200833081_office_sotf_f0x.resx">
+      <DependentUpon>201504200833081_office_sotf_f0x.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201504200957069_oldids_person_provider.resx">
+      <DependentUpon>201504200957069_oldids_person_provider.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201504240847471_calendar_period_confirmed_by.resx">
+      <DependentUpon>201504240847471_calendar_period_confirmed_by.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201504240858321_freelanceCalendarPeriodsAndPromotionsAdded.resx">
+      <DependentUpon>201504240858321_freelanceCalendarPeriodsAndPromotionsAdded.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201504241115102_add_reference_to_language_from_domains.resx">
+      <DependentUpon>201504241115102_add_reference_to_language_from_domains.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201504291325240_rename_freelance_calendar_statuses_to_availability_statuses.resx">
+      <DependentUpon>201504291325240_rename_freelance_calendar_statuses_to_availability_statuses.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201505051346201_jobPart_job_added.resx">
+      <DependentUpon>201505051346201_jobPart_job_added.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201505051540232_added_pending_to_jobPartComletionSTatus.resx">
+      <DependentUpon>201505051540232_added_pending_to_jobPartComletionSTatus.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201505060939542_added_regions.resx">
+      <DependentUpon>201505060939542_added_regions.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201505060941432_fix_regions.resx">
+      <DependentUpon>201505060941432_fix_regions.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201505060946113_fix_regions2.resx">
+      <DependentUpon>201505060946113_fix_regions2.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201505061125114_add_providerGroups.resx">
+      <DependentUpon>201505061125114_add_providerGroups.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201505061129059_fix_providerGroups.resx">
+      <DependentUpon>201505061129059_fix_providerGroups.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201505071117303_fix.resx">
+      <DependentUpon>201505071117303_fix.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201505071205222_additionalstuff.resx">
+      <DependentUpon>201505071205222_additionalstuff.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201505181330436_software_added.resx">
+      <DependentUpon>201505181330436_software_added.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201505191011288_add_phonetypes.resx">
+      <DependentUpon>201505191011288_add_phonetypes.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201505200918054_added_phones_other_contacts.resx">
+      <DependentUpon>201505200918054_added_phones_other_contacts.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201505200935162_fix_bugs.resx">
+      <DependentUpon>201505200935162_fix_bugs.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201505261553181_fix_email.resx">
+      <DependentUpon>201505261553181_fix_email.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201505270911477_fix_double_key_in_email_step1.resx">
+      <DependentUpon>201505270911477_fix_double_key_in_email_step1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201505270914190_fix_double_key_in_email_step2.resx">
+      <DependentUpon>201505270914190_fix_double_key_in_email_step2.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201505270949199_fix_double_key_in_phone.resx">
+      <DependentUpon>201505270949199_fix_double_key_in_phone.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201505281749237_add_soft_delete_to_freelance.resx">
+      <DependentUpon>201505281749237_add_soft_delete_to_freelance.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201506081058385_update_calendarPeriods.resx">
+      <DependentUpon>201506081058385_update_calendarPeriods.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201506081710423_add_native_speaker.resx">
+      <DependentUpon>201506081710423_add_native_speaker.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201506092009352_fix_providersoft.resx">
+      <DependentUpon>201506092009352_fix_providersoft.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201506182046272_add_grades.resx">
+      <DependentUpon>201506182046272_add_grades.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201506182138458_add_grades_v2.resx">
+      <DependentUpon>201506182138458_add_grades_v2.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201506190727396_grades_add_style.resx">
+      <DependentUpon>201506190727396_grades_add_style.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201506251214254_modifyGradeModel.resx">
+      <DependentUpon>201506251214254_modifyGradeModel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201506251216529_modifyGradeModel1.resx">
+      <DependentUpon>201506251216529_modifyGradeModel1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201506251923175_updateGrades.resx">
+      <DependentUpon>201506251923175_updateGrades.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201506251931314_connectGradesToProviders.resx">
+      <DependentUpon>201506251931314_connectGradesToProviders.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201506251934302_connectGradesToProviders1.resx">
+      <DependentUpon>201506251934302_connectGradesToProviders1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201506251936271_connectGradesToProviders2.resx">
+      <DependentUpon>201506251936271_connectGradesToProviders2.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201506251937421_connectGradesToProviders3.resx">
+      <DependentUpon>201506251937421_connectGradesToProviders3.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201506251939233_connectGradesToProviders4.resx">
+      <DependentUpon>201506251939233_connectGradesToProviders4.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201506251941195_connectGradesToProviders5.resx">
+      <DependentUpon>201506251941195_connectGradesToProviders5.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201506251943419_fix_grade_extra_foreignKey.resx">
+      <DependentUpon>201506251943419_fix_grade_extra_foreignKey.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201506301005307_add_productivity.resx">
+      <DependentUpon>201506301005307_add_productivity.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201506301010014_dd.resx">
+      <DependentUpon>201506301010014_dd.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201506301010449_add_productivity1.resx">
+      <DependentUpon>201506301010449_add_productivity1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201507071943545_fix_otherContacts_reverseProperty.resx">
+      <DependentUpon>201507071943545_fix_otherContacts_reverseProperty.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201507071950383_add_address_to_provider.resx">
+      <DependentUpon>201507071950383_add_address_to_provider.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201507230906139_addcustomer.resx">
+      <DependentUpon>201507230906139_addcustomer.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201507230939406_addcustomer1.resx">
+      <DependentUpon>201507230939406_addcustomer1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201507230942172_customer_unique.resx">
+      <DependentUpon>201507230942172_customer_unique.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201507241310251_addjobtypes.resx">
+      <DependentUpon>201507241310251_addjobtypes.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201507241332168_addToJobTypes.resx">
+      <DependentUpon>201507241332168_addToJobTypes.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201507241334149_addToJobTypesIsInternal.resx">
+      <DependentUpon>201507241334149_addToJobTypesIsInternal.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201507301640023_a.resx">
+      <DependentUpon>201507301640023_a.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201507301805060_bindcontactPersonsToCustomer.resx">
+      <DependentUpon>201507301805060_bindcontactPersonsToCustomer.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201507301829078_modifyCustomer.resx">
+      <DependentUpon>201507301829078_modifyCustomer.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201507301834590_modifyCustomer1.resx">
+      <DependentUpon>201507301834590_modifyCustomer1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201507301838149_modifyCustomer2.resx">
+      <DependentUpon>201507301838149_modifyCustomer2.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201507311010550_add_orders.resx">
+      <DependentUpon>201507311010550_add_orders.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201507311205072_document_added_to_order.resx">
+      <DependentUpon>201507311205072_document_added_to_order.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201507311256140_add_office_to_order.resx">
+      <DependentUpon>201507311256140_add_office_to_order.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201507311437231_make_number_optional.resx">
+      <DependentUpon>201507311437231_make_number_optional.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201508041014109_add_properties_to_order.resx">
+      <DependentUpon>201508041014109_add_properties_to_order.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201508041057495_specify_job.resx">
+      <DependentUpon>201508041057495_specify_job.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201508041059561_makejobtimestamped.resx">
+      <DependentUpon>201508041059561_makejobtimestamped.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201508041100490_add_finals_to_job.resx">
+      <DependentUpon>201508041100490_add_finals_to_job.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201508041132191_add_jobs_to_order.resx">
+      <DependentUpon>201508041132191_add_jobs_to_order.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201508041134098_fix-job.resx">
+      <DependentUpon>201508041134098_fix-job.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201508041351569_relate_job_to_jobTypeAndLanguageAndDomains.resx">
+      <DependentUpon>201508041351569_relate_job_to_jobTypeAndLanguageAndDomains.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201508051137423_make_volume_nullable.resx">
+      <DependentUpon>201508051137423_make_volume_nullable.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201508051446232_amplify_order_and_job-part.resx">
+      <DependentUpon>201508051446232_amplify_order_and_job-part.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201508060754545_add_currency_to_job.resx">
+      <DependentUpon>201508060754545_add_currency_to_job.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201508060928120_full-fledged-participant.resx">
+      <DependentUpon>201508060928120_full-fledged-participant.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201508060931392_add_uom_to_job.resx">
+      <DependentUpon>201508060931392_add_uom_to_job.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201508070959573_modified_job_completion_statuses.resx">
+      <DependentUpon>201508070959573_modified_job_completion_statuses.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201508071339165_modify_job_completion_status.resx">
+      <DependentUpon>201508071339165_modify_job_completion_status.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201508100801073_add_delegated_office_toJob.resx">
+      <DependentUpon>201508100801073_add_delegated_office_toJob.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201508101726575_fucking_elephant.resx">
+      <DependentUpon>201508101726575_fucking_elephant.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201508111326374_make_jobPartITimeStamped.resx">
+      <DependentUpon>201508111326374_make_jobPartITimeStamped.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201508111404064_changePendingToIsPending.resx">
+      <DependentUpon>201508111404064_changePendingToIsPending.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201508111438458_jobPartAddWorkInHouse.resx">
+      <DependentUpon>201508111438458_jobPartAddWorkInHouse.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201508111507296_jobPartStatusRequiresCompletion.resx">
+      <DependentUpon>201508111507296_jobPartStatusRequiresCompletion.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201510301146175_addOfficialInfoToContactPerson.resx">
+      <DependentUpon>201510301146175_addOfficialInfoToContactPerson.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201603181506092_fix1.resx">
+      <DependentUpon>201603181506092_fix1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201603181531392_add IP.resx">
+      <DependentUpon>201603181531392_add IP.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201603181532532_add timedifference.resx">
+      <DependentUpon>201603181532532_add timedifference.cs</DependentUpon>
+    </EmbeddedResource>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

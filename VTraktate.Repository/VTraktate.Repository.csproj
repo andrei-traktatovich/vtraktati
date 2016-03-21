@@ -1,0 +1,103 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{2E3AD0C6-0F51-4943-A4C7-9E22D4F58FD7}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>VTraktate.Repository</RootNamespace>
+    <AssemblyName>VTraktate.Repository</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <UseVSHostingProcess>false</UseVSHostingProcess>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="AccountRepo.cs" />
+    <Compile Include="CustomerRepo.cs" />
+    <Compile Include="EmailRepo.cs" />
+    <Compile Include="EmploymentRepo.cs" />
+    <Compile Include="GlobalsProvider.cs" />
+    <Compile Include="GradeRepo.cs" />
+    <Compile Include="JobPartRepo.cs" />
+    <Compile Include="JobRepo.cs" />
+    <Compile Include="OrderRepo.cs" />
+    <Compile Include="OtherContactRepo.cs" />
+    <Compile Include="PersonRepo.cs" />
+    <Compile Include="PhoneRepo.cs" />
+    <Compile Include="ProviderRepo.cs" />
+    <Compile Include="ProviderServiceRepo.cs" />
+    <Compile Include="ProviderSoftRepo.cs" />
+    <Compile Include="Repo.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ServiceDomainInfoRepo.cs" />
+    <Compile Include="ServiceLanguageRepo.cs" />
+    <Compile Include="SnapshotProviders\AccountSnapshotProvider.cs" />
+    <Compile Include="SnapshotProviders\ExtendedProviderSnapShotProvider.cs" />
+    <Compile Include="SnapshotProviders\ProviderSnapshotBase.cs" />
+    <Compile Include="SnapshotProviders\ProviderSnapshotProvider.cs" />
+    <Compile Include="SnapshotProviders\ProviderSnapshotProviderBase.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\VTraktate.Core\VTraktate.Core.csproj">
+      <Project>{501136e5-5b5d-435f-930b-8ac0acefa8a1}</Project>
+      <Name>VTraktate.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\VTraktate.DataAccess\VTraktate.DataAccess.csproj">
+      <Project>{1d3e0ac0-2667-4a53-af0d-5a3cb74e6f1d}</Project>
+      <Name>VTraktate.DataAccess</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\VTraktate.Domain\VTraktate.Domain.csproj">
+      <Project>{cebdfb8c-be5d-4f8e-84d8-06bfd32c33eb}</Project>
+      <Name>VTraktate.Domain</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+    <None Include="packages.config" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

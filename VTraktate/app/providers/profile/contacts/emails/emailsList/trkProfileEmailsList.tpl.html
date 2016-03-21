@@ -1,0 +1,92 @@
+﻿<div>
+
+    <p ng-show="!items.length">Ничего нет</p>
+
+    <div class="well">
+
+        <div class="row">
+            <div ng-show="model.concatEmails">
+                <a href="mailto: {{ model.concatEmails }}" tooltip="Написать по всем адресам">
+                Отправить письмо по всем адресам<i class="glyphicon glyphicon-send"></i>
+                </a>
+            </div>
+            <table class="table table-condensed table-bordered" ng-show="items && items.length > 0">
+                <thead>
+                    <tr>
+                        <th>Email</th>
+                        <th>Статус</th>
+                        <th>Комментарий</th>
+                        <th>Создано</th>
+                        <th>Изменено</th>
+                        <th ng-if="!model.readonly"><!-- --></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr 
+                        ng-repeat="item in items | orderBy : ['-active', '-isDeleted']" 
+                        ng-class="{ 'success' : item.active, 'item-deleted' : item.isDeleted }"
+                        ng-hide="item.isDeleted && model.readonly">
+
+                        <td><a href="mailto:{{ item.email }}">{{ item.email }}</a></td>
+                        <td>
+                            <i class="glyphicon glyphicon-ok text-success" ng-show="item.active && !item.isDeleted"></i>
+                            <i class="glyphicon glyphicon-trash" popover="Удалено" ng-show="item.isDeleted"></i>
+                        </td>
+                        <td>{{ item.comment }}</td>
+                        <td>{{ item.createdByName }} {{ item.createdDate }}</td>
+                        <td>{{ item.modifiedByName }} {{ item.modifiedDate }}</td>
+                        <td ng-if="!readonly" ng-show="!model.editingItem && !model.addingItem">
+                            
+                            <button class="btn btn-sm btn-default" ng-hide="item.isDeleted" ng-click="model.beginEditItem(item)">
+                                <i class="glyphicon glyphicon-pencil"></i>
+                            </button>
+
+                            <button class="btn btn-sm btn-default" ng-hide="item.isDeleted" ng-click="model.removeItem(item)">
+                                <i class="glyphicon glyphicon-trash"></i>
+                            </button>
+
+                            <button class="btn btn-sm btn-default" ng-show="item.isDeleted" ng-click="model.restoreItem(item)">
+                                <i class="glyphicon glyphicon-refresh"></i>
+                            </button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        
+        <div class="row">
+            <div ng-if="!readonly" ng-show="!!model.addingItem || !!model.editingItem">
+                <h4>
+                    <span ng-show="!!model.addingItem">Добавление</span>
+                    <span ng-show="!!model.editingItem">Редактирование</span>
+                </h4>
+                
+                <form name="addEmail" class="form-inline">
+                    
+                    <div class="form-group">
+                        <label for="inputEmail">Еmail</label>
+                        <input id="inputEmail" name="inputEmail" class="form-control" type="email" required ng-model="model.newItem.email" />
+                        <trk-error-summary for="addEmail.inputEmail"></trk-error-summary>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="inputActive">Активный</label>
+                        <input id="inputActive" type="checkbox" ng-model="model.newItem.active" />
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="inputComment">Комментарий</label>
+                        <input id="inputComment" class="form-control" type="text" ng-model="model.newItem.comment" />
+                    </div>
+                    <hr />
+
+                    <button class="btn btn-sm btn-success" ng-show="!!model.addingItem" ng-disabled="addEmail.$invalid" ng-click="model.addItem()"><span class="glyphicon glyphicon-save"></span>Готово</button>
+                    <button class="btn btn-sm btn-success" ng-show="!!model.editingItem" ng-disabled="addEmail.$invalid" ng-click="model.editItem()"><span class="glyphicon glyphicon-save"></span>Готово</button>
+                    <button class="btn btn-sm btn-default" ng-click="model.cancelItem()"><span class="glyphicon glyphicon-remove"></span>Отмена</button>
+                </form>
+            </div>
+            <button class="btn btn-sm btn-success" ng-hide="readonly || model.addingItem || model.editingItem" ng-click="model.beginAddItem()"><span class="glyphicon glyphicon-plus"></span></button>
+        </div>
+    </div>
+
+</div>

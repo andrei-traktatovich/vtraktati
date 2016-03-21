@@ -1,0 +1,13 @@
+﻿<div class="alert alert-danger" ng-show="text">
+    <p>
+        <b>
+            <i class="glyphicon glyphicon-warning-sign"></i>
+            &nbsp;
+            {{ text.message }} 
+            <a ng-click="expanded=true" ng-show="!expanded">Подробности</a>
+        </b>
+    </p>
+    <div style="height: 200px; overflow: auto" ng-show="expanded">
+        {{ text || json }}
+    </div>
+</div>

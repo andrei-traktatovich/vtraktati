@@ -1,0 +1,8 @@
+﻿<div class="row text-small text-muted">
+    <div class="col-md-6">
+        <p>Создано: {{ item.createdByName }} <trk-datetime trk-dt-val="item.createdDate" trk-dt-mode="date"></trk-datetime></p>
+    </div>
+    <div class="col-md-6">
+        <p ng-show="item.modifiedByName != null">Изменено: {{ item.modifiedByName }} <trk-datetime trk-dt-val="item.modifiedDate" trk-dt-mode="date"></trk-datetime></p>
+    </div>
+</div>

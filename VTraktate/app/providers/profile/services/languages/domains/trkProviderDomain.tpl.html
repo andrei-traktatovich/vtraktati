@@ -1,0 +1,24 @@
+﻿<label class="label label-default domain-importance{{ getDomainImportance(item) }}" ng-class=""
+           style="margin: 3px;"
+           popover-template="'app/providers/profile/services/languages/domains/domain-popover.tpl.html'"
+           popover-trigger="mouseenter"
+           popover-title="{{ item.domainName }}">
+
+        {{ item.domainName }}
+
+    <rating ng-model="item.stars" readonly="true" max="3"></rating><span class="badge">{{ item.grade }}</span>
+
+    <span class="glyphicon glyphicon-remove text-danger" ng-hide="readonly"
+              ng-click="remove()"
+              style="cursor: pointer">
+    </span>
+</label>
+
+
+<script type="text/ng-template" id="confirmDomainDelete.tpl.html">
+    <p>Вы действительно хотите удалить тематику {{ item.domainName }}?</p>
+    Text
+    <hr />
+    <button class="pull-right btn btn-sm btn-danger" value="Да"></button>
+</script>
+

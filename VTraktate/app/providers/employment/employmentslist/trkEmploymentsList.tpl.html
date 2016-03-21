@@ -1,0 +1,47 @@
+﻿<p ng-show="!items || items.length == 0">История штатной работы отсутствует.</p>
+<div ng-show="items && items.length > 0">
+    <table class="table table-condensed table-striped">
+        <thead>
+            <tr>
+                <th>С</th>
+                <th>По</th>
+                <th>Должность</th>
+                <th>Подразделение</th>
+                <th>Статус</th>
+                <th>Комментарий</th>
+                <th>Создано</th>
+                <th>Изменено</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr ng-repeat="item in items | orderBy: 'startDate'" ng-class="{ 'item-deleted' : item.isDeleted }">
+                <td>
+                    <trk-datetime trk-dt-val="item.startDate" trk-dt-mode="date"></trk-datetime>
+                </td>
+                <td>
+                    <trk-datetime trk-dt-val="item.endDate" trk-dt-mode="date"></trk-datetime>
+                </td>
+                <td>
+                    {{ item.title.name }}
+                </td>
+                <td>
+                    {{ item.office.name }}
+                </td>
+                <td>
+                    {{ item.status.name }}
+                </td>
+                <td>
+                    {{ item.comment }}
+                </td>
+                <td>
+                    {{ item.createdByName }}
+                    <p class="text-small text-muted"><trk-datetime trk-dt-val="item.createdDate"></trk-datetime></p>
+                </td>
+                <td>
+                    {{ item.modifiedByName }}
+                    <p class="text-small text-muted"><trk-datetime trk-dt-val="item.modifiedDate"></trk-datetime></p>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>

@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="7dc22d36c0be48278992183a8a2e7181" Name="Diagram1">
+        <EntityTypeShape EntityType="TraktatDataModel.AspNetUser" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="TraktatDataModel.PersonalInfo" Width="1.5" PointX="3.5" PointY="0.75" IsExpanded="true" />
+        <AssociationConnector Association="TraktatDataModel.FK_AspNetUsers_personal_infos" />
+        <EntityTypeShape EntityType="TraktatDataModel.Office" Width="1.5" PointX="6" PointY="4.625" />
+        <EntityTypeShape EntityType="TraktatDataModel.Provider" Width="1.5" PointX="5.875" PointY="0.75" />
+        <AssociationConnector Association="TraktatDataModel.FK_providers_offices" />
+        <AssociationConnector Association="TraktatDataModel.FK_personal_infos_personal_infos" />
+        <AssociationConnector Association="TraktatDataModel.FK_personal_infos_personal_infos1" />
+        <AssociationConnector Association="TraktatDataModel.FK_personal_infos_providers" />
+        <EntityTypeShape EntityType="TraktatDataModel.ProviderType" Width="1.5" PointX="8" PointY="0.75" />
+        <AssociationConnector Association="TraktatDataModel.FK_providers_provider_types" />
+        <EntityTypeShape EntityType="TraktatDataModel.Email" Width="1.5" PointX="4.25" PointY="7.5" />
+        <AssociationConnector Association="TraktatDataModel.FK_emails_personal_infos" />
+        <EntityTypeShape EntityType="TraktatDataModel.EmployeeTitle" Width="1.5" PointX="12.5" PointY="4.375" />
+        <EntityTypeShape EntityType="TraktatDataModel.EmploymentStatus" Width="1.5" PointX="12.375" PointY="6.625" />
+        <EntityTypeShape EntityType="TraktatDataModel.Employment" Width="1.5" PointX="9.875" PointY="5" />
+        <AssociationConnector Association="TraktatDataModel.FK_employments_offices" />
+        <AssociationConnector Association="TraktatDataModel.FK_employments_employee_titles" />
+        <AssociationConnector Association="TraktatDataModel.FK_employments_employment_statuses" />
+        <AssociationConnector Association="TraktatDataModel.FK_employments_personal_infos1" />
+        <AssociationConnector Association="TraktatDataModel.FK_employments_personal_infos2" />
+        <EntityTypeShape EntityType="TraktatDataModel.CalendarPeriod" Width="1.5" PointX="12.375" PointY="0.625" />
+        <AssociationConnector Association="TraktatDataModel.FK_calendar_periods_offices1" ManuallyRouted="false" >
+        </AssociationConnector>
+        <AssociationConnector Association="TraktatDataModel.FK_employments_providers" />
+        <AssociationConnector Association="TraktatDataModel.FK_calendar_periods_providers" />
+        <AssociationConnector Association="TraktatDataModel.FK_calendar_periods_employments" />
+        <EntityTypeShape EntityType="TraktatDataModel.FreelanceStatus" Width="1.5" PointX="8.125" PointY="6.625" />
+        <EntityTypeShape EntityType="TraktatDataModel.Freelance" Width="1.5" PointX="8.25" PointY="3.75" />
+        <AssociationConnector Association="TraktatDataModel.FK_freelances_freelance_statuses" />
+        <AssociationConnector Association="TraktatDataModel.FK_freelances_providers" />
+        <EntityTypeShape EntityType="TraktatDataModel.AspNetRole" Width="1.5" PointX="0.75" PointY="5.875" />
+        <AssociationConnector Association="TraktatDataModel.AspNetUserRoles" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

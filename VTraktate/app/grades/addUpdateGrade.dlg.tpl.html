@@ -1,0 +1,183 @@
+<div class="modal-header">
+    <h4 class="modal-title">
+        <span ng-show="model.id">Изменение оценки</span>
+        <span ng-hide="model.id">Добавление оценки</span>
+    </h4>
+</div>
+<div class="modal-body">
+    <div style="padding:10px;">
+
+
+
+        <form class="form-horizontal" name="gradeform">
+            <div class="row">
+                <!-- provider  -->
+                <!-- dialog will be callable from the grades lst, to add either a grade for an existing provider picked from list  -->
+                <!-- or a provider picked by user in the dialog itself -->
+                <!-- User can also add a grade to a specific known provider -->
+                <!-- if known, show name. -->
+                <h4 ng-show="providerKnown">
+                    {{ providerName }}
+                </h4>
+                <!-- if provider is unknown, let user pick one -->
+                <div ng-if="!providerKnown" class="form-group">
+                    <label for="inputSelectProvider" class="control-label">Имя</label>
+
+                    <ui-select ng-model="model.providerId"
+                               name="inputSelectProvider"
+                               search-enabled="true"
+                                
+                               required
+                               theme="select2" style="min-width: 200px;">
+                        <ui-select-match>{{$select.selected.name}}</ui-select-match>
+                        <ui-select-choices repeat="item.id as item in lists.providers | filter: { name : $select.search }">
+                            <div ng-bind-html="item.name | highlight: $select.search"></div>
+                        </ui-select-choices>
+                    </ui-select>
+
+                    <trk-error-summary for="gradeForm.inputSelectProvider"></trk-error-summary>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-6">
+
+                    <div class="form-group">
+                        <label for="inputOrderName" class="control-label">Заказ</label>
+                        <input type="text"
+                               name="inputOrderName"
+                                
+                               ng-model="model.legacyJobName"
+                               required />
+                        <trk-error-summary for="gradeForm.inputOrderName"></trk-error-summary>
+                    </div>
+
+                    <!-- in the legacy model, value for service type is assumed to be written translation, always  -->
+                    <!-- language: only shown if service is linguistic -->
+                    <!-- serviceType; language and domains controls conditional on serviceType being linguistic -->
+                    <div class="form-group">
+                        <label for="inputLanguage" class="control-label">Направление</label>
+                        <ui-select ng-model="model.languageId"
+                                   name="inputLanguage"
+                                   search-enabled="true"
+                                    
+                                   required
+                                   theme="select2" style="min-width: 200px;">
+                            <ui-select-match>{{$select.selected.title}}</ui-select-match>
+                            <ui-select-choices repeat="item.id as item in lists.languages | filter: { title : $select.search }">
+                                <div ng-bind-html="item.title | highlight: $select.search"></div>
+                            </ui-select-choices>
+                        </ui-select>
+
+                        <trk-error-summary for="gradeForm.inputLanguage"></trk-error-summary>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="inputDomain1" class="control-label">Тематика1</label>
+                        <ui-select ng-model="model.domain1Id"
+                                   name="inputDomain1"
+                                   search-enabled="true"
+                                    
+                                   required
+                                   theme="select2" style="min-width: 200px;">
+                            <ui-select-match>{{$select.selected.title}}</ui-select-match>
+                            <ui-select-choices repeat="item.id as item in lists.domains | filter: { title : $select.search }">
+                                <div ng-bind-html="item.title | highlight: $select.search"></div>
+                            </ui-select-choices>
+                        </ui-select>
+
+                        <trk-error-summary for="gradeForm.inputDomain1"></trk-error-summary>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="inputDomain2" class="control-label">Тематика2</label>
+                        <ui-select ng-model="model.domain2Id"
+                                   name="inputDomain2"
+                                   
+                                   search-enabled="true"
+                                   theme="select2" style="min-width: 200px;">
+                            <ui-select-match>{{$select.selected.title}}</ui-select-match>
+                            <ui-select-choices repeat="item.id as item in lists.domains | filter: { title : $select.search }">
+                                <div ng-bind-html="item.title | highlight: $select.search"></div>
+                            </ui-select-choices>
+                        </ui-select>
+
+                        <trk-error-summary for="gradeForm.inputDomain2"></trk-error-summary>
+                    </div>
+
+
+
+                    <!-- default = 8!!! -->
+
+                    <div class="form-group" trk-grade-semaphore="model.score">
+                        <label for="inputScore" class="control-label">Балл (1..10)</label>
+                        <input type="number"
+                               name="inputScore"
+                               ng-model=" model.score"
+                               required
+                               min="1"
+                               max="10"
+                               class="form-control" style="font-size: large; width: 60px;" />
+
+                        <trk-error-summary for="gradeForm.inputScore"></trk-error-summary>
+
+                    </div>
+                </div>
+                <div class="col-sm-6 text-small">
+
+                    <h4>Ошибки</h4>
+
+                    <p>
+                        <input type="checkbox" ng-model="model.error.spelling" />&nbsp;Орфография
+                    </p>
+                    <p>
+                        <input type="checkbox" ng-model="model.error.fact" />&nbsp;Фактические ошибки
+                    </p>
+                    <p>
+                        <input type="checkbox" ng-model="model.error.term" />&nbsp;Терминология
+                    </p>
+                    <p>
+                        <input type="checkbox" ng-model="model.error.grammar" />&nbsp;Грамматика
+                    </p>
+                    <p>
+                        <input type="checkbox" ng-model="model.error.sense" />&nbsp;Смысл
+                    </p>
+                    <p>
+                        <input type="checkbox" ng-model="model.error.omissions" />&nbsp;Пропуски
+                    </p>
+                    <p>
+                        <input type="checkbox" ng-model="model.error.requirements" />&nbsp;Требования к переводу/оформлению перевода
+                    </p>
+                    <!-- bonus checkboxes -->
+                    <h4>Бонусы</h4>
+                    <p>
+                        <input type="checkbox" ng-model="model.bonus.quality" />&nbsp;Высокое качество
+                    </p>
+                    <p>
+                        <input type="checkbox" ng-model="model.bonus.native" />&nbsp;Носитель
+                    </p>
+                </div>
+            </div>
+            <div class="row" >
+                <div class="col-sm-12" style="height: 150px;">
+                    <textarea class="form-control" style="min-width: 100%; min-height: 130px;" ng-model="model.comment" placeholder="Комментарий ... "></textarea>
+                </div>
+            </div>
+        </form>
+
+    </div>
+
+</div>
+
+
+
+<div class="modal-footer">
+    <trk-form-error text="errorMessage"></trk-form-error>
+    <button class="btn btn-sm btn-success" ng-disabled="gradeForm.$pristine || gradeForm.$invalid" ng-click="ok()">
+        <i class="glyphicon glyphicon-save"></i>
+        Ок
+    </button>
+    <button class="btn btn-sm btn-danger" ng-click="cancel()">
+        <i class="glyphicon glyphicon-remove"></i>
+        Отмена
+    </button>
+</div>

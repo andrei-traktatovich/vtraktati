@@ -1,0 +1,1212 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="TraktatDataModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="AspNetRoles">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Description" Type="nvarchar(max)" />
+          <Property Name="Name" Type="nvarchar" MaxLength="256" Nullable="false" />
+        </EntityType>
+        <EntityType Name="AspNetUserRoles">
+          <Key>
+            <PropertyRef Name="UserId" />
+            <PropertyRef Name="RoleId" />
+          </Key>
+          <Property Name="UserId" Type="int" Nullable="false" />
+          <Property Name="RoleId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="AspNetUsers">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="LoginDisabled" Type="bit" Nullable="false" />
+          <Property Name="Email" Type="nvarchar" MaxLength="256" />
+          <Property Name="EmailConfirmed" Type="bit" Nullable="false" />
+          <Property Name="PasswordHash" Type="nvarchar(max)" />
+          <Property Name="SecurityStamp" Type="nvarchar(max)" />
+          <Property Name="PhoneNumber" Type="nvarchar(max)" />
+          <Property Name="PhoneNumberConfirmed" Type="bit" Nullable="false" />
+          <Property Name="TwoFactorEnabled" Type="bit" Nullable="false" />
+          <Property Name="LockoutEndDateUtc" Type="datetime" />
+          <Property Name="LockoutEnabled" Type="bit" Nullable="false" />
+          <Property Name="AccessFailedCount" Type="int" Nullable="false" />
+          <Property Name="UserName" Type="nvarchar" MaxLength="256" Nullable="false" />
+          <Property Name="PersonId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="calendar_periods">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="calendar_status_id" Type="int" Nullable="false" />
+          <Property Name="start_date" Type="date" Nullable="false" />
+          <Property Name="end_date" Type="datetime" />
+          <Property Name="office_id" Type="int" />
+          <Property Name="provider_id" Type="int" Nullable="false" />
+          <Property Name="employment_id" Type="int" />
+        </EntityType>
+        <EntityType Name="emails">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="active" Type="bit" Nullable="false" />
+          <Property Name="preferred" Type="bit" Nullable="false" />
+          <Property Name="email" Type="nvarchar" MaxLength="200" Nullable="false" />
+          <Property Name="description" Type="nvarchar(max)" />
+          <Property Name="person_id" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="employee_titles">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="name" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="old_id" Type="int" />
+        </EntityType>
+        <EntityType Name="employment_statuses">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" Nullable="false" />
+          <Property Name="name" Type="nvarchar" MaxLength="100" Nullable="false" />
+        </EntityType>
+        <EntityType Name="employments">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="provider_id" Type="int" Nullable="false" />
+          <Property Name="office_id" Type="int" Nullable="false" />
+          <Property Name="title_id" Type="int" Nullable="false" />
+          <Property Name="status_id" Type="int" Nullable="false" />
+          <Property Name="startDate" Type="date" Nullable="false" />
+          <Property Name="enddate" Type="date" />
+          <Property Name="comment" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="created_by_id" Type="int" Nullable="false" />
+          <Property Name="created_date" Type="datetime" Nullable="false" />
+          <Property Name="modified_by_id" Type="int" />
+          <Property Name="modified_date" Type="datetime" />
+          <Property Name="is_deleted" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="freelance_statuses">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="name" Type="nvarchar" MaxLength="20" Nullable="false" />
+        </EntityType>
+        <EntityType Name="freelances">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="provider_id" Type="int" Nullable="false" />
+          <Property Name="date_start" Type="datetime" Nullable="false" />
+          <Property Name="date_end" Type="datetime" />
+          <Property Name="status_id" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="offices">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="name" Type="nvarchar" MaxLength="500" Nullable="false" />
+          <Property Name="official_name" Type="nvarchar" MaxLength="500" Nullable="false" />
+          <Property Name="code" Type="nvarchar" MaxLength="10" Nullable="false" />
+          <Property Name="old_id" Type="int" />
+        </EntityType>
+        <EntityType Name="personal_infos">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="FirstName" Type="nvarchar" MaxLength="200" Nullable="false" />
+          <Property Name="MiddleName" Type="nvarchar" MaxLength="200" />
+          <Property Name="LastName" Type="nvarchar" MaxLength="200" />
+          <Property Name="AlternateName" Type="nvarchar" MaxLength="200" />
+          <Property Name="AddressName" Type="nvarchar" MaxLength="200" />
+          <Property Name="Initials" Type="nvarchar" MaxLength="200" />
+          <Property Name="BirthDate" Type="date" />
+          <Property Name="Comment" Type="nvarchar(max)" />
+          <Property Name="IsDeleted" Type="bit" Nullable="false" />
+          <Property Name="Created_by_id" Type="int" Nullable="false" />
+          <Property Name="modified_by_id" Type="int" />
+          <Property Name="created_date" Type="datetime" />
+          <Property Name="modified_date" Type="datetime" />
+          <Property Name="provider_id" Type="int" />
+          <Property Name="old_id" Type="int" />
+          <Property Name="full_name" Type="nvarchar" MaxLength="500" Nullable="false" />
+        </EntityType>
+        <EntityType Name="provider_types">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="name" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="Id" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="providers">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="provider_name" Type="nvarchar" MaxLength="500" Nullable="false" />
+          <Property Name="provider_type" Type="int" Nullable="false" />
+          <Property Name="represents_office_id" Type="int" />
+          <Property Name="old_p_id" Type="int" />
+        </EntityType>
+        <Association Name="FK_AspNetUsers_personal_infos">
+          <End Role="personal_infos" Type="Self.personal_infos" Multiplicity="1" />
+          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="personal_infos">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="AspNetUsers">
+              <PropertyRef Name="PersonId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_calendar_periods_employments">
+          <End Role="employments" Type="Self.employments" Multiplicity="0..1" />
+          <End Role="calendar_periods" Type="Self.calendar_periods" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="employments">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="calendar_periods">
+              <PropertyRef Name="employment_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_calendar_periods_offices1">
+          <End Role="offices" Type="Self.offices" Multiplicity="0..1" />
+          <End Role="calendar_periods" Type="Self.calendar_periods" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="offices">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="calendar_periods">
+              <PropertyRef Name="office_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_calendar_periods_providers">
+          <End Role="providers" Type="Self.providers" Multiplicity="1" />
+          <End Role="calendar_periods" Type="Self.calendar_periods" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="providers">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="calendar_periods">
+              <PropertyRef Name="provider_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_AspNetUserRoles_dbo_AspNetRoles_RoleId">
+          <End Role="AspNetRoles" Type="Self.AspNetRoles" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="AspNetUserRoles" Type="Self.AspNetUserRoles" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetRoles">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AspNetUserRoles">
+              <PropertyRef Name="RoleId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_AspNetUserRoles_dbo_AspNetUsers_UserId">
+          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="AspNetUserRoles" Type="Self.AspNetUserRoles" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AspNetUserRoles">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_emails_personal_infos">
+          <End Role="personal_infos" Type="Self.personal_infos" Multiplicity="1" />
+          <End Role="emails" Type="Self.emails" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="personal_infos">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="emails">
+              <PropertyRef Name="person_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_employments_employee_titles">
+          <End Role="employee_titles" Type="Self.employee_titles" Multiplicity="1" />
+          <End Role="employments" Type="Self.employments" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="employee_titles">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="employments">
+              <PropertyRef Name="title_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_employments_employment_statuses">
+          <End Role="employment_statuses" Type="Self.employment_statuses" Multiplicity="1" />
+          <End Role="employments" Type="Self.employments" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="employment_statuses">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="employments">
+              <PropertyRef Name="status_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_employments_offices">
+          <End Role="offices" Type="Self.offices" Multiplicity="1" />
+          <End Role="employments" Type="Self.employments" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="offices">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="employments">
+              <PropertyRef Name="office_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_employments_personal_infos1">
+          <End Role="personal_infos" Type="Self.personal_infos" Multiplicity="1" />
+          <End Role="employments" Type="Self.employments" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="personal_infos">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="employments">
+              <PropertyRef Name="created_by_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_employments_personal_infos2">
+          <End Role="personal_infos" Type="Self.personal_infos" Multiplicity="0..1" />
+          <End Role="employments" Type="Self.employments" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="personal_infos">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="employments">
+              <PropertyRef Name="modified_by_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_employments_providers">
+          <End Role="providers" Type="Self.providers" Multiplicity="1" />
+          <End Role="employments" Type="Self.employments" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="providers">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="employments">
+              <PropertyRef Name="provider_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_freelances_freelance_statuses">
+          <End Role="freelance_statuses" Type="Self.freelance_statuses" Multiplicity="1" />
+          <End Role="freelances" Type="Self.freelances" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="freelance_statuses">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="freelances">
+              <PropertyRef Name="status_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_freelances_providers">
+          <End Role="providers" Type="Self.providers" Multiplicity="1" />
+          <End Role="freelances" Type="Self.freelances" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="providers">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="freelances">
+              <PropertyRef Name="provider_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_personal_infos_personal_infos">
+          <End Role="personal_infos" Type="Self.personal_infos" Multiplicity="0..1" />
+          <End Role="personal_infos1" Type="Self.personal_infos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="personal_infos">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="personal_infos1">
+              <PropertyRef Name="modified_by_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_personal_infos_personal_infos1">
+          <End Role="personal_infos" Type="Self.personal_infos" Multiplicity="1" />
+          <End Role="personal_infos1" Type="Self.personal_infos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="personal_infos">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="personal_infos1">
+              <PropertyRef Name="Created_by_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_personal_infos_providers">
+          <End Role="providers" Type="Self.providers" Multiplicity="0..1" />
+          <End Role="personal_infos" Type="Self.personal_infos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="providers">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="personal_infos">
+              <PropertyRef Name="provider_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_providers_offices">
+          <End Role="offices" Type="Self.offices" Multiplicity="0..1" />
+          <End Role="providers" Type="Self.providers" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="offices">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="providers">
+              <PropertyRef Name="represents_office_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_providers_provider_types">
+          <End Role="provider_types" Type="Self.provider_types" Multiplicity="1" />
+          <End Role="providers" Type="Self.providers" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="provider_types">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="providers">
+              <PropertyRef Name="provider_type" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="TraktatDataModelStoreContainer">
+          <EntitySet Name="AspNetRoles" EntityType="Self.AspNetRoles" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="AspNetUserRoles" EntityType="Self.AspNetUserRoles" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="AspNetUsers" EntityType="Self.AspNetUsers" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="calendar_periods" EntityType="Self.calendar_periods" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="emails" EntityType="Self.emails" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="employee_titles" EntityType="Self.employee_titles" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="employment_statuses" EntityType="Self.employment_statuses" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="employments" EntityType="Self.employments" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="freelance_statuses" EntityType="Self.freelance_statuses" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="freelances" EntityType="Self.freelances" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="offices" EntityType="Self.offices" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="personal_infos" EntityType="Self.personal_infos" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="provider_types" EntityType="Self.provider_types" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="providers" EntityType="Self.providers" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_AspNetUsers_personal_infos" Association="Self.FK_AspNetUsers_personal_infos">
+            <End Role="personal_infos" EntitySet="personal_infos" />
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_calendar_periods_employments" Association="Self.FK_calendar_periods_employments">
+            <End Role="employments" EntitySet="employments" />
+            <End Role="calendar_periods" EntitySet="calendar_periods" />
+          </AssociationSet>
+          <AssociationSet Name="FK_calendar_periods_offices1" Association="Self.FK_calendar_periods_offices1">
+            <End Role="offices" EntitySet="offices" />
+            <End Role="calendar_periods" EntitySet="calendar_periods" />
+          </AssociationSet>
+          <AssociationSet Name="FK_calendar_periods_providers" Association="Self.FK_calendar_periods_providers">
+            <End Role="providers" EntitySet="providers" />
+            <End Role="calendar_periods" EntitySet="calendar_periods" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_AspNetUserRoles_dbo_AspNetRoles_RoleId" Association="Self.FK_dbo_AspNetUserRoles_dbo_AspNetRoles_RoleId">
+            <End Role="AspNetRoles" EntitySet="AspNetRoles" />
+            <End Role="AspNetUserRoles" EntitySet="AspNetUserRoles" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_AspNetUserRoles_dbo_AspNetUsers_UserId" Association="Self.FK_dbo_AspNetUserRoles_dbo_AspNetUsers_UserId">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="AspNetUserRoles" EntitySet="AspNetUserRoles" />
+          </AssociationSet>
+          <AssociationSet Name="FK_emails_personal_infos" Association="Self.FK_emails_personal_infos">
+            <End Role="personal_infos" EntitySet="personal_infos" />
+            <End Role="emails" EntitySet="emails" />
+          </AssociationSet>
+          <AssociationSet Name="FK_employments_employee_titles" Association="Self.FK_employments_employee_titles">
+            <End Role="employee_titles" EntitySet="employee_titles" />
+            <End Role="employments" EntitySet="employments" />
+          </AssociationSet>
+          <AssociationSet Name="FK_employments_employment_statuses" Association="Self.FK_employments_employment_statuses">
+            <End Role="employment_statuses" EntitySet="employment_statuses" />
+            <End Role="employments" EntitySet="employments" />
+          </AssociationSet>
+          <AssociationSet Name="FK_employments_offices" Association="Self.FK_employments_offices">
+            <End Role="offices" EntitySet="offices" />
+            <End Role="employments" EntitySet="employments" />
+          </AssociationSet>
+          <AssociationSet Name="FK_employments_personal_infos1" Association="Self.FK_employments_personal_infos1">
+            <End Role="personal_infos" EntitySet="personal_infos" />
+            <End Role="employments" EntitySet="employments" />
+          </AssociationSet>
+          <AssociationSet Name="FK_employments_personal_infos2" Association="Self.FK_employments_personal_infos2">
+            <End Role="personal_infos" EntitySet="personal_infos" />
+            <End Role="employments" EntitySet="employments" />
+          </AssociationSet>
+          <AssociationSet Name="FK_employments_providers" Association="Self.FK_employments_providers">
+            <End Role="providers" EntitySet="providers" />
+            <End Role="employments" EntitySet="employments" />
+          </AssociationSet>
+          <AssociationSet Name="FK_freelances_freelance_statuses" Association="Self.FK_freelances_freelance_statuses">
+            <End Role="freelance_statuses" EntitySet="freelance_statuses" />
+            <End Role="freelances" EntitySet="freelances" />
+          </AssociationSet>
+          <AssociationSet Name="FK_freelances_providers" Association="Self.FK_freelances_providers">
+            <End Role="providers" EntitySet="providers" />
+            <End Role="freelances" EntitySet="freelances" />
+          </AssociationSet>
+          <AssociationSet Name="FK_personal_infos_personal_infos" Association="Self.FK_personal_infos_personal_infos">
+            <End Role="personal_infos" EntitySet="personal_infos" />
+            <End Role="personal_infos1" EntitySet="personal_infos" />
+          </AssociationSet>
+          <AssociationSet Name="FK_personal_infos_personal_infos1" Association="Self.FK_personal_infos_personal_infos1">
+            <End Role="personal_infos" EntitySet="personal_infos" />
+            <End Role="personal_infos1" EntitySet="personal_infos" />
+          </AssociationSet>
+          <AssociationSet Name="FK_personal_infos_providers" Association="Self.FK_personal_infos_providers">
+            <End Role="providers" EntitySet="providers" />
+            <End Role="personal_infos" EntitySet="personal_infos" />
+          </AssociationSet>
+          <AssociationSet Name="FK_providers_offices" Association="Self.FK_providers_offices">
+            <End Role="offices" EntitySet="offices" />
+            <End Role="providers" EntitySet="providers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_providers_provider_types" Association="Self.FK_providers_provider_types">
+            <End Role="provider_types" EntitySet="provider_types" />
+            <End Role="providers" EntitySet="providers" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="TraktatDataModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="AspNetUser">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="LoginDisabled" Type="Boolean" Nullable="false" />
+          <Property Name="Email" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="EmailConfirmed" Type="Boolean" Nullable="false" />
+          <Property Name="PasswordHash" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="SecurityStamp" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="PhoneNumber" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="PhoneNumberConfirmed" Type="Boolean" Nullable="false" />
+          <Property Name="TwoFactorEnabled" Type="Boolean" Nullable="false" />
+          <Property Name="LockoutEndDateUtc" Type="DateTime" Precision="3" />
+          <Property Name="LockoutEnabled" Type="Boolean" Nullable="false" />
+          <Property Name="AccessFailedCount" Type="Int32" Nullable="false" />
+          <Property Name="UserName" Type="String" MaxLength="256" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="PersonId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Person" Relationship="TraktatDataModel.FK_AspNetUsers_personal_infos" FromRole="AspNetUser" ToRole="personal_infos" />
+          <NavigationProperty Name="AspNetRoles" Relationship="TraktatDataModel.AspNetUserRoles" FromRole="AspNetUser" ToRole="AspNetRole" />
+        </EntityType>
+        <EntityType Name="PersonalInfo">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="FirstName" Type="String" MaxLength="200" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="AspNetUsers" Relationship="TraktatDataModel.FK_AspNetUsers_personal_infos" FromRole="personal_infos" ToRole="AspNetUser" />
+          <Property Name="MiddleName" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="LastName" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="AlternateName" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="AddressName" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="Initials" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="BirthDate" Type="DateTime" Precision="0" />
+          <Property Name="Comment" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="IsDeleted" Type="Boolean" Nullable="false" />
+          <Property Name="CreatedByID" Type="Int32" Nullable="false" />
+          <Property Name="ModifiedByID" Type="Int32" />
+          <Property Name="CreatedDate" Type="DateTime" Precision="3" />
+          <Property Name="ModifiedDate" Type="DateTime" Precision="3" />
+          <Property Name="ProviderId" Type="Int32" />
+          <NavigationProperty Name="ModifiedBy" Relationship="TraktatDataModel.FK_personal_infos_personal_infos" FromRole="PersonalInfo" ToRole="PersonalInfo1" />
+          <NavigationProperty Name="Modifieds" Relationship="TraktatDataModel.FK_personal_infos_personal_infos" FromRole="PersonalInfo1" ToRole="PersonalInfo" />
+          <NavigationProperty Name="CreatedBy" Relationship="TraktatDataModel.FK_personal_infos_personal_infos1" FromRole="PersonalInfo" ToRole="PersonalInfo1" />
+          <NavigationProperty Name="Creatures" Relationship="TraktatDataModel.FK_personal_infos_personal_infos1" FromRole="PersonalInfo1" ToRole="PersonalInfo" />
+          <NavigationProperty Name="Provider" Relationship="TraktatDataModel.FK_personal_infos_providers" FromRole="PersonalInfo" ToRole="provider" />
+          <NavigationProperty Name="EmailAddresses" Relationship="TraktatDataModel.FK_emails_personal_infos" FromRole="PersonalInfo" ToRole="email" />
+          <NavigationProperty Name="CreatedEmployments" Relationship="TraktatDataModel.FK_employments_personal_infos1" FromRole="PersonalInfo" ToRole="Employment" />
+          <NavigationProperty Name="ModifiedEmployments" Relationship="TraktatDataModel.FK_employments_personal_infos2" FromRole="PersonalInfo" ToRole="Employment" />
+          <Property Name="old_id" Type="Int32" />
+          <Property Name="FullName" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityContainer Name="TraktatData" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="AspNetUsers" EntityType="Self.AspNetUser" />
+          <EntitySet Name="PersonalInfos" EntityType="TraktatDataModel.PersonalInfo" />
+          <AssociationSet Name="FK_AspNetUsers_personal_infos" Association="TraktatDataModel.FK_AspNetUsers_personal_infos">
+            <End Role="personal_infos" EntitySet="PersonalInfos" />
+            <End Role="AspNetUser" EntitySet="AspNetUsers" />
+          </AssociationSet>
+          <EntitySet Name="Offices" EntityType="TraktatDataModel.Office" />
+          <EntitySet Name="Providers1" EntityType="TraktatDataModel.Provider" />
+          <AssociationSet Name="FK_providers_offices" Association="TraktatDataModel.FK_providers_offices">
+            <End Role="office" EntitySet="Offices" />
+            <End Role="provider" EntitySet="Providers1" />
+          </AssociationSet>
+          <AssociationSet Name="FK_personal_infos_personal_infos" Association="TraktatDataModel.FK_personal_infos_personal_infos">
+            <End Role="PersonalInfo" EntitySet="PersonalInfos" />
+            <End Role="PersonalInfo1" EntitySet="PersonalInfos" />
+          </AssociationSet>
+          <AssociationSet Name="FK_personal_infos_personal_infos1" Association="TraktatDataModel.FK_personal_infos_personal_infos1">
+            <End Role="PersonalInfo" EntitySet="PersonalInfos" />
+            <End Role="PersonalInfo1" EntitySet="PersonalInfos" />
+          </AssociationSet>
+          <AssociationSet Name="FK_personal_infos_providers" Association="TraktatDataModel.FK_personal_infos_providers">
+            <End Role="provider" EntitySet="Providers1" />
+            <End Role="PersonalInfo" EntitySet="PersonalInfos" />
+          </AssociationSet>
+          <EntitySet Name="ProviderTypes" EntityType="TraktatDataModel.ProviderType" />
+          <AssociationSet Name="FK_providers_provider_types" Association="TraktatDataModel.FK_providers_provider_types">
+            <End Role="provider_types" EntitySet="ProviderTypes" />
+            <End Role="Provider" EntitySet="Providers1" />
+          </AssociationSet>
+          <EntitySet Name="Emails1" EntityType="TraktatDataModel.Email" />
+          <AssociationSet Name="FK_emails_personal_infos" Association="TraktatDataModel.FK_emails_personal_infos">
+            <End Role="PersonalInfo" EntitySet="PersonalInfos" />
+            <End Role="email" EntitySet="Emails1" />
+          </AssociationSet>
+          <EntitySet Name="EmployeeTitles" EntityType="TraktatDataModel.EmployeeTitle" />
+          <EntitySet Name="EmploymentStatuses" EntityType="TraktatDataModel.EmploymentStatus" />
+          <EntitySet Name="Employments1" EntityType="TraktatDataModel.Employment" />
+          <AssociationSet Name="FK_employments_offices" Association="TraktatDataModel.FK_employments_offices">
+            <End Role="Office" EntitySet="Offices" />
+            <End Role="employment" EntitySet="Employments1" />
+          </AssociationSet>
+          <AssociationSet Name="FK_employments_employee_titles" Association="TraktatDataModel.FK_employments_employee_titles">
+            <End Role="EmployeeTitles" EntitySet="EmployeeTitles" />
+            <End Role="Employment" EntitySet="Employments1" />
+          </AssociationSet>
+          <AssociationSet Name="FK_employments_employment_statuses" Association="TraktatDataModel.FK_employments_employment_statuses">
+            <End Role="EmploymentStatuses" EntitySet="EmploymentStatuses" />
+            <End Role="Employment" EntitySet="Employments1" />
+          </AssociationSet>
+          <AssociationSet Name="FK_employments_personal_infos1" Association="TraktatDataModel.FK_employments_personal_infos1">
+            <End Role="PersonalInfo" EntitySet="PersonalInfos" />
+            <End Role="Employment" EntitySet="Employments1" />
+          </AssociationSet>
+          <AssociationSet Name="FK_employments_personal_infos2" Association="TraktatDataModel.FK_employments_personal_infos2">
+            <End Role="PersonalInfo" EntitySet="PersonalInfos" />
+            <End Role="Employment" EntitySet="Employments1" />
+          </AssociationSet>
+          <EntitySet Name="CalendarPeriods" EntityType="TraktatDataModel.CalendarPeriod" />
+          <AssociationSet Name="FK_calendar_periods_offices1" Association="TraktatDataModel.FK_calendar_periods_offices1">
+            <End Role="Office" EntitySet="Offices" />
+            <End Role="calendar_periods" EntitySet="CalendarPeriods" />
+          </AssociationSet>
+          <AssociationSet Name="FK_employments_providers" Association="TraktatDataModel.FK_employments_providers">
+            <End Role="Provider" EntitySet="Providers1" />
+            <End Role="Employment" EntitySet="Employments1" />
+          </AssociationSet>
+          <AssociationSet Name="FK_calendar_periods_providers" Association="TraktatDataModel.FK_calendar_periods_providers">
+            <End Role="Provider" EntitySet="Providers1" />
+            <End Role="CalendarPeriod" EntitySet="CalendarPeriods" />
+          </AssociationSet>
+          <AssociationSet Name="FK_calendar_periods_employments" Association="TraktatDataModel.FK_calendar_periods_employments">
+            <End Role="Employment" EntitySet="Employments1" />
+            <End Role="CalendarPeriod" EntitySet="CalendarPeriods" />
+          </AssociationSet>
+          <EntitySet Name="FreelanceStatuses" EntityType="TraktatDataModel.FreelanceStatus" />
+          <EntitySet Name="Freelances" EntityType="TraktatDataModel.Freelance" />
+          <AssociationSet Name="FK_freelances_freelance_statuses" Association="TraktatDataModel.FK_freelances_freelance_statuses">
+            <End Role="freelance_statuses" EntitySet="FreelanceStatuses" />
+            <End Role="freelance" EntitySet="Freelances" />
+          </AssociationSet>
+          <AssociationSet Name="FK_freelances_providers" Association="TraktatDataModel.FK_freelances_providers">
+            <End Role="Provider" EntitySet="Providers1" />
+            <End Role="freelance" EntitySet="Freelances" />
+          </AssociationSet>
+          <EntitySet Name="AspNetRoles" EntityType="TraktatDataModel.AspNetRole" />
+          <AssociationSet Name="AspNetUserRoles" Association="TraktatDataModel.AspNetUserRoles">
+            <End Role="AspNetRole" EntitySet="AspNetRoles" />
+            <End Role="AspNetUser" EntitySet="AspNetUsers" />
+          </AssociationSet>
+        </EntityContainer>
+        <Association Name="FK_AspNetUsers_personal_infos">
+          <End Type="TraktatDataModel.PersonalInfo" Role="personal_infos" Multiplicity="1" />
+          <End Type="TraktatDataModel.AspNetUser" Role="AspNetUser" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="personal_infos">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AspNetUser">
+              <PropertyRef Name="PersonId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="Office">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="OfficialName" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="Code" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="ProviderAliases" Relationship="TraktatDataModel.FK_providers_offices" FromRole="office" ToRole="provider" />
+          <NavigationProperty Name="Employments" Relationship="TraktatDataModel.FK_employments_offices" FromRole="Office" ToRole="employment" />
+          <NavigationProperty Name="CalendarPeriods" Relationship="TraktatDataModel.FK_calendar_periods_offices1" FromRole="Office" ToRole="calendar_periods" />
+          <Property Name="old_id" Type="Int32" />
+        </EntityType>
+        <EntityType Name="Provider">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="TypeID" Type="TraktatDataModel.ProviderTypes" Nullable="false" />
+          <Property Name="RepresentedOfficeID" Type="Int32" />
+          <NavigationProperty Name="RepresentedOffice" Relationship="TraktatDataModel.FK_providers_offices" FromRole="provider" ToRole="office" />
+          <NavigationProperty Name="Personalities" Relationship="TraktatDataModel.FK_personal_infos_providers" FromRole="provider" ToRole="PersonalInfo" />
+          <NavigationProperty Name="ProviderType" Relationship="TraktatDataModel.FK_providers_provider_types" FromRole="Provider" ToRole="provider_types" />
+          <NavigationProperty Name="Employments" Relationship="TraktatDataModel.FK_employments_providers" FromRole="Provider" ToRole="Employment" />
+          <NavigationProperty Name="CalendarPeriods" Relationship="TraktatDataModel.FK_calendar_periods_providers" FromRole="Provider" ToRole="CalendarPeriod" />
+          <NavigationProperty Name="Freelances" Relationship="TraktatDataModel.FK_freelances_providers" FromRole="Provider" ToRole="freelance" />
+          <Property Name="old_p_id" Type="Int32" />
+        </EntityType>
+        <Association Name="FK_providers_offices">
+          <End Type="TraktatDataModel.Office" Role="office" Multiplicity="0..1" />
+          <End Type="TraktatDataModel.Provider" Role="provider" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="office">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="provider">
+              <PropertyRef Name="RepresentedOfficeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_personal_infos_personal_infos">
+          <End Type="TraktatDataModel.PersonalInfo" Role="PersonalInfo" Multiplicity="0..1" />
+          <End Type="TraktatDataModel.PersonalInfo" Role="PersonalInfo1" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PersonalInfo">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="PersonalInfo1">
+              <PropertyRef Name="ModifiedByID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_personal_infos_personal_infos1">
+          <End Type="TraktatDataModel.PersonalInfo" Role="PersonalInfo" Multiplicity="1" />
+          <End Type="TraktatDataModel.PersonalInfo" Role="PersonalInfo1" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PersonalInfo">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="PersonalInfo1">
+              <PropertyRef Name="CreatedByID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_personal_infos_providers">
+          <End Type="TraktatDataModel.Provider" Role="provider" Multiplicity="0..1" />
+          <End Type="TraktatDataModel.PersonalInfo" Role="PersonalInfo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="provider">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="PersonalInfo">
+              <PropertyRef Name="ProviderId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="ProviderType">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="Id" Type="TraktatDataModel.ProviderTypes" Nullable="false" />
+          <NavigationProperty Name="Providers" Relationship="TraktatDataModel.FK_providers_provider_types" FromRole="provider_types" ToRole="Provider" />
+        </EntityType>
+        <Association Name="FK_providers_provider_types">
+          <End Type="TraktatDataModel.ProviderType" Role="provider_types" Multiplicity="1" />
+          <End Type="TraktatDataModel.Provider" Role="Provider" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="provider_types">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Provider">
+              <PropertyRef Name="TypeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EnumType Name="ProviderTypes">
+          <Member Name="Employee" Value="0" />
+          <Member Name="Freelancer" Value="1" />
+          <Member Name="Contractor" Value="2" />
+          <Member Name="Office" Value="3" />
+        </EnumType>
+        <EntityType Name="Email">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Active" Type="Boolean" Nullable="false" />
+          <Property Name="Preferred" Type="Boolean" Nullable="false" />
+          <Property Name="EmailAddress" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="PersonID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Person" Relationship="TraktatDataModel.FK_emails_personal_infos" FromRole="email" ToRole="PersonalInfo" />
+        </EntityType>
+        <Association Name="FK_emails_personal_infos">
+          <End Type="TraktatDataModel.PersonalInfo" Role="PersonalInfo" Multiplicity="1" />
+          <End Type="TraktatDataModel.Email" Role="email" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PersonalInfo">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="email">
+              <PropertyRef Name="PersonID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="EmployeeTitle">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Employments" Relationship="TraktatDataModel.FK_employments_employee_titles" FromRole="EmployeeTitles" ToRole="Employment" />
+          <Property Name="old_id" Type="Int32" />
+        </EntityType>
+        <EntityType Name="EmploymentStatus">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Employments" Relationship="TraktatDataModel.FK_employments_employment_statuses" FromRole="EmploymentStatuses" ToRole="Employment" />
+        </EntityType>
+        <EntityType Name="Employment">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="OfficeID" Type="Int32" Nullable="false" />
+          <Property Name="TitleID" Type="Int32" Nullable="false" />
+          <Property Name="StatusID" Type="Int32" Nullable="false" />
+          <Property Name="StartDate" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="EndDate" Type="DateTime" Precision="0" />
+          <Property Name="Comment" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="CreatedByID" Type="Int32" Nullable="false" />
+          <Property Name="CreatedDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="ModifiedByID" Type="Int32" />
+          <Property Name="ModifiedDate" Type="DateTime" Precision="3" />
+          <Property Name="IsDeleted" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="Office" Relationship="TraktatDataModel.FK_employments_offices" FromRole="employment" ToRole="Office" />
+          <NavigationProperty Name="Title" Relationship="TraktatDataModel.FK_employments_employee_titles" FromRole="Employment" ToRole="EmployeeTitles" />
+          <NavigationProperty Name="Status" Relationship="TraktatDataModel.FK_employments_employment_statuses" FromRole="Employment" ToRole="EmploymentStatuses" />
+          <NavigationProperty Name="CreatedBy" Relationship="TraktatDataModel.FK_employments_personal_infos1" FromRole="Employment" ToRole="PersonalInfo" />
+          <NavigationProperty Name="ModifiedBy" Relationship="TraktatDataModel.FK_employments_personal_infos2" FromRole="Employment" ToRole="PersonalInfo" />
+          <Property Name="ProviderID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Provider" Relationship="TraktatDataModel.FK_employments_providers" FromRole="Employment" ToRole="Provider" />
+          <NavigationProperty Name="CalendarPeriods" Relationship="TraktatDataModel.FK_calendar_periods_employments" FromRole="Employment" ToRole="CalendarPeriod" />
+        </EntityType>
+        <Association Name="FK_employments_offices">
+          <End Type="TraktatDataModel.Office" Role="Office" Multiplicity="1" />
+          <End Type="TraktatDataModel.Employment" Role="employment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Office">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="employment">
+              <PropertyRef Name="OfficeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_employments_employee_titles">
+          <End Type="TraktatDataModel.EmployeeTitle" Role="EmployeeTitles" Multiplicity="1" />
+          <End Type="TraktatDataModel.Employment" Role="Employment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="EmployeeTitles">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Employment">
+              <PropertyRef Name="TitleID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_employments_employment_statuses">
+          <End Type="TraktatDataModel.EmploymentStatus" Role="EmploymentStatuses" Multiplicity="1" />
+          <End Type="TraktatDataModel.Employment" Role="Employment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="EmploymentStatuses">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Employment">
+              <PropertyRef Name="StatusID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_employments_personal_infos1">
+          <End Type="TraktatDataModel.PersonalInfo" Role="PersonalInfo" Multiplicity="1" />
+          <End Type="TraktatDataModel.Employment" Role="Employment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PersonalInfo">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Employment">
+              <PropertyRef Name="CreatedByID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_employments_personal_infos2">
+          <End Type="TraktatDataModel.PersonalInfo" Role="PersonalInfo" Multiplicity="0..1" />
+          <End Type="TraktatDataModel.Employment" Role="Employment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PersonalInfo">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Employment">
+              <PropertyRef Name="ModifiedByID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="CalendarPeriod">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="StatusID" Type="Int32" Nullable="false" />
+          <Property Name="StartDate" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="EndDate" Type="DateTime" Precision="3" />
+          <Property Name="OfficeID" Type="Int32" />
+          <Property Name="EmploymentID" Type="Int32" />
+          <NavigationProperty Name="Office" Relationship="TraktatDataModel.FK_calendar_periods_offices1" FromRole="calendar_periods" ToRole="Office" />
+          <Property Name="ProviderID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Provider" Relationship="TraktatDataModel.FK_calendar_periods_providers" FromRole="CalendarPeriod" ToRole="Provider" />
+          <NavigationProperty Name="Employment" Relationship="TraktatDataModel.FK_calendar_periods_employments" FromRole="CalendarPeriod" ToRole="Employment" />
+        </EntityType>
+        <Association Name="FK_calendar_periods_offices1">
+          <End Type="TraktatDataModel.Office" Role="Office" Multiplicity="0..1" />
+          <End Type="TraktatDataModel.CalendarPeriod" Role="calendar_periods" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Office">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="calendar_periods">
+              <PropertyRef Name="OfficeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_employments_providers">
+          <End Type="TraktatDataModel.Provider" Role="Provider" Multiplicity="1" />
+          <End Type="TraktatDataModel.Employment" Role="Employment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Provider">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Employment">
+              <PropertyRef Name="ProviderID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_calendar_periods_providers">
+          <End Type="TraktatDataModel.Provider" Role="Provider" Multiplicity="1" />
+          <End Type="TraktatDataModel.CalendarPeriod" Role="CalendarPeriod" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Provider">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="CalendarPeriod">
+              <PropertyRef Name="ProviderID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_calendar_periods_employments">
+          <End Type="TraktatDataModel.Employment" Role="Employment" Multiplicity="0..1" />
+          <End Type="TraktatDataModel.CalendarPeriod" Role="CalendarPeriod" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Employment">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="CalendarPeriod">
+              <PropertyRef Name="EmploymentID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="FreelanceStatus">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Freelances" Relationship="TraktatDataModel.FK_freelances_freelance_statuses" FromRole="freelance_statuses" ToRole="freelance" />
+        </EntityType>
+        <EntityType Name="Freelance">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ProviderID" Type="Int32" Nullable="false" />
+          <Property Name="StartDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="EndDate" Type="DateTime" Precision="3" />
+          <Property Name="StatusID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Status" Relationship="TraktatDataModel.FK_freelances_freelance_statuses" FromRole="freelance" ToRole="freelance_statuses" />
+          <NavigationProperty Name="Provider" Relationship="TraktatDataModel.FK_freelances_providers" FromRole="freelance" ToRole="Provider" />
+        </EntityType>
+        <Association Name="FK_freelances_freelance_statuses">
+          <End Type="TraktatDataModel.FreelanceStatus" Role="freelance_statuses" Multiplicity="1" />
+          <End Type="TraktatDataModel.Freelance" Role="freelance" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="freelance_statuses">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="freelance">
+              <PropertyRef Name="StatusID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_freelances_providers">
+          <End Type="TraktatDataModel.Provider" Role="Provider" Multiplicity="1" />
+          <End Type="TraktatDataModel.Freelance" Role="freelance" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Provider">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="freelance">
+              <PropertyRef Name="ProviderID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="AspNetRole">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="AspNetUsers" Relationship="TraktatDataModel.AspNetUserRoles" FromRole="AspNetRole" ToRole="AspNetUser" />
+        </EntityType>
+        <Association Name="AspNetUserRoles">
+          <End Type="TraktatDataModel.AspNetRole" Role="AspNetRole" Multiplicity="*" />
+          <End Type="TraktatDataModel.AspNetUser" Role="AspNetUser" Multiplicity="*" />
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="TraktatDataModelStoreContainer" CdmEntityContainer="TraktatData">
+          <EntitySetMapping Name="AspNetUsers">
+            <EntityTypeMapping TypeName="TraktatDataModel.AspNetUser">
+              <MappingFragment StoreEntitySet="AspNetUsers">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="LoginDisabled" ColumnName="LoginDisabled" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="EmailConfirmed" ColumnName="EmailConfirmed" />
+                <ScalarProperty Name="PasswordHash" ColumnName="PasswordHash" />
+                <ScalarProperty Name="SecurityStamp" ColumnName="SecurityStamp" />
+                <ScalarProperty Name="PhoneNumber" ColumnName="PhoneNumber" />
+                <ScalarProperty Name="PhoneNumberConfirmed" ColumnName="PhoneNumberConfirmed" />
+                <ScalarProperty Name="TwoFactorEnabled" ColumnName="TwoFactorEnabled" />
+                <ScalarProperty Name="LockoutEndDateUtc" ColumnName="LockoutEndDateUtc" />
+                <ScalarProperty Name="LockoutEnabled" ColumnName="LockoutEnabled" />
+                <ScalarProperty Name="AccessFailedCount" ColumnName="AccessFailedCount" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="PersonId" ColumnName="PersonId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PersonalInfos">
+            <EntityTypeMapping TypeName="TraktatDataModel.PersonalInfo">
+              <MappingFragment StoreEntitySet="personal_infos">
+                <ScalarProperty Name="FullName" ColumnName="full_name" />
+                <ScalarProperty Name="old_id" ColumnName="old_id" />
+                <ScalarProperty Name="ProviderId" ColumnName="provider_id" />
+                <ScalarProperty Name="ModifiedDate" ColumnName="modified_date" />
+                <ScalarProperty Name="CreatedDate" ColumnName="created_date" />
+                <ScalarProperty Name="ModifiedByID" ColumnName="modified_by_id" />
+                <ScalarProperty Name="CreatedByID" ColumnName="Created_by_id" />
+                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+                <ScalarProperty Name="Comment" ColumnName="Comment" />
+                <ScalarProperty Name="BirthDate" ColumnName="BirthDate" />
+                <ScalarProperty Name="Initials" ColumnName="Initials" />
+                <ScalarProperty Name="AddressName" ColumnName="AddressName" />
+                <ScalarProperty Name="AlternateName" ColumnName="AlternateName" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="MiddleName" ColumnName="MiddleName" />
+                <ScalarProperty Name="Id" ColumnName="id" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Offices">
+            <EntityTypeMapping TypeName="TraktatDataModel.Office">
+              <MappingFragment StoreEntitySet="offices">
+                <ScalarProperty Name="old_id" ColumnName="old_id" />
+                <ScalarProperty Name="Code" ColumnName="code" />
+                <ScalarProperty Name="OfficialName" ColumnName="official_name" />
+                <ScalarProperty Name="Name" ColumnName="name" />
+                <ScalarProperty Name="Id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Providers1">
+            <EntityTypeMapping TypeName="TraktatDataModel.Provider">
+              <MappingFragment StoreEntitySet="providers">
+                <ScalarProperty Name="old_p_id" ColumnName="old_p_id" />
+                <ScalarProperty Name="RepresentedOfficeID" ColumnName="represents_office_id" />
+                <ScalarProperty Name="TypeID" ColumnName="provider_type" />
+                <ScalarProperty Name="Name" ColumnName="provider_name" />
+                <ScalarProperty Name="Id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ProviderTypes">
+            <EntityTypeMapping TypeName="TraktatDataModel.ProviderType">
+              <MappingFragment StoreEntitySet="provider_types">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Emails1">
+            <EntityTypeMapping TypeName="TraktatDataModel.Email">
+              <MappingFragment StoreEntitySet="emails">
+                <ScalarProperty Name="PersonID" ColumnName="person_id" />
+                <ScalarProperty Name="Description" ColumnName="description" />
+                <ScalarProperty Name="EmailAddress" ColumnName="email" />
+                <ScalarProperty Name="Preferred" ColumnName="preferred" />
+                <ScalarProperty Name="Active" ColumnName="active" />
+                <ScalarProperty Name="Id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="EmployeeTitles">
+            <EntityTypeMapping TypeName="TraktatDataModel.EmployeeTitle">
+              <MappingFragment StoreEntitySet="employee_titles">
+                <ScalarProperty Name="old_id" ColumnName="old_id" />
+                <ScalarProperty Name="Name" ColumnName="name" />
+                <ScalarProperty Name="Id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="EmploymentStatuses">
+            <EntityTypeMapping TypeName="TraktatDataModel.EmploymentStatus">
+              <MappingFragment StoreEntitySet="employment_statuses">
+                <ScalarProperty Name="Name" ColumnName="name" />
+                <ScalarProperty Name="Id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Employments1">
+            <EntityTypeMapping TypeName="TraktatDataModel.Employment">
+              <MappingFragment StoreEntitySet="employments">
+                <ScalarProperty Name="ProviderID" ColumnName="provider_id" />
+                <ScalarProperty Name="IsDeleted" ColumnName="is_deleted" />
+                <ScalarProperty Name="ModifiedDate" ColumnName="modified_date" />
+                <ScalarProperty Name="ModifiedByID" ColumnName="modified_by_id" />
+                <ScalarProperty Name="CreatedDate" ColumnName="created_date" />
+                <ScalarProperty Name="CreatedByID" ColumnName="created_by_id" />
+                <ScalarProperty Name="Comment" ColumnName="comment" />
+                <ScalarProperty Name="EndDate" ColumnName="enddate" />
+                <ScalarProperty Name="StartDate" ColumnName="startDate" />
+                <ScalarProperty Name="StatusID" ColumnName="status_id" />
+                <ScalarProperty Name="TitleID" ColumnName="title_id" />
+                <ScalarProperty Name="OfficeID" ColumnName="office_id" />
+                <ScalarProperty Name="Id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CalendarPeriods">
+            <EntityTypeMapping TypeName="TraktatDataModel.CalendarPeriod">
+              <MappingFragment StoreEntitySet="calendar_periods">
+                <ScalarProperty Name="ProviderID" ColumnName="provider_id" />
+                <ScalarProperty Name="EmploymentID" ColumnName="employment_id" />
+                <ScalarProperty Name="OfficeID" ColumnName="office_id" />
+                <ScalarProperty Name="EndDate" ColumnName="end_date" />
+                <ScalarProperty Name="StartDate" ColumnName="start_date" />
+                <ScalarProperty Name="StatusID" ColumnName="calendar_status_id" />
+                <ScalarProperty Name="ID" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="FreelanceStatuses">
+            <EntityTypeMapping TypeName="TraktatDataModel.FreelanceStatus">
+              <MappingFragment StoreEntitySet="freelance_statuses">
+                <ScalarProperty Name="Name" ColumnName="name" />
+                <ScalarProperty Name="Id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Freelances">
+            <EntityTypeMapping TypeName="TraktatDataModel.Freelance">
+              <MappingFragment StoreEntitySet="freelances">
+                <ScalarProperty Name="StatusID" ColumnName="status_id" />
+                <ScalarProperty Name="EndDate" ColumnName="date_end" />
+                <ScalarProperty Name="StartDate" ColumnName="date_start" />
+                <ScalarProperty Name="ProviderID" ColumnName="provider_id" />
+                <ScalarProperty Name="Id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AspNetRoles">
+            <EntityTypeMapping TypeName="TraktatDataModel.AspNetRole">
+              <MappingFragment StoreEntitySet="AspNetRoles">
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <AssociationSetMapping Name="AspNetUserRoles" TypeName="TraktatDataModel.AspNetUserRoles" StoreEntitySet="AspNetUserRoles">
+            <EndProperty Name="AspNetUser">
+              <ScalarProperty Name="Id" ColumnName="UserId" />
+            </EndProperty>
+            <EndProperty Name="AspNetRole">
+              <ScalarProperty Name="Id" ColumnName="RoleId" />
+            </EndProperty>
+          </AssociationSetMapping>
+          </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

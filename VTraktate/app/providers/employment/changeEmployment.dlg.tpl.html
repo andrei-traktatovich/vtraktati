@@ -1,0 +1,20 @@
+﻿<form>
+    <div class="modal-header">
+        <span class="modal-title">Изменение штатной занятости</span>
+    </div>
+    <div class="modal-body">
+        
+            <div class="form-horizontal">
+                <trk-provider-employment employment="model.employment"></trk-provider-employment>
+            </div>
+        
+    </div>
+    <div class="modal-footer">
+        <btn class="btn btn-sm btn-success" ng-click="model.save()">
+            <i class="glyphicon glyphicon-save"></i>Сохранить
+        </btn>
+        <btn class="btn btn-sm btn-default" ng-click="model.cancel()">
+            <i class="glyphicon glyphicon-remove"></i>Отмена
+        </btn>
+    </div>
+</form>

@@ -1,0 +1,104 @@
+﻿<div class="modal-header">
+    <h4 class="modal-title">{{ title }}</h4>
+</div>
+<div class="modal-body">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12">
+                
+                <form class="form-horizontal" name="addServiceType">
+
+                    <div class="form-group" ng-if="addingService">
+                        <label for="selectType">Вид</label>
+
+                        <ui-select ng-model="model.serviceTypeId"
+                                   name="inputServiceType"
+                                   search-enabled="true"
+                                   ng-change="toggleServiceType($select.selected)"
+                                   required
+                                   theme="select2" style="min-width: 200px;">
+
+                            <ui-select-match>{{$select.selected.title}}</ui-select-match>
+                            
+                            <ui-select-choices repeat="item.id as item in lists.services | filter: { title : $select.search }">
+                                <div ng-bind-html="item.title | highlight: $select.search"></div>
+                            </ui-select-choices>
+
+                        </ui-select>
+
+                        <trk-error-summary for="addServiceType.inputServiceType"></trk-error-summary>
+                    </div>
+
+                    <div class="form-group" ng-if="!addingService">
+                        <h2>{{ serviceName }}</h2>
+                    </div>
+
+
+                    <div class="form-group">
+                        <label for="stars">Рейтинг</label>
+                        <rating id="selectStars" ng-model=" model.qaStars" max="3"></rating>
+                    </div>
+
+                    <!-- showing only if the service does not require language types  -->
+                    <div ng-show="showRate">
+                        <div class="form-group">
+                            <label for="selectMinRate">Тариф неср.</label>
+                            <input id="selectMinRate" name="inputMin"
+                                   ng-required="showRate"
+                                   trk-positive-amount 
+                                   type="number"
+                                   class="form-control"
+                                   ng-model="model.minRate" />
+                            <trk-error-summary for="addServiceType.inputMin"></trk-error-summary>
+                        </div>
+                        <div class="form-group">
+                            <label for="selectMaxRate">Тариф срочн.</label>
+                            <input id="selectMaxRate" name="inputMax"
+                                   ng-required="showRate"
+                                   trk-positive-amount 
+                                   class="form-control"
+                                   type="number"
+                                   ng-model="model.maxRate" />
+                            <trk-error-summary for="addServiceType.inputMax"></trk-error-summary>
+                        </div>
+                    </div>
+                    
+
+                    <div class="form-group" ng-show="showUom">
+                        <label for="selectUOM">Ед.изм.</label>
+                        <select class="form-control" 
+                                ng-model="model.uomId"
+                                ng-options="item.id as item.title for item in lists.serviceUoms">
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="selectCurrency">Валюта</label>
+                        <select class="form-control"
+                                ng-model="model.currencyId"
+                                ng-options="item.id as item.title for item in lists.currencies">
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="comment">Комментарий</label>
+                        <textarea class="form-control" ng-model="model.comment"></textarea>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+  
+</div>
+
+<div class="modal-footer">
+    <trk-form-error text="errorMessage"></trk-form-error>
+    <button class="btn btn-sm btn-success" ng-disabled="addServiceType.$invalid" ng-click="ok()">
+        <i class="glyphicon glyphicon-save"></i>
+        Ок
+    </button>
+    <button class="btn btn-sm btn-danger" ng-click="cancel()">
+        <i class="glyphicon glyphicon-remove"></i>
+        Отмена
+    </button>
+</div>

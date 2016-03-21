@@ -1,0 +1,134 @@
+﻿<p ng-if="!items.length">Ничего нет</p>
+<div class="well">
+    <table class="table table-condensed table-bordered text-small" ng-if="items && items.length > 0">
+        <thead>
+            <tr>
+                <th width="200">#</th>
+                <th>Доб.</th>
+                <th>Активный</th>
+                <th>Тип</th>
+                <th>Комментарий</th>
+                <th>Создано</th>
+                <th>Изменено</th>
+                <th><!-- --></th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr ng-repeat="item in items | orderBy : ['-active', '-isDeleted']"
+                ng-class="{ 'success' : item.active, 'item-deleted' : item.isDeleted }"
+                ng-hide="item.isDeleted && model.readonly">
+
+                <td>
+                    <!-- need to sanitize phone number because 1st time it passes +before phone number to the SIP app-->
+                    <a href="dial://{{ sanitizePhoneNumber(item.phone) }}" tooltip="Позвонить с использованием SIP телефонии">
+                        <input type="text" readonly="readonly"
+                               id="inputPhone"
+                               class="form-control"
+                               international-phone-number
+                               national-mode="false"
+                               name="inputPhone"
+                               ng-model="item.phone" />
+                    </a>
+                </td>
+
+                <td>{{ item.ext }}</td>
+
+                <td>
+                    <i class="glyphicon glyphicon-ok text-success" ng-show="item.active && !item.isDeleted"></i>
+                    <i class="glyphicon glyphicon-trash" popover="Удалено" ng-show="item.isDeleted"></i>
+                </td>
+
+                <td>{{ item.typeName }}</td>
+
+                <td>{{ item.comment }}</td>
+
+                <td>
+                    {{ item.createdByName }}
+                    <p class="text-small text-muted">
+                        <trk-datetime trk-dt-val="item.createdDate"></trk-datetime>
+                    </p>
+                </td>
+
+                <td>
+                    {{ item.modifiedByName }}
+                    <p class="text-small text-muted">
+                        <trk-datetime trk-dt-val="item.modifiedDate"></trk-datetime>
+                    </p>
+                </td>
+
+                <td ng-if="!readonly" ng-show="!model.editingItem && !model.addingItem">
+
+                    <button class="btn btn-sm btn-default" ng-hide="item.isDeleted" ng-click="model.beginEditItem(item)">
+                        <i class="glyphicon glyphicon-pencil"></i>
+                    </button>
+
+                    <button class="btn btn-sm btn-default" ng-hide="item.isDeleted" ng-click="model.removeItem(item)">
+                        <i class="glyphicon glyphicon-trash"></i>
+                    </button>
+
+                    <button class="btn btn-sm btn-default" ng-show="item.isDeleted" ng-click="model.restoreItem(item)">
+                        <i class="glyphicon glyphicon-refresh"></i>
+                    </button>
+
+                </td>
+
+            </tr>
+        </tbody>
+    </table>
+    <div class="row">
+        <div ng-if="!readonly" ng-show="!!model.addingItem || !!model.editingItem">
+            <h4>
+                <span ng-show="!!model.addingItem">Добавление</span>
+                <span ng-show="!!model.editingItem">Редактирование</span>
+            </h4>
+
+            <form name="addPhone" class="form-inline">
+
+                <div class="form-group">
+                    <label for="inputPhone">Тел.</label>
+                    <input type="text"
+                           id="inputPhone"
+                           class="form-control"
+                           international-phone-number
+                           national-mode="false"
+                           required
+                           name="inputPhone"
+                           ng-model="model.newItem.phone" />
+                    <trk-error-summary ng-show="addPhone.inputPhone.$dirty" for="addPhone.inputPhone"></trk-error-summary>
+                </div>
+                <div class="form-group">
+                    <label for="inputExt">Доб.</label>
+                    <input id="inputExt"
+                           name="inputExt"
+                           type="number"
+                           class="form-control"
+                           ng-model="model.newItem.ext" />
+                    <trk-error-summary for="addPhone.inputExt"></trk-error-summary>
+                </div>
+
+                <div class="form-group">
+                    <label for="inputActive">Активный</label>
+                    <input id="inputActive" type="checkbox" ng-model="model.newItem.active" />
+                </div>
+                <div class="form-group">
+                    <label for="inputType"></label>
+                    <select name="inputType" class="form-control" required ng-model="model.newItem.typeId" ng-options="type.id as type.title for type in lists.phoneTypes"></select>
+                    <trk-error-summary for="addPhone.inputType"></trk-error-summary>
+
+                </div>
+                <div class="form-group">
+                    <label for="inputComment">Комментарий</label>
+                    <input id="inputComment"
+                           class="form-control"
+                           type="text"
+                           ng-model="model.newItem.comment" />
+                </div>
+                <hr />
+                <button class="btn btn-sm btn-success" ng-show="!!model.addingItem" ng-disabled="addPhone.$invalid" ng-click="model.addItem()"><span class="glyphicon glyphicon-save"></span>Готово</button>
+                <button class="btn btn-sm btn-success" ng-show="!!model.editingItem" ng-disabled="addPhone.$invalid" ng-click="model.editItem()"><span class="glyphicon glyphicon-save"></span>Готово</button>
+                <button class="btn btn-sm btn-default" ng-click="model.cancelItem()"><span class="glyphicon glyphicon-remove"></span>Отмена</button>
+            </form>
+        </div>
+        <button class="btn btn-sm btn-success" ng-hide="readonly || model.addingItem || model.editingItem" ng-click="model.beginAddItem()"><span class="glyphicon glyphicon-plus"></span></button>
+    </div>
+</div>

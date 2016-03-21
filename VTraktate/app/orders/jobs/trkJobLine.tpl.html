@@ -1,0 +1,68 @@
+<!-- collapse 3 rows into 2, just add finals at the bottom of their respective columns and add titles.
+    in future this may enable you to refactor that stuff into separate DRY chunks -->
+<div ng-form name="jobRow">
+    <div class="row text-small">
+        <div class="col-md-4">
+            <div class="form-group">
+                <label for="inputJobTypeId" class="control-label">Вид работ</label>
+                <ui-select ng-model="job.jobTypeId" theme="bootstrap" name="inputJobTypeId" id="inputJobTypeId" required
+                           reset-search-input="false" on-select="onJobTypeChanged($item, $model)" style="width: 100%;">
+                    <ui-select-match placeholder="Вид работ">{{ $select.selected.name }}</ui-select-match>
+                    <ui-select-choices repeat="jobType.id as jobType in jobTypes | filter: { name : $select.search }">
+                        <div ng-bind-html="jobType.name | highlight: $select.search"></div>
+                    </ui-select-choices>
+                </ui-select>
+                <trk-error-summary for="jobRow.inputJobTypeId"></trk-error-summary>
+            </div>
+            <div class="form-group" ng-show="isJobTypeLinguistic()">
+                <label for="inputLanguageId" class="control-panel">Направление</label>
+                <ui-select ng-model="job.languageId" ng-required="isJobTypeLinguistic()" name="inputLanguageId" theme="bootstrap"
+                           on-select="onLanguageChanged($item, $model)">
+                    <ui-select-match placeholder="Направление">{{ $select.selected.title }}</ui-select-match>
+                    <ui-select-choices repeat="language.id as language in languages | filter: { title: $select.search }">
+                        <div ng-bind-html="language.title | highlight: $select.search"></div>
+                    </ui-select-choices>
+                </ui-select>
+                <trk-error-summary for="jobRow.inputLanguageId"></trk-error-summary>
+            </div>
+            <div class="form-group" ng-show="isJobTypeLinguistic()">
+                <label for="inputDomain1Id" class="control-panel">Основная тематика</label>
+                <ui-select ng-model="job.domain1Id" name="inputDomain1Id" theme="bootstrap">
+                    <ui-select-match placeholder="Тематика 1">{{ $select.selected.title }}</ui-select-match>
+                    <ui-select-choices repeat="domain.id as domain in domains | filter: { title: $select.search }">
+                        <div ng-bind-html="domain.title | highlight: $select.search"></div>
+                    </ui-select-choices>
+                </ui-select>
+            </div>
+            <div class="form-group" ng-show="isJobTypeLinguistic()">
+                <label for="inputDomain1Id" class="control-panel">Доп.тематика</label>
+                <ui-select ng-model="job.domain2Id" name="inputDomain2Id" theme="bootstrap">
+                    <ui-select-match placeholder="Тематика 2">{{ $select.selected.title }}</ui-select-match>
+                    <ui-select-choices repeat="domain.id as domain in domains | filter: { title: $select.search }">
+                        <div ng-bind-html="domain.title | highlight: $select.search"></div>
+                    </ui-select-choices>
+                </ui-select>
+            </div>
+        </div>
+        <div class="col-md-8">
+            
+        <trk-volume-and-pricing item="job.initial" rounding-rule="orderOptions.roundingRule" show-chars-and-words="isJobTypeLinguistic()">
+        </trk-volume-and-pricing>
+        </div>
+        
+    </div>
+    <!-- ACHTUNG: possible tag issue! -->
+    <!-- final figures go here -->
+    <div class="row" ng-if="showFinals()">
+        <trk-volume-and-pricing item="job.final" rounding-rule="orderOptions.roundingRule" show-chars-and-words="isJobTypeLinguistic()">
+        </trk-volume-and-pricing>
+    </div>
+    <div class="row">
+        <div class="col-sm-12">
+            <!-- document -->
+            <input type="text" ng-model="job.document" placeholder="Описание документа ... " typeahead="doc for doc in getDocAsync($viewValue)"
+                   class="form-control" stype="min-width:100%" />
+        </div>
+    </div>
+
+</div>

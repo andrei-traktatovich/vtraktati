@@ -1,0 +1,97 @@
+﻿
+<h3>Учетные записи пользователей</h3>
+
+<table ng-table="tableParams" show-filter="true" class="table table-condensed table-hover table-striped text-small">
+    <tbody>
+        <tr ng-repeat="item in $data">
+            <td data-title="'Аккаунт'" filter="{ 'account': 'select' }" filter-data="$root.globals.getFilter('tripleChoice')">
+
+                <button class="btn btn-xs btn-success" ui-sref="admin.accountCreate({ personId : item.personId, personName : item.name })" ng-if="!item.account">
+                    <span class="glyphicon glyphicon-plus" title="Создать учетную запись"></span>
+                </button>
+
+                <button class="btn btn-xs btn-danger" ng-click="removeAccount(item)" ng-if="item.account">
+                    <span class="glyphicon glyphicon-remove" title="Удалить учетную запись"></span>
+                </button>
+
+                <button class="btn btn-xs btn-warning" ui-sref="admin.accountEdit({ account : { accountId : item.account.accountId, email : item.account.email, password : null, confirmPassword : null, roles : item.account.roles, loginDisabled : item.account.accountDisabled, name : item.account.accountName }, personName : item.name })" ng-if="item.account">
+                    <span class="glyphicon glyphicon-pencil" title="Редактировать учетную запись"></span>
+                </button>
+            </td>
+            <td data-title="'Логин'" filter="{ 'userName': 'text' }" sortable="name">
+                {{item.account.accountName }}
+            </td>
+            <td data-title="'Блокирован'" filter="{ 'disabled': 'select' }" filter-data="$root.globals.getFilter('tripleChoice')">
+                <div ng-if=" item.account">
+                    <span style="cursor: pointer" ng-if="item.account.accountDisabled" class="text-danger glyphicon glyphicon-ban-circle"
+                        ng-click="unlockAccount(item)" title="Разблокировать учетную запись"></span>
+
+                    <span style="cursor: pointer"  ng-if="!item.account.accountDisabled" class="text-success glyphicon glyphicon-ok"
+                          ng-click="lockAccount(item)" title="Заблокировать учетную запись"></span>
+                </div>
+            </td>
+            <td data-title="'Роли'" filter="{ 'inRole': 'text' }">
+                <ul class="list-unstyled list-inline">
+                    <li ng-repeat="role in item.account.roles">
+                        <small class="badge ">{{ role.title }}</small>
+                    </li>
+                </ul>
+            </td>
+            <td data-title="'Имя'" filter="{ 'personName': 'text' }">
+                {{ item.name }}
+            </td>
+            <td data-title="'Тип'" filter="{ 'providerTypeID': 'select' }" filter-data="lists.providerTypes">
+                {{ item.typeName }}
+            </td>
+            <td data-title="'Офис'" filter="{ 'permOfficeID': 'select' }" filter-data="lists.offices">
+                {{ item.employment.permanentOfficeName }}
+            </td>
+            <td data-title="'Должность'" filter="{ 'titleID': 'select' }" filter-data="lists.titles">
+                {{ item.employment.titleName }}
+            </td>
+            <td data-title="'Статус'" filter="{ 'emplStatusID': 'select' }" filter-data="lists.employmentStatuses">
+                {{ item.employment.employmentStatus }}
+            </td>
+            <td data-title="'Статус фриланс'" filter="{ 'freelanceStatusID': 'select' }" filter-data="lists.freelanceStatuses"
+                {{ item.freelanceStatus }}
+            </td>
+             
+        </tr>
+    </tbody>
+</table>
+
+<!-- modal dialogs -->
+<!-- Remove a user account: confirmation -->
+<script type="text/ng-template" id="removeAccount.html">
+    <div class="modal-header">
+        <h3 class="modal-title">Удаление учетной записи</h3>
+    </div>
+    <div class="modal-body">
+        <p>
+            <span class="glyphicon glyphicon-warning-sign text-danger"></span>
+            Вы действительно хотите безвозвратно удалить учетную запись пользователя <strong>{{ item.name }} </strong> с логином <strong>{{ item.account.accountName }} </strong>?</p>
+    </div>
+    <div class="modal-footer">
+        <button class="btn btn-primary" ng-click="ok()">Oк</button>
+        <button class="btn btn-default" ng-click="cancel()">Отмена</button>
+    </div>
+</script>
+
+<script type="text/ng-template" id="blockAccount.html">
+    <div class="modal-header">
+        <h3 class="modal-title">Статус учетной записи</h3>
+    </div>
+    <div class="modal-body">
+        <p>
+            <span class="glyphicon glyphicon-warning-sign text-danger"></span>
+            Вы действительно хотите&nbsp;
+            <span ng-if="!val">разблокировать</span>
+            <span ng-if="val">блокировать</span>
+            &nbsp;учетную запись пользователя <strong>{{ item.name }} </strong> с логином <strong>{{ item.account.accountName }} </strong>?
+        </p>
+    </div>
+    <div class="modal-footer">
+        <button class="btn btn-primary" ng-click="ok()">Oк</button>
+        <button class="btn btn-default" ng-click="cancel()">Отмена</button>
+    </div>
+</script>

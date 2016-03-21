@@ -1,0 +1,29 @@
+﻿<p ng-show="!items || items.length === 0">Нет емейлов</p>
+<table class="table table-condensed form" ng-show="items.length > 0">
+    <!-- TODO: column widths propotional to expected content width -->
+    <thead>
+        <tr>
+            <th>Адрес</th>
+            <th>Активный</th>
+            <th>Комментарий</th>
+            <th><!-- action --></th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr ng-repeat="item in items" ng-class="{ 'success' : item.active }" ng-form name="addEmail">
+            <td>
+                <input type="email" class="form-control" ng-model="item.email" name="inputEmail" ng-required="true"/>
+                <trk-error-summary for="addEmail.inputEmail"></trk-error-summary>
+            </td>
+            <td><input type="checkbox"  ng-model="item.active" /></td>
+            <td><input class="form-control" type="text" ng-model="item.comment" /></td>
+            <td>
+                <button class="btn btn-sm btn-default pull-right" ng-click="remove()">
+                    <i class="glyphicon glyphicon-trash"></i>
+                </button>
+            </td>
+        </tr>
+    </tbody>
+</table>
+
+<button class="btn btn-small btn-success" ng-click="addContactPerson()">Добавить</button>

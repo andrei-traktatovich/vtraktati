@@ -1,0 +1,164 @@
+﻿<div class="form large-bottom-margin">
+    <ng-form name="individualCreate">
+        <h1>
+            {{ model.type.name }}
+            <span>
+                <strong>{{ model.personName.fullName }}</strong>
+            </span>
+            <br />
+            <span class="text-small text-muted" ng-show="model.personName.alternateName.length > 0">&nbsp;aka <strong>{{ model.personName.alternateName }}</strong></span>
+        </h1>
+        <hr />
+
+        <div class="well">
+            <trk-person-name person-name="model.personName"></trk-person-name>
+        </div>
+        <hr />
+
+        <section id="details">
+
+            <h3>Подробности</h3>
+            <div class="well">
+
+                <div class="form-group">
+                    <label for="inputBirthday">День рождения</label>
+                    <input id="inputBirthday" class="form-control" type="date" placeholder='дд.мм.гггг' ng-model="model.details.birthDay" />
+                </div>
+
+                <div class="form-group">
+                    <label for="inputRegion">Регион</label>
+                    <select id="inputRegion" ng-model="model.details.regionId" class="form-control" ng-options="item.id as item.title for item in lists.regions"></select>
+                </div>
+
+                <div class="form-group">
+                    <label for="inputDetailsAddress">Адрес</label>
+                    <textarea id="inputDetailsAddress" style="height: 200px;" class="form-control" ng-model="model.details.address"></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="inputDetailsAddress">Город</label>
+                    <textarea id="inputDetailsAddress" style="height: 200px;" class="form-control" ng-model="model.details.city"></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="inputDetailsComment">Комментарий</label>
+                    <textarea id="inputDetailsComment" style="height: 200px;" class="form-control" ng-model="model.details.comment"></textarea>
+                </div>
+
+                <div class="form-group">
+                    <label for="inputDetailsGroups">Группы</label>
+                    <trk-providergroup-picker id="inputDetailsGroups" selection="model.details.groups"></trk-providergroup-picker>
+                </div>
+
+                <div class="form-group">
+                    <label for="inputDetailsSofts">Софт</label>
+                    <trk-soft-picker id="inputDetailsSofts" selection="model.details.soft"></trk-soft-picker>
+                </div>
+            </div>
+            <hr />
+
+        </section>
+
+        <section id="freelance">
+
+            <h3>Фриланс</h3>
+
+            <div class="well">
+                <div class="form-group">
+                    <label for="inputFreeLanceStatus">Статус</label>
+                    <select id="inputFreeLanceStatus" ng-model="model.freelance.statusId" class="form-control"
+                            ng-options="item.id as item.title for item in lists.freelanceStatuses"></select>
+
+                </div>
+
+                <div class="form-group">
+                    <label for="inputIsIp">ИП</label>
+                    <input type="checkbox" ng-model="model.details.isIP" /> зарегистрирован как индивидуальный предприниматель
+                </div>
+
+                <div class="form-group">
+                    <label for="inputFreelanceComment">Комментарий</label>
+                    <textarea id="inputFreelanceComment" style="height: 200px;" class="form-control" ng-model="model.freelance.comment"></textarea>
+                </div>
+            </div>
+            <hr />
+
+        </section>
+
+        <section id="employment" ng-if="model.type.id == 0">
+
+            <h3>Штатная работа</h3>
+            <!-- TODO: encapsulate in a separate directive? -->
+            <div class="well">
+                <div ng-form>
+                    <trk-provider-employment employment="model.employment"></trk-provider-employment>
+                    
+                    
+                </div>
+            </div>
+
+            <hr />
+
+        </section>
+
+        <section id="contactData">
+
+            <h3>Контактные данные</h3>
+            <div>
+                <h3>Электропочта</h3>
+                <div class="well">
+                    <trk-email-list items="model.emails"></trk-email-list>
+                </div>
+            </div>
+            <div>
+                <h3>Телефоны</h3>
+                <div class="well">
+                    <trk-phone-list items="model.telephones"></trk-phone-list>
+                </div>
+            </div>
+            <div>
+                <h3>Прочее</h3>
+                <div class="well">
+                    <trk-other-contacts-list items="model.otherContacts"></trk-other-contacts-list>
+                </div>
+            </div>
+
+            <hr />
+        </section>
+
+        <section id="services">
+
+            <h3>Услуги</h3>
+            <div class="well">
+                <trk-provider-service-list items="model.services">
+
+                </trk-provider-service-list>
+            </div>
+            <hr />
+
+        </section>
+
+        <section id="promotion">
+            <div class="well">
+                <div class="row">
+
+                    <h2>
+                        <i class="glyphicon glyphicon-arrow-up text-success"></i>
+                        <input type="checkbox" ng-model="model.promote" />
+                        <label>
+                            &nbsp;Продвижение
+                        </label>
+                    </h2>
+
+                    <p class="text-small" style="border-left: 1px solid black; padding: 25px;">
+                        Исполнитель с отметкой о продвижении будет продвигаться вверх при подборе исполнителей.
+                    </p>
+
+                </div>
+            </div>
+        </section>
+
+        <div class="pull-right">
+            <button class="btn btn-success" ng-click="save()" ng-disabled="individualCreate.$pristine || individualCreate.$invalid">ОК</button>
+            <button class="btn btn-default" ng-click="cancel()">Отмена</button>
+        </div>
+    </ng-form>
+</div>

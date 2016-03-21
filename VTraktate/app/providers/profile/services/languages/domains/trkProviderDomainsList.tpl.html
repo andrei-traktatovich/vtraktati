@@ -1,0 +1,61 @@
+﻿<div>
+    <div ng-if="!items || !items.length">
+        <p>Ничего нет.</p>
+    </div>
+    <div ng-if="items && items.length">
+        <div class="form-inline">
+            <div class="form-group">
+                <input placeholder="Искать..." class="form-control" ng-model="search.text" />
+            </div>
+            <div class="form-group">
+                <label>{{ limitText }}</label>
+                <button ng-click="setLimit()">{{ limitBtnText }}</button>
+            </div>
+        </div>
+        <div style="width: 100%; overflow: auto;">
+            <table class="table table-condensed text-small">
+                <thead>
+                    <tr>
+                        <th style="width:25%;">Тематика</th>
+                        <th style="width:5%;">Балл</th>
+                        <th style="width:5%;">Звезды</th>
+                        <th style="width:30%;">Комментарий</th>
+                        <th style="width:25%;"></th>
+                        <th style="width:10%;"></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="item in items | filter:search.text | orderBy : ['-grade', '-stars'] | limitTo: limit || items.length">
+                        <td>{{ item.domainName }}</td>
+                        <td>
+                            <div ng-show="item.grade" trk-grade-semaphore="item.grade">
+                                <strong>{{ item.grade }}</strong>
+                            </div>
+                            <span ng-hide="item.grade" class="text-muted">нет</span>
+
+                        </td>
+                        <td>
+                            <rating ng-model="item.stars" readonly="true" max="3"></rating>
+                        </td>
+                        <td>{{item.comment}}</td>
+                        <td>
+                            <trk-time-stamp item="item"></trk-time-stamp>
+                        </td>
+                        <td class="cell-action" ng-hide="readonly">
+                            <button class="btn-sm btn btn-danger" ng-click="remove(item)" tooltip="Удалить тематику">
+                                <i class="glyphicon glyphicon-trash"></i>
+                            </button>
+                            <button class="btn-sm btn btn-default" ng-click="edit(item)" tooltip="Изменить тематику">
+                                <i class=" glyphicon glyphicon-pencil">
+                                </i>
+                            </button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <button class="btn btn-success btn-sm" ng-hide="readonly" ng-click="addDomains()" value="Добавить">
+        <i class="glyphicon glyphicon-plus"></i>Добавить тематику
+    </button>
+</div>

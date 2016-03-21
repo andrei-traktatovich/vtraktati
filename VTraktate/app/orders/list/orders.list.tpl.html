@@ -1,0 +1,275 @@
+﻿<!-- content -->
+<!-- external filters -->
+<div class="form-group">
+    <select ng-model="currentOfficeId" class="form-control" ng-options="office.id as office.title for office in offices" ng-change="onCurrentOfficeChanged()"></select>
+</div>
+
+<!-- toolbar will be here -->
+<div ng-show="currentOfficeId > 0">
+    <div class="btn-group">
+        <a ui-sref="orders.create" class="btn btn-success">
+            <i class="glyphicon glyphicon-plus"></i>
+            Создать
+        </a>
+        <button type="button" ng-show="orderTemplates.length" class="btn btn-success dropdown-toggle" 
+                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <i class="glyphicon glyphicon-plus"></i>
+            Создать <span class="caret"></span>
+        </button>
+        <ul class="dropdown-menu">
+            <li ng-repeat="item in orderTemplates">
+                <a ui-sref="orders.create({ template: item.template })">{{ item.name }}</a>
+            </li>
+        </ul>
+    </div>
+</div>
+
+<div style="width:1900px; height: 1200px;">
+    <div class="grid" ui-grid="gridOptions" ui-grid-tree-view ui-grid-move-columns ui-grid-resize-columns ui-grid-pagination></div>
+</div>
+
+<!-- cell templates -->
+
+<script type="text/ng-template" id="job-payment-cell.tpl.html">
+    <div class="ui-grid-cell-contents" title="{{ row.entity.paymentStatus.name }}">
+        <!-- TODO: include payment status icon here depending on row.entity.paymentStatus.id -->
+    </div>
+</script>
+
+<script type="text/ng-template" id="customer-cell-template.tpl.html">
+    <div class="ui-grid-cell-contents">
+        <span ng-if="row.entity.rowType === 0" class="glyphicon glyphicon-hand-right" style="cursor:pointer;" ns-popover ns-popover-template="customerInfo">
+        </span>
+        {{ COL_FIELD }}
+    </div>
+</script>
+
+<script type="text/ng-template" id="document-cell-template.tpl.html">
+    <div class="ui-grid-cell-contents">
+        <span ng-if="row.entity.rowType === 0" class="glyphicon glyphicon-hand-right" style="cursor:pointer;" ns-popover ns-popover-template="documentInfo">
+        </span>{{ COL_FIELD }}
+    </div>
+</script>
+
+<script type="text/ng-template" id="order-name-cell-template.tpl.html">
+    <div class="ui-grid-cell-contents">
+        <span ng-if="row.entity.rowType === 0"
+              class="glyphicon glyphicon-menu-hamburger"
+              style="cursor:pointer;"
+              ns-popover
+              ns-popover-template="menu">
+        </span>
+        {{ COL_FIELD }}
+    </div>
+</script>jobpart-menu
+
+<script type="text/ng-template" id="provider-cell-template.tpl.html">
+    <div class="ui-grid-cell-contents">
+        <div ng-if="row.entity.rowType === 1">
+            <span ng-if="row.entity.rowType === 1"
+                  class="glyphicon glyphicon-menu-hamburger"
+                  style="cursor:pointer;"
+                  ns-popover
+                  ns-popover-template="jobpart-menu">
+            </span>
+            <span class="glyphicon glyphicon-home" ng-show="row.entity.workInHouse" tooltip="штатная работа"></span>
+            <span class="glyphicon glyphicon-globe" ng-hide="row.entity.workInHouse" tooltip="внештатная работа"></span>
+            {{ COL_FIELD }}
+        </div>
+    </div>
+</script>
+
+
+<script type="text/ng-template" id="price-info-cell-template.tpl.html">
+    <div class="ui-grid-cell-contents">
+        <span style="cursor:pointer;">
+            <i class="glyphicon glyphicon-hand-right"
+               tooltip="Без скидки {{ COL_FIELD.price }}, скидка {{ COL_FIELD.discount }}%" tooltip-placement="bottom">
+            </i>
+            <trk-glyphicon trk-gl-data="row.entity.currency.name"></trk-glyphicon>{{ COL_FIELD.discountedPrice }}
+        </span>
+
+    </div>
+</script>
+
+<!-- popover templates -->
+
+
+<script type="text/ng-template" id="documentInfo">
+    <div class="triangle"></div>
+    <div class="ns-popover-tooltip">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h4>Описание</h4>
+            </div>
+            <div class="panel-body">
+                <table class="table table-condensed">
+                    <tbody>
+                        <tr>
+                            <td>
+                                <strong>Документ</strong>
+                            </td>
+                            <td class="text-small">{{ row.entity.document }}</td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <strong>Тематика1</strong>
+                            </td>
+                            <td>{{ row.entity.domain1.name }}</td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <strong>Тематика2</strong>
+                            </td>
+                            <td>{{ row.entity.domain2.name }}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</script>
+
+<script type="text/ng-template" id="customerInfo">
+    <div class="triangle"></div>
+    <div class="ns-popover-tooltip">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h4>{{ row.entity.customer.shortName }}</h4>
+            </div>
+            <div class="panel-body">
+                <table class="table table-condensed">
+                    <thead>
+                        <tr>
+                            <th></th>
+                            <th style="font-weight: bold;"></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>офиц.название</td>
+                            <td>{{ row.entity.customer.longName }}</td>
+                        </tr>
+                        <tr>
+                            <td>Код</td>
+                            <td>{{ row.entity.customer.code }}</td>
+                        </tr>
+                        <tr>
+                            <td>Контактное лицо</td>
+                            <td>{{ row.entity.customer.contactPerson.fullName }}</td>
+                        </tr>
+                        <tr>
+                            <td>Конт.тел</td>
+                            <td>
+                                <a href="dial://{{row.entity.customer.contactPerson.phone }}">
+                                    {{ row.entity.customer.contactPerson.phone }}
+                                </a>
+                                <span ng-show="row.entity.cutomer.contactPerson.ext">
+                                    доб. {{ row.entity.cutomer.contactPerson.ext }}
+                                </span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Конт.email</td>
+                            <td><a href="mailto://{{ row.entity.customer.contactPerson.email }}">{{ row.entity.customer.contactPerson.email }}</a></td>
+                        </tr>
+                        <tr>
+                            <td>Комментарий</td>
+                            <td>{{ row.entity.customer.contactPerson.comment }}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+    </div>
+</script>
+
+<script type="text/ng-template" id="jobpart-menu">
+
+    <div class="triangle"></div>
+
+    <div class="ns-popover-tooltip" style="padding: 5px; width: 250px;">
+        <h4>{{ row.entity.name }}</h4>
+        <h4>
+            <small>
+                {{ row.entity.status.name }}
+            </small>
+        </h4>
+        <p>Создан: {{ row.entity.createdByName }} <trk-datetime trk-dt-val="row.entity.createdDate"></trk-datetime></p>
+        <p>Изменен: {{ row.entity.modifiedByName }} <trk-datetime trk-dt-val="row.entity.modifiedDate"></trk-datetime></p>
+        <ul class="popover-list-theme">
+
+            <li><a href="" ng-click="grid.appScope.editJobPart(row.entity)"><i class="glyphicon glyphicon-pencil"></i>&nbsp;Редактировать</a></li>
+            <li><a class="danger" href="" ng-click="grid.appScope.deleteJobPart(row.entity)"><i class="glyphicon glyphicon-trash"></i>&nbsp;Удалить</a></li>
+            <li>
+                Изменить статус исполнителя
+                <ul>
+                    <li><a href="" ng-click="grid.appScope.setJobPartPending(row.entity)">В работе</a></li>
+                    <li><a href="" ng-click="grid.appScope.setJobPartCompleted(row.entity)">Выполнен</a></li>
+                    <li><a href="" ng-click="grid.appScope.setJobPartCanceled(row.entity)">Отменен</a></li>
+                </ul>
+            </li>
+
+        </ul>
+
+    </div>
+
+</script>
+<script type="text/ng-template" id="menu">
+
+    <div class="triangle"></div>
+
+    <div class="ns-popover-tooltip" style="padding: 5px; width: 250px;">
+        <h4>{{ row.entity.order.name }}
+            <small ng-show="grid.appScope.isDaughterJob(row.entity)">Заказ по взаимозачету</small>
+        </h4>
+        <h4>
+            <small>
+                {{ row.entity.status.name }}
+                
+            </small>
+        </h4>
+        <p>Создан: {{ row.entity.createdByName }} <trk-datetime trk-dt-val="row.entity.createdDate"></trk-datetime></p>
+        <p>Изменен: {{ row.entity.modifiedByName }} <trk-datetime trk-dt-val="row.entity.modifiedDate"></trk-datetime></p>
+        <ul class="popover-list-theme">
+
+            <!-- <li><a href=""><i class="glyphicon glyphicon-folder-open"></i>&nbsp;Путь</a></li> -->
+
+            <li><a href="" ng-click="grid.appScope.editJob(row.entity)"><i class="glyphicon glyphicon-pencil"></i>&nbsp;Редактировать</a></li>
+
+            <li ng-show="!grid.appScope.isDaughterJob(row.entity)">
+                <a href=""
+                   ng-click="grid.appScope.cloneJob(row.entity)"><i class="glyphicon glyphicon-copy"></i>&nbsp;Добавить вид работ</a>
+            </li>
+
+            <!-- this is conditional on job being root -->
+            <li ng-show="!grid.appScope.isDaughterJob(row.entity)">
+                <a class="danger" href="" ng-click="grid.appScope.deleteJob(row.entity)"><i class="glyphicon glyphicon-trash"></i>&nbsp;Удалить</a>
+            </li>
+            <li>Назначить
+                <ul class="popover-list-theme">
+                    <li><a href="" ng-click="grid.appScope.appointAny(row.entity)"><i class="glyphicon glyphicon-user"></i>&nbsp;исполнителя</a></li>
+                    <li><a href="" ng-click="grid.appScope.appointAnyOffice(row.entity)"><i class="glyphicon glyphicon-user"></i>&nbsp;подразделение</a></li>
+                    <li><a href="" ng-click="grid.appScope.appointFromMyOffice(row.entity)"><i class="glyphicon glyphicon-user"></i>&nbsp;из текущего подразделения</a></li>
+                </ul>
+            </li>
+            
+            
+            <!--<li><a href=""><i class="glyphicon glyphicon-usd"></i>&nbsp;К оплатам</a></li>-->
+            <li>
+                Изменить статус заказа
+                <ul>
+                    <li><a href="" ng-click="grid.appScope.setPending(row.entity)">В работе</a></li>
+                    <li><a href="" ng-click="grid.appScope.setCompleted(row.entity)">Выполнен</a></li>
+                    <li><a href="" ng-click="grid.appScope.setDelivered(row.entity)">Сдан</a></li>
+                    <li><a href="" ng-click="grid.appScope.setCanceled(row.entity)">Отменен</a></li>
+                </ul>
+            </li>
+
+        </ul>
+
+    </div>
+
+</script>
+

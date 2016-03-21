@@ -1,0 +1,10 @@
+﻿<ul class="list-unstyled">
+    <li class="well" ng-repeat="job in jobs">
+        <trk-job-line show-finals="false">
+        </trk-job-line>
+    </li>
+</ul>
+<h4>
+    <strong>Итого: {{ initialTotal }}</strong>
+</h4>
+<button class="btn-sm btn btn-success glyphicon glyphicon-plus" tooltip="добавить вид работ" ng-click="addJob()"></button>

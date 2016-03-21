@@ -1,0 +1,119 @@
+﻿<div class="container">
+    <div class="row">
+        <!-- TODO: filters -->
+        <!-- TODO: create grade button -->
+        <h3>Оценки исполнителей</h3>
+        <div trk-grade-semaphore="grades.tableParams.payload.avg"><p>Средний балл = {{ grades.tableParams.payload.avg }}</p></div>
+        <!-- TODO: show only if user has the right rights -->
+        <button class="btn btn-small btn-success" ng-click="grades.add()">
+            <i class="glyphicon glyphicon-plus">Добавить оценку</i>
+        </button>
+        <div class="panel panel-default">
+            <div class="panel-heading ">
+                <h4><input type="checkbox" ng-model="grades.useAdditionalFilters" ng-change="grades.toggleAdditionalFilters()" /> Дополнительные фильтры
+                    <a href="" ng-click="grades.additionaFiltersVisible = !grades.additionaFiltersVisible" class="pull-right">
+                        <i class="glyphicon glyphicon-chevron-up" ng-show="grades.additionaFiltersVisible"></i>
+                        <i class="glyphicon glyphicon-chevron-down" ng-hide="grades.additionaFiltersVisible"></i>
+                    </a>
+                </h4>
+            </div>
+            <div class="panel-body" ng-show="grades.useAdditionalFilters && grades.additionaFiltersVisible">
+                <div class="col-sm-6">
+                    <input type="checkbox" ng-model="grades.showStartDate" ng-change="grades.toggleStartDate()" />
+                    <p ng-hide="grades.showStartDate">Любая начальная дата. Поставьте галочку. чтобы указать начальную дату.</p>
+                    <datepicker ng-show="grades.showStartDate" ng-model="grades.tableParams.filter()['startDate']" min-date="minDate" show-weeks="true" class="well well-sm" custom-class="getDayClass(date, mode)"></datepicker>
+                </div>
+                <div class="col-sm-6">
+                    <input type="checkbox" ng-model="grades.showEndDate" ng-change="grades.toggleEndDate()" />
+                    <p ng-hide="grades.showEndDate">Любая конечная дата. Поставьте галочку. чтобы указать конечную дату.</p>
+                    <datepicker ng-show="grades.showEndDate" ng-model="grades.tableParams.filter()['endDate']" min-date="minDate" show-weeks="true" class="well well-sm" custom-class="getDayClass(date, mode)"></datepickerng-show>
+                </div>
+
+            </div>
+            
+
+            <table ng-table="grades.tableParams" show-filter="true" class="table table-condensed ng-table-responsive text-small">
+                <tbody>
+                    <tr ng-repeat="item in $data">
+                        <!-- TODO: FILTERS -->
+                        <td data-title="'Имя'" sortable="'name'" filter="{ 'name': 'text' }">
+                            {{ item.provider.name }}
+                        </td>
+                        <td data-title="'Заказ'" sortable="'jobPartName'" filter="{ 'jobPartName': 'text' }">
+                            {{ item.jobPart.name }}
+                        </td>
+                        <td data-title="'Балл'" sortable="'score'" trk-grade-semaphore="item.score">
+                            <strong>
+                                {{ item.score }}
+                            </strong>
+                        </td>
+                        <!-- TODO: detalization -->
+
+                        <td ng-show="details" data-title="'Орф.'"><i ng-show="item.error.spelling" class="glyphicon glyphicon-thumbs-down text-danger"></i></td>
+                        <td ng-show="details" data-title="'Факт.'"><i ng-show="item.error.fact" class="glyphicon glyphicon-thumbs-down text-danger"></i></td>
+                        <td ng-show="details" data-title="'Терм.'"><i ng-show="item.error.term" class="glyphicon glyphicon-thumbs-down text-danger"></i></td>
+                        <td ng-show="details" data-title="'Грам.'"><i ng-show="item.error.grammar" class="glyphicon glyphicon-thumbs-down text-danger"></i></td>
+                        <td ng-show="details" data-title="'Смысл'"><i ng-show="item.error.sense" class="glyphicon glyphicon-thumbs-down text-danger"></i></td>
+                        <td ng-show="details" data-title="'Проп.'"><i ng-show="item.error.omissions" class="glyphicon glyphicon-thumbs-down text-danger"></i></td>
+                        <td ng-show="details" data-title="'Треб.'"><i ng-show="item.error.requirements" class="glyphicon glyphicon-thumbs-down text-danger"></i></td>
+
+                        <td ng-show="details" data-title="'Нос.'"><i ng-show="item.bonus.native" class="glyphicon glyphicon-thumbs-up text-success"></i></td>
+                        <td ng-show="details" data-title="'Кач.'"><i ng-show="item.bonus.quality" class="glyphicon glyphicon-thumbs-up text-success"></i></td>
+
+
+                        <td data-title="'Направл.'" sortable="'language'" filter="{ 'langName': 'text' }">
+                            <span ng-class="{ 'text-danger' : !item.serviceLanguageInfoGradedId }">
+                                {{ item.language.name }}
+                            </span>
+                        </td>
+                        <td data-title="'Тематика'" sortable="'domain'" filter="{ 'domainName': 'text' }">
+                            <span ng-show="item.domain1.name && item.domain1.name != '-'"
+                                  ng-class="{ 'text-danger' : !item.primaryDomainGradedId }">
+                                {{ item.domain1.name }}
+                                <a tooltip="Добавить эту тематику" style="cursor: pointer;"
+                                   ng-show="!item.primaryDomainGradedId && item.serviceLanguageInfoGradedId"
+                                   ng-click="grades.addDomain(item.provider.name, item.language.name, item.serviceLanguageInfoGradedId, item.domain1)">
+                                    <i class="glyphicon glyphicon-plus"></i>
+                                </a>
+                            </span>
+
+
+                            <span ng-show="item.domain2.name && item.domain2.name != '-' && item.domain2.name != item.domain1.name"
+                                  ng-class="{ 'text-danger' : !item.secondaryDomainGradedId }">
+                                ,&nbsp; {{ item.domain2.name }}
+                                <a tooltip="Добавить эту тематику" style="cursor: pointer;"
+                                   ng-show="!item.secondaryDomainGradedId && item.serviceLanguageInfoGradedId"
+                                   ng-click="grades.addDomain(item.provider.name, item.language.name, item.serviceLanguageInfoGradedId, item.domain2)">
+                                    <i class="glyphicon glyphicon-plus text-success"></i>
+                                </a>
+                            </span>
+                            <!-- doesn't work ... --><trk-domain-description domain1="item.domain1.name" domain2="item.domain2.name"></trk-domain-description>
+                        </td>
+                        <td data-title="'Комментарий'" filter="{ 'comment': 'text' }">
+                            <p>
+                                {{ item.comment }}
+                            </p>
+                        </td>
+                        <td data-title="'Созд./изм. '" filter="{ 'authoredBy': 'text' }" sortable="'createdDate'">
+                            <trk-time-stamp item=" item">
+                            </trk-time-stamp>
+                        </td>
+                        <td data-title="' '">
+                            <!-- TODO: show only if user has the right rights -->
+                            <button class="btn btn-small btn-success" ng-click="grades.add(item.provider)">
+                                <i class="glyphicon glyphicon-plus"></i>
+                            </button>
+
+                            <button class="btn btn-small btn-default" ng-click="grades.edit(item)">
+                                <i class="glyphicon glyphicon-pencil"></i>
+                            </button>
+
+                            <button class="btn btn-small btn-danger" ng-click="grades.remove(item)">
+                                <i class="glyphicon glyphicon-trash"></i>
+                            </button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>

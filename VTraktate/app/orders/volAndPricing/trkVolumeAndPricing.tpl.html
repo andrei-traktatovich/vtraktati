@@ -1,0 +1,47 @@
+<div class="row" ng-form name="volumeAndPricing">
+	<div class="col-md-4">
+		<div class="form-group" ng-show="showCharsAndWords">
+			<label class="control-label" for="inputChars">Знаков</label>
+			<input type="number" class="form-control" ng-model="item.volume.chars" id="inputChars" ng-change="onCharsChanged()"
+			/>
+		</div>
+		<div class="form-group">
+			<label class="control-label" for="inputPages">Уч.стр.
+				<trk-conditional-comment heading="Округление" message="roundingRule.description"></trk-conditional-comment>
+			</label>
+			<input type="number" name="inputPages" required trk-positive-amount class="form-control" ng-model="item.volume.pages" ng-change="onPagesChanged()"
+			/>
+			<trk-error-summary for="volumeAndPricing.inputPages"></trk-error-summary>
+		</div>
+		<div class="form-group" ng-show="showCharsAndWords">
+			<label class="control-label" for="inputWords">Слов</label>
+			<input type="number" class="form-control" ng-model="item.volume.words" ng-change="onWordsChanged()" />
+		</div>
+	</div>
+	<div class="col-sm-4">
+		<div class="form-group">
+			<label for="inputRate" class="control-label">Цена за ед.</label>
+			<input type="number" class="form-control" name="inputRate" required trk-positive-number ng-model="item.pricing.rate"
+			ng-change="onRateChanged()" />
+			<trk-error-summary for="volumeAndPricing.inputRate"></trk-error-summary>
+		</div>
+		<div class="form-group">
+			<label for="" class="control-label">Скидка</label>
+			<input type="number" name="inputDiscount" class="form-control" min="0" max="100" ng-model="item.pricing.discount"
+			ng-change="onDiscountChanged()" />
+			<trk-error-summary for="volumeAndPricing.inputDiscount"></trk-error-summary>
+		</div>
+	</div>
+	<div class="col-md-2">
+		<div class="form-group">
+			<label for="displayPrice" class="control-label">Стоимость</label>
+			<h4 id="displayPrice">{{ item.pricing.price }}</h4>
+		</div>
+		<div class="form-group">
+			<label for="displayDiscounted" class="control-label">Со скидкой</label>
+			<h4 id="displayDiscounted">
+				<strong>{{ item.pricing.discountedPrice }}</strong>
+			</h4>
+		</div>
+	</div>
+</div>

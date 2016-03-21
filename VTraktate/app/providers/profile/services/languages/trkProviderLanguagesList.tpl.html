@@ -1,0 +1,31 @@
+﻿<div>
+    <tabset class="tabs-left">
+        <tab ng-repeat="language in items | orderBy: ['-qastars', '-qaGrade' ]">
+            <tab-heading>
+                <rating ng-model="language.qaStars" readonly="true" max="3"></rating>
+                {{ language.languagePairName }}
+            </tab-heading>
+            <trk-provider-language readonly="readonly" item="language" on-edit="edit(language)" on-remove="remove(language)"></trk-provider-language>
+        </tab>
+
+        <tab>
+            <tab-heading ng-hide="readonly">
+                <button class="btn btn-success btn-sm" ng-click="addLanguages()">
+                    <i class="glyphicon glyphicon-plus"></i>Добавить язык
+                </button>
+            </tab-heading>
+        </tab>
+    </tabset>
+
+
+    <!--<ul class="list-group">
+        <li ng-repeat="language in items | orderBy: ['-qaStars', '-qaGrade']" class="list-group-item">
+            
+        </li>
+    </ul>
+    
+    <button ng-hide="readonly" class="btn btn-success btn-sm" ng-click="addLanguages()">
+        <i class="glyphicon glyphicon-plus"></i>Добавить язык
+    </button>-->
+    
+</div>

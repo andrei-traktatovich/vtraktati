@@ -1,0 +1,91 @@
+﻿<div class="modal-header">
+    <h4>Добавление языкового направления</h4>
+</div>
+<div class="modal-body">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12">
+                <form name="addLanguage" class="form-horizontal">
+                    <div class="form-group">
+                        <label for="selectLanguage">Язык(и)</label>
+                        <trk-language-picker selection="model.languages" except="existingLanguages"></trk-language-picker>
+                        <p ng-show="!model.languages.length" 
+                           class="text-danger text-small">Необходимо выбрать хотя бы один язык
+                        </p>
+                    </div>
+                    <div class="form-group">
+                        <label for="selectStars" tooltip="Чем больше звезд, тем выше приоритет">Рейтинг</label>
+                        <rating ng-model="model.stars" max="3"></rating>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="inputQACommment" tooltip="Прокомментируйте рейтинг">Комментарий к рейтингу</label>
+                        <textarea ng-model="model.qaComment" class="form-control" placeholder="Комментарий к рейтингу"></textarea>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="minRate">Тариф неср.</label>
+                        <input type="number" 
+                               class="form-control" 
+                               name='inputMinRate' 
+                               placeholder="несрочный тариф" 
+                               ng-model="model.minRate" 
+                               required
+                               trk-positive-amount />
+                        <trk-error-summary for="addLanguage.inputMinRate"></trk-error-summary>
+                    </div>
+                    <div class="form-group">
+                        <label for="maxRate">Тариф срочн.</label>
+                        <input type="number"
+                               class="form-control"
+                               name='inputMaxRate'
+                               placeholder="срочный тариф"
+                               ng-model="model.maxRate"
+                               required
+                               trk-positive-amount />
+                        <trk-error-summary for="addLanguage.inputMaxRate"></trk-error-summary>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="productivityMin">Производительность, мин.</label>
+                        <input type="number"
+                               class="form-control"
+                               name='productivityMin'
+                               placeholder="Произв.мин."
+                               ng-model="model.productivityMin"
+                               
+                               trk-positive-amount />
+                        <trk-error-summary for="addLanguage.productivityMin"></trk-error-summary>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="productivityMax">Производительность, макс.</label>
+                        <input type="number"
+                               class="form-control"
+                               name='productivityMax'
+                               placeholder="Произв.макс."
+                               ng-model="model.productivityMax"
+                               trk-positive-amount />
+                        <trk-error-summary for="addLanguage.productivityMax"></trk-error-summary>
+                    </div>
+
+                    
+                    <div class="form-group">
+                        <input type="checkbox" ng-model="model.nativeSpeaker" tooltip="Поставьте галочку, если исполнитель является носителем целевого языка"/>Носитель
+                    </div>
+
+                    <div class="form-group">
+                        <label for="writeComment">Комментарий к языковой паре</label>
+                        <textarea class="form-control" ng-model="model.comment" placeholder="Комментарий к языковой паре"></textarea>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal-footer">
+    <trk-form-error text="errorMessage"></trk-form-error>
+    <button class="btn btn-success glyphicon glyphicon-save" ng-disabled="addLanguage.$invalid || !model.languages.length" ng-click="ok()">Сохранить</button>
+    <button class="btn btn-danger glyphicon glyphicon-remove" ng-click="cancel()">Отмена</button>
+</div>

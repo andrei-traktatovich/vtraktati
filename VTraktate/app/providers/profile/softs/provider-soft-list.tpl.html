@@ -1,0 +1,56 @@
+﻿<p ng-if="!items.length">Ничего нет</p>
+<input type="search" ng-model="query" class="form-control" placeholder="Поиск по названию ..." />
+
+<div class="well">
+    
+
+    <table class="table table-condensed table-bordered" ng-if="items && items.length > 0">
+        <thead>
+            <tr>
+                <th>ПО</th>
+                <th><!-- --></th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr ng-repeat="item in items | orderBy : ['name'] | filter : query">
+
+                <td>
+                    {{ item.name }}
+                </td>
+                <td>
+                    <button class="btn btn-sm btn-default" ng-click="removeItem(item)"
+                            ng-hide="readonly || addingItem">
+                        <i class="glyphicon glyphicon-trash"></i>
+                    </button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+
+    <div class="row">
+        <div ng-if="!readonly" ng-show="!!addingItem">
+            <h4>
+                Добавление
+            </h4>
+
+            <form name="addSoft" class="form-inline">
+
+                <div class="form-group">
+                    <label for="inputSoft">Наименование.</label>
+                    
+                    <trk-soft-picker selection="newItems.ids" name="inputSoft" except="items"></trk-soft-picker>
+                     
+                </div>
+
+                <hr />
+                
+                <button class="btn btn-sm btn-success" ng-show="!!addingItem" ng-disabled="addSoft.$invalid || !newItems.ids.length" ng-click="addItem()"><span class="glyphicon glyphicon-save"></span>Готово</button>
+                <button class="btn btn-sm btn-default" ng-click="cancelItem()"><span class="glyphicon glyphicon-remove"></span>Отмена</button>
+            </form>
+        </div>
+
+        <button class="btn btn-sm btn-success" ng-hide="readonly || addingItem" ng-click="beginAddItem()">
+            <span class="glyphicon glyphicon-plus"></span>
+        </button>
+    </div>
+</div>

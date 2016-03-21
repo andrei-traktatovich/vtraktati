@@ -1,0 +1,126 @@
+﻿<form class="form-horizontal" name="accountEditForm">
+
+    <div class="form-group">
+        <div class="col-sm-offset-2 col-sm-10">
+            <h2>
+                <span ng-if="creatingAccount">Создание</span><span ng-if="!creatingAccount">Изменение</span>&nbsp;учетной записи
+            </h2>
+
+            <h3><span class="glyphicon glyphicon-user">{{ personName }}</span></h3>
+            <hr />
+        </div>
+    </div>
+    <!-- user name -->
+
+    <div class="form-group">
+        <label for="inputUserName" class="col-sm-2 control-label">Логин</label>
+        <div class="col-sm-10">
+            <!-- alternate element !!! account name is editable if creating new account OR if user hits glyph to change account name button -->
+            <div ng-if="creatingAccount">
+                <input ng-if="creatingAccount" ng-model="account.name" placeholder="Имя пользователя" name="inputUserName" type="text" class="form-control" autofocus
+                       ng-required="true" ng-minlength="5" ng-maxlength="100" ng-pattern="/^[A-z|0-9|\.|\@]+$/" 
+                       trk-unique="service" trk-unique-data="account.id" />
+                <trk-error-summary for="accountEditForm.inputUserName" ng-show="accountEditForm.$dirty" />
+            </div>
+            <label ng-if="!creatingAccount" class="control-label">{{ account.name }}</label>
+        </div>
+
+    </div>
+
+    <!-- account disabled ? (shown only if editing account) -->
+    <div class="form-group" ng-if="!creatingAccount">
+        <div class="col-sm-offset-2 col-sm-10">
+            <label>
+                <input type="checkbox" ng-model="account.loginDisabled"> Аккаунт заблокирован
+            </label>
+            <p ng-show="account.loginDisabled" class="text-warning">
+                <span class="glyphicon glyphicon-warning-sign">Внимание! Пользователю запрещен вход в систему</span>
+            </p>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <div class="col-sm-offset-2 col-sm-10" ng-if="!creatingAccount">
+            <input type="checkbox" ng-click="enablePasswordChange()" /> Изменить пароль
+        </div>
+    </div>
+
+    <div ng-if="creatingAccount || changingPassword">
+        <div class="form-group">
+            <label for="inputPassword1" class="col-sm-2 control-label">Пароль</label>
+            <div class="col-sm-10">
+                <input type="password" class="form-control" name="inputPassword1" id="inputPassword1" placeholder="Пароль"
+                       ng-model="account.password"
+                       ng-required="creatingAccount" ng-minlength="8" ng-pattern="/^(?=.*\d)(?=.*[a-zA-Z]).{8,11}$/" />
+
+                <!--http://forums.asp.net/t/918584.aspx?REGEX+password+must+contain+letters+a+zA+Z+and+at+least+one+digit+0+9 -->
+                <trk-error-summary for="accountEditForm.inputPassword1" ng-show="accountEditForm.$dirty" />
+            </div>
+        </div>
+
+
+        <div class="form-group">
+            <label for="inputPassword2" class="col-sm-2 control-label">Еще раз пароль</label>
+            <div class="col-sm-10">
+                <input type="password" class="form-control" name="inputPassword2" id="inputPassword2" placeholder="Подтвердите пароль" ng-model="account.confirmPassword"
+                       ng-required="creatingAccount" ng-minlength="8" ng-pattern="/^(?=.*\d)(?=.*[a-zA-Z]).{8,11}$/"
+                       trk-match="accountEditForm.inputPassword1" />
+                <trk-error-summary for="accountEditForm.inputPassword2" ng-show="accountEditForm.$dirty" />
+            </div>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label for="inputPassword" class="col-sm-2 control-label">Электропочта</label>
+        <div class="col-sm-10">
+            <input type="email" class="form-control" name="inputEmail" ng-model="account.email" ng-required />
+            <trk-error-summary for="accountEditForm.inputEmail" ng-show="accountEditForm.$dirty" />
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label for="inputUserRoles" class="col-sm-2 control-label">Роли</label>
+        <div class="col-sm-10">
+            <ui-select name="inputUserRoles" trk-require-multiple multiple ng-model="account.roles" theme="select2" ng-disabled="disabled" style="width: 800px;">
+                <ui-select-match placeholder="Выберите хотя бы одну роль...">{{$item.title}}</ui-select-match>
+                <ui-select-choices repeat="role.title as role in roles | orderBy : 'title' | propsFilter: {title: $select.search, description : $select.search }">
+                    <div ng-bind-html="role.title | highlight: $select.search"></div>
+                    <small>
+                        <strong>{{role.title}}</strong><br /> {{ role.description }}
+                        <!-- <span ng-bind-html="''+role.description | highlight: $select.search"></span> -->
+                    </small>
+                </ui-select-choices>
+            </ui-select>
+            <br />
+            <trk-error-summary for="accountEditForm.inputUserRoles" />
+        </div>
+    </div>
+
+
+    <div class="form-group">
+        <div class="col-sm-offset-2 col-sm-10 alert alert-warning" ng-show="accountEditForm.$dirty && accountEditForm.$invalid">
+            <i class="glyphicon glyphicon-warning-sign"></i>
+            <strong></strong>Пока сохраниться не могу. Поработай над ошибками, дружок ...
+        </div>
+    </div>
+
+    <div class="form-group">
+        <div class="col-sm-offset-2 col-sm-10 alert alert-danger" ng-if="error">
+            <i class="glyphicon glyphicon-warning-sign"></i>
+            <strong>{{ error | json }}</strong>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <div class="col-sm-offset-2 col-sm-10">
+            <a class="btn btn-primary" ng-click="submit()" ng-disabled="accountEditForm.$invalid">
+                <i class="glyphicon glyphicon-save"></i>
+                Сохранить
+            </a>
+            <a class="btn btn-default" ui-sref="admin.account">
+                <i class="glyphicon glyphicon-backward"></i>
+                Отмена
+            </a>
+        </div>
+    </div>
+</form>

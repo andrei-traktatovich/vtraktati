@@ -1,0 +1,38 @@
+﻿<p ng-show="!items || items.length === 0">Ничего нет</p>
+<table class="table table-condensed form" ng-show="items.length > 0">
+    <thead>
+        <tr>
+            <th>Адрес</th>
+            <th>Тип</th>
+            <th>Активный</th>
+            <th>Комментарий</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr ng-repeat="item in items" ng-class="{ 'success' : item.active }" ng-form name="addOtherContact">
+            <td>
+                <input type="text" class="form-control" ng-model="item.address" required name="inputAddress"/>
+                <trk-error-summary for="addOtherContact.inputAddress"></trk-error-summary>
+            </td>
+            <td>
+                <select ng-model="item.type" class="form-control" name="inputType" ng-options="item.id as item.title for item in contactTypes" required></select>
+                <trk-error-summary for="addOtherContact.inputType"></trk-error-summary>
+            </td>
+            <td>
+                <input type="checkbox"  ng-model="item.active" />
+            </td>
+            <td>
+                <input type="text" class="form-control" ng-model="item.comment" />
+            </td>
+            <td>
+                <button class="btn btn-sm btn-default pull-right" ng-click="remove()">
+                    <i class="glyphicon glyphicon-trash"></i>
+                </button>
+            </td>
+        </tr>
+    </tbody>
+</table>
+<button class="btn btn-small btn-success" ng-click="add()">
+    Добавить
+</button>

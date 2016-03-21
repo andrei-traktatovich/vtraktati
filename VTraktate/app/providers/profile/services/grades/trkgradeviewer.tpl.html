@@ -1,0 +1,63 @@
+﻿<div>
+    <button ng-hide="showing" ng-click="show()">
+        <i class="glyphicon glyphicon-chevron-right"></i>&nbsp;Показать
+    </button>
+    <button ng-show="showing" ng-click="hide()">
+        <i class="glyphicon glyphicon-chevron-up"></i>&nbsp;Скрыть
+    </button>
+    <div ng-show="showing && !items.length">
+        <p>Оценок нет.</p>
+    </div>
+    <div ng-show="showing && items.length">
+        <div class="form-inline">
+            <div class="form-group">
+                <input ng-model="textSearch" class="form-control" placeholder="Искать..." />
+            </div>
+            <div class="form-group">
+                <input type="checkbox" ng-model="details" />Подробно
+            </div>
+            <div class="form-group">
+                <span>Всего&nbsp;<span class="badge">{{ items.length }}</span></span>
+            </div>
+        </div>
+        <div class="well" style="width: 100%; overflow: auto;">
+            <table class="table table-condensed table-striped text-small">
+                <thead style="text-align: left;">
+                    <tr>
+                        <th>Балл</th>
+                        <th>Заказ</th>
+                        <th>Тематики</th>
+                        <th></th>
+                        <th tooltip="Орфография" ng-show="details">О</th>
+                        <th tooltip="Фактические" ng-show="details">Ф</th>
+                        <th tooltip="Терминология" ng-show="details">Т</th>
+                        <th tooltip="Грамматика" ng-show="details">Г</th>
+                        <th tooltip="Смысл" ng-show="details">С</th>
+                        <th tooltip="Пропуски" ng-show="details">П</th>
+                        <th tooltip="Требования клиента или бюро" ng-show="details">Тр</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="item in items | filter:textSearch | orderBy: ['-createdDate']" style="text-align: left;">
+                        <td trk-grade-semaphore="item.score">{{ item.score }}</td>
+                        <td><strong>{{ item.jobName }}</strong></td>
+                        <td>{{ domainText(item) }}</td>
+                        <td><trk-time-stamp item="item"></trk-time-stamp></td>
+                        <td><i ng-show="item.error.spelling" class="glyphicon glyphicon-alert text-danger"></i></td>
+                        <td><i ng-show="item.error.fact" class="glyphicon glyphicon-alert text-danger"></i></td>
+                        <td><i ng-show="item.error.term" class="glyphicon glyphicon-alert text-danger"></i></td>
+                        <td><i ng-show="item.error.grammar" class="glyphicon glyphicon-alert text-danger"></i></td>
+                        <td><i ng-show="item.error.sense" class="glyphicon glyphicon-alert text-danger"></i></td>
+                        <td><i ng-show="item.error.omissions" class="glyphicon glyphicon-alert text-danger"></i></td>
+                        <td><i ng-show="item.error.requirements" class="glyphicon glyphicon-alert text-danger"></i></td>
+                        <td>{{ item.comment }}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <button ng-show="showing" ng-click="hide()">
+            <i class="glyphicon glyphicon-chevron-up"></i>&nbsp;Скрыть
+        </button>
+    </div>
+</div>

@@ -1,0 +1,263 @@
+﻿
+.cheesy {
+    background-image: url(../Content/images/cheesie.jpg);
+    background-size: 100%;
+    
+    text-align: right
+}
+
+body {
+    /*padding-top: 70px; */
+    padding-bottom: 00px;
+}
+
+div.signin-background {
+    background-image:url('images/traktat.png');
+    padding-top: 0px;
+}
+.ng-cloak {
+    display: none;
+}
+
+/* Set padding to keep content from hitting the edges */
+.vtraktate-container-fluid {
+    padding-left: 10px;
+    margin-left: 20px;
+    margin-right: 20px;
+    margin-top: 100px;
+    padding-top: 10px;
+    padding-right: 10px;
+}
+
+/* Set width on the form input elements since they're 100% wide by default */
+input,
+select,
+textarea {
+    max-width: 280px;
+}
+
+/* styles for validation helpers */
+.field-validation-error {
+    color: #b94a48;
+}
+
+.field-validation-valid {
+    display: none;
+}
+
+input.input-validation-error {
+    border: 1px solid #b94a48;
+}
+
+input[type="checkbox"].input-validation-error {
+    border: 0 none;
+}
+
+.validation-summary-errors {
+    color: #b94a48;
+}
+
+.validation-summary-valid {
+    display: none;
+}
+
+button[type="submit"] {
+    position: relative;
+}
+
+.modal {
+    display: block;
+}
+
+.text-small {
+    font-size: smaller;
+}
+
+
+
+/* general utilities */
+.noselect {
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+#http-spinner {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 35px;
+    height: 35px;
+    z-index: 100;
+}
+
+.large-bottom-margin {
+    padding-bottom: 50px;
+}
+
+/* sign in */
+
+.form-signin {
+    padding: 20px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin-right: -50%;
+    -moz-transform: translate(-50%, -50%);
+    -ms-transform: translate(-50%, -50%);
+    -o-transform: translate(-50%, -50%);
+    -webkit-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+    width: 300px;
+    background-color: #eee;
+    border: 1px solid #808080;
+}
+
+.popover-wrapper {
+    padding: 10px;
+}
+
+ul.popover-list {
+    margin: 10px;
+}
+li.ns-popover-list-item {
+    cursor: pointer;
+}
+
+li.ns-popover-list-item:hover {
+    cursor: pointer;
+    background-color: gray;
+}
+
+
+tr td a.cell-action {
+    cursor: pointer;
+    visibility: hidden;
+}
+
+tr:hover td a.cell-action {
+    opacity: 0.3;
+    visibility: visible;
+}
+
+tr:hover td:hover a.cell-action {
+    opacity: 1;
+    visibility: visible;
+}
+
+/* selected table row*/
+.selected-table-row {
+    border-left: 5px solid blue;
+}
+
+
+/* provider statuses */
+
+.item-deleted {
+    color: #808080;
+    text-decoration: line-through;
+}
+
+.provider-busy {
+    background-color: #ffd800;
+}
+
+.provider-unavailable {
+    background-color: #ffd800;
+}
+
+.provider-overdue {
+    background-color: #ffd800;
+    color: red;
+}
+
+/* domain */
+
+.domain-importance0 {
+}
+
+.domain-importance1 {
+    font-size: larger;
+}
+
+.domain-importance2 {
+    font-size: x-large;
+}
+
+.domain-importance3 {
+    font-size: xx-large;
+}
+
+
+/* ui-layout */
+.glyphicon-chevron-left,
+.glyphicon-chevron-right,
+.glyphicon-chevron-up,
+.glyphicon-chevron-down{
+  color: black;
+}
+
+/* this creates an unpleasant gray stripe in the middle of the screen if one of the panes is collapsed ... */
+/*.layout-container {
+    padding: 10px;
+    background-color: #deded9;
+}*/
+
+
+/* job grid && job && job part statuses*/
+.job-delivered {
+	background-color: #dff0d8 !important;
+	 
+}
+
+.job-completed {
+	background-color: aqua !important;
+}
+
+.job-canceled { 
+	color: gray !important;
+	font-style: italic !important;
+	text-decoration: dashed !important;
+	font-weight: lighter !important;
+}
+
+.participant-canceled {
+    color: gray !important;
+	font-style: italic !important;
+	text-decoration: dashed !important;
+	font-weight: lighter !important;
+}
+
+.job-pending {
+	background-color: #faf2cc !important;
+}
+
+.job-row {
+	font-size: small;
+	font-weight: bold !important;
+}
+.job-created {
+	background-color: #f2dede !important;
+}
+
+.participant-row {
+	font-weight: normal;
+	font-size: smaller;
+}
+.participant-unknown {
+	
+}
+
+.participant-created {
+	background-color: #f2dede !important;
+}
+
+.participant-pending {
+	background-color: #faf2cc !important;
+}
+
+.participant-completed {
+    background-color: #dff0d8 !important;
+}

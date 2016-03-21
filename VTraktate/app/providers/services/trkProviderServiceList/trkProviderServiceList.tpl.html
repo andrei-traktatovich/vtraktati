@@ -1,0 +1,25 @@
+﻿<ul class="list-unstyled">
+    <li ng-repeat="item in items">
+        <trk-provider-service-item item="item" on-remove="remove(item)"></trk-provider-service-item>
+    </li>
+</ul>
+
+<div class="form form-inline" ng-show="!!isAddingItems">
+    <div class="form-group">
+        <label for="inputServiceTypeId">Виды услуг</label>
+        <!-- TODO: REFACTOR! This is almost the servicetype picker except it works with whole service types rather than their ids -->
+        <ui-select ng-model="newItems.services" multiple search-enabled="true"
+                   theme="select2" style="width: 200px;">
+            <ui-select-match>{{$item.title}}</ui-select-match>
+            <ui-select-choices repeat="item as item in serviceTypes | filter: { title : $select.search }">
+                <div ng-bind-html="item.title | highlight: $select.search"></div>
+            </ui-select-choices>
+        </ui-select>
+
+    </div>
+
+    <button class="btn btn-sm btn-success" ng-click="addItems()">Готово</button>
+</div>
+
+<button class="btn btn-sm btn-success" ng-click="beginAddItems()" ng-show="!isAddingItems">Добавить</button>
+

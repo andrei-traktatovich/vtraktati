@@ -1,0 +1,60 @@
+﻿<div>
+    <div class="form">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h4 class="panel-title">
+                    {{ item.type.name }}
+
+                    <rating ng-model="item.qaStars" max="3" />
+                    <button class="btn btn-sm btn-default pull-right" ng-click="remove()">
+                        <i class="glyphicon glyphicon-trash"></i>
+                    </button>
+                </h4>
+            </div>
+            <div class="panel-body">
+                
+                <div class="row" ng-if="!item.isLinguistic">
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label for="">Тариф несрочный</label>
+                            <input type="number" ng-model="item.rate.minRate" class="form-control" />
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label for="">Тариф срочный</label>
+                            <input type="number" ng-model="item.rate.maxRate" class="form-control" />
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label for="">Валюта</label>
+                            <select ng-model="item.currencyId" class="form-control" ng-options="cur.id as cur.title for cur in lists.currencies"></select>
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label for="">Единица измерения</label>
+                            <select ng-model="item.uomId" class="form-control" ng-options="uom.id as uom.title for uom in lists.uoms"></select>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-12">
+                        <div class="form-group">
+                            <label for="">Комментарий</label>
+                            <textarea ng-model="item.comment" class="form-control"></textarea>
+                        </div>
+                    </div>
+                </div>
+                <div ng-if="item.isLinguistic">
+                    <h4>Языки</h4>
+                    <trk-provider-service-languages items="item.languages"></trk-provider-service-languages>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

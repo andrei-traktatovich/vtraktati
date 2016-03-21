@@ -1,0 +1,83 @@
+﻿<div class="modal-header">
+    <h4>Изменение языкового направления {{ languagePairName }}</h4>
+</div>
+<div class="modal-body">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12">
+                <form name="editLanguage" class="form-horizontal">
+                    
+                    <div class="form-group">
+                        <label for="selectStars" tooltip="Чем больше звезд, тем выше приоритет">Рейтинг</label>
+                        <rating ng-model="model.qaStars" max="3"></rating>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="inputQACommment" tooltip="Прокомментируйте рейтинг">Комментарий к рейтингу</label>
+                        <textarea ng-model="model.qaComment" class="form-control" placeholder="Комментарий к рейтингу"></textarea>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="minRate">Тариф неср.</label>
+                        <input type="number"
+                               class="form-control"
+                               name='inputMinRate'
+                               placeholder="несрочный тариф"
+                               ng-model="model.minRate"
+                               required
+                               trk-positive-amount />
+                        <trk-error-summary for="editLanguage.inputMinRate"></trk-error-summary>
+                    </div>
+                    <div class="form-group">
+                        <label for="maxRate">Тариф срочн.</label>
+                        <input type="number"
+                               class="form-control"
+                               name='inputMaxRate'
+                               placeholder="срочный тариф"
+                               ng-model="model.maxRate"
+                               required
+                               trk-positive-amount />
+                        <trk-error-summary for="editLanguage.inputMaxRate"></trk-error-summary>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="productivityMin">Производительность, мин.</label>
+                        <input type="number"
+                               class="form-control"
+                               name='productivityMin'
+                               placeholder="Произв.мин."
+                               ng-model="model.productivityMin"
+                               trk-positive-amount />
+                        <trk-error-summary for="editLanguage.productivityMin"></trk-error-summary>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="productivityMax">Производительность, макс.</label>
+                        <input type="number"
+                               class="form-control"
+                               name='productivityMax'
+                               placeholder="Произв.макс."
+                               ng-model="model.productivityMax"
+                               trk-positive-amount />
+                        <trk-error-summary for="editLanguage.productivityMax"></trk-error-summary>
+                    </div>
+
+                    <div class="form-group">
+                        <input type="checkbox" ng-model="model.nativeSpeaker" tooltip="Поставьте галочку, если исполнитель является носителем целевого языка" />Носитель
+                    </div>
+
+                    <div class="form-group">
+                        <label for="writeComment">Комментарий к языковой паре</label>
+                        <textarea class="form-control" ng-model="model.comment" placeholder="Комментарий к языковой паре"></textarea>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal-footer">
+    <trk-form-error text="errorMessage"></trk-form-error>
+    <button class="btn btn-success glyphicon glyphicon-save" ng-disabled="editLanguage.$invalid" ng-click="ok()">Сохранить</button>
+    <button class="btn btn-danger glyphicon glyphicon-remove" ng-click="cancel()">Отмена</button>
+</div>

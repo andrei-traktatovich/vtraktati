@@ -1,0 +1,16 @@
+﻿<!-- if not editing -->
+<div ng-hide="editing">
+    <!-- data -->
+    <trk-edit-button action="beginEdit()"></trk-edit-button>
+</div>
+<div ng-show="editing">
+    <trk-person-name 
+                     person-name="contactPerson.personName"
+                     person-id="contactPerson.id">
+
+    </trk-person-name>
+    <!-- additional fields ... -->
+    
+    <trk-save-button action="save()" ng-disabled=""></trk-save-button> <!-- control the form -->
+    <trk-cancel-button action="cancel()"></trk-cancel-button>
+</div>

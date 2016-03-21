@@ -1,0 +1,37 @@
+﻿<p ng-show="!items || items.length === 0">Нет телефонов</p>
+<table class="table table-condensed form" ng-show="items.length > 0">
+    <thead>
+        <!-- make column width proportional to expected content -->
+        <tr>
+            <th>№</th>
+            <th>доп.</th>
+            <th>Активный</th>
+            <th>Тип</th>
+            <th>Комментарий</th>
+            <th><!-- action --></th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr ng-repeat="item in items" ng-class="{ 'success' : item.active }" ng-form name="addPhone">
+            <!-- TODO: convert this to intl phone number picker !!! -->
+            <td>
+                <input type="text" name="inputPhone" id="inputPhone" class="form-control" international-phone-number national-mode="false" ng-required="true" ng-model="item.phone" />
+                <trk-error-summary for="addPhone.inputPhone"></trk-error-summary>
+            </td>
+            <td><input type="text" class="form-control" ng-model="item.ext" /></td>
+            <td><input type="checkbox" ng-model="item.active" /></td>
+            
+            <td><select class="form-control" name="inputType" ng-model="item.typeId" ng-options="type.id as type.title for type in lists.phoneTypes"></select>
+                <trk-error-summary for="addPhone.inputType"></trk-error-summary>
+            </td>
+
+            <td><input type="text" class="form-control" ng-model="item.comment" /></td>
+            <td>
+                <button class="btn btn-sm btn-default" ng-click="remove()">
+                    <i class="glyphicon glyphicon-trash"></i>
+                </button>
+            </td>
+        </tr>
+    </tbody>
+</table>
+<button class="btn btn-small btn-success" ng-click="addTelNo()">Добавить</button>

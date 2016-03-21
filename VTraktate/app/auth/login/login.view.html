@@ -1,0 +1,31 @@
+﻿
+<div style="position: absolute; top: 0; width: 100%; height: 100%;" class="signin-background"></div>
+<div style="position: absolute; top: 10px; left: 10px;">
+    <div class="alert alert-danger">
+        <h3 class="alert alert-danger">{{ $root.version }}</h3>
+        <p tooltip="Запомните эти цифры. Это номер версии. Назовите их, если что-то пошло не так."><u>Что это?</u></p>
+    </div>
+</div>
+<form name="authForm" class="form-signin">
+    <h2 class="form-signin-heading">Войдите</h2>
+
+    <label for="inputUserName" class="sr-only">Имя пользователя</label>
+    <input type="text" id="inputUserName" class="form-control" placeholder="Имя пользователя"
+               ng-model="credentials.userName" ng-required="true" autofocus="autofocus">
+
+    <label for="inputPassword" class="sr-only">Password</label>
+    <input type="password" id="inputPassword" class="form-control" ng-required="true" placeholder="Пароль" required=""
+               ng-model="credentials.password" />
+
+    <div class="checkbox">
+        <label>
+            <input type="checkbox" ng-model="credentials.rememberMe"> Запомнить меня
+        </label>
+    </div>
+
+    <div class="alert alert-danger" ng-if="errorMessage" role="alert">{{ errorMessage }}</div>
+
+    <button class="btn btn-lg btn-primary btn-block" type="submit" data-indi-click="submit()" ng-disabled="authForm.$invalid">Войти</button>
+        
+</form>
+

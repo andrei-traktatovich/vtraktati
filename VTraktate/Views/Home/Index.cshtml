@@ -1,0 +1,375 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <title>@ViewBag.Title</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+
+    <link href="~/app/common/directives/ThirdParty/ngTable/css/ng-table.min.css" rel="stylesheet" />
+
+
+    <!-- ui select-->
+    @*<link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/select2/3.4.5/select2.css"> - link unavailable*@
+    <link href="~/app/common/directives/ThirdParty/ui-select/select2.css" rel="stylesheet" />
+    <!--
+      Selectize theme
+      Less versions are available at https://github.com/brianreavis/selectize.js/tree/master/dist/less
+    -->
+    <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/selectize.js/0.8.5/css/selectize.default.css">
+    <!-- <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/selectize.js/0.8.5/css/selectize.bootstrap2.css"> -->
+    <!-- <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/selectize.js/0.8.5/css/selectize.bootstrap3.css"> -->
+    <link href="~/app/common/directives/ThirdParty/ui-select/select.min.css" rel="stylesheet" />
+    <link href="~/app/common/directives/ThirdParty/rz-slider/rzSlider.css" rel="stylesheet" />
+    <link href="~/Content/toastr.min.css" rel="stylesheet" />
+
+    <link href="~/Content/stacked-tabs.css" rel="stylesheet" />
+    
+    <link href="~/app/common/directives/ThirdParty/ui-layout/ui-layout.css" rel="stylesheet" />
+
+    <link href="~/app/common/directives/ThirdParty/nsPopover/nsPopover.css" rel="stylesheet" />
+
+    <link href="~/app/common/directives/ThirdParty/internationalPhoneNumber/jQueryPlugin/css/tel-input.css" rel="stylesheet" />
+    <link href="~/Content/fullcalendar.css" rel="stylesheet" />
+    <link href="~/app/common/directives/ThirdParty/bootstrap-datetimepicker/datetimepicker.css" rel="stylesheet" />
+    
+    <link href="~/app/common/directives/ThirdParty/ui-grid/ui-grid.min.css" rel="stylesheet" />
+    <meta name="description" content="TO BE DONE" />
+
+</head>
+<body ng-app="app" class="ng-cloak">
+
+    <div ng-controller="appController">
+
+        <!-- navigation bar, only displayed when user is logged in -->
+        <!-- Fixed navbar -->
+        <nav class="navbar navbar-default navbar-fixed-top" ng-if="getUser()">
+            <div class="container">
+                <!-- spinner -->
+                <div id="http-spinner">
+                    <span us-spinner="{radius:5, width:3, length: 5}" spinner-key="spinner-1"></span>
+                </div>
+
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+
+                    <a class="navbar-brand info" ui-sref="home">ВТрактате</a>
+                </div>
+                <div id="navbar" class="navbar-collapse collapse">
+                    <traktat-active-navbar source="source" gatekeeper="gatekeeper" />
+                </div>
+            </div>
+        </nav>
+
+        <div ui-view class="container vtraktate-container-fluid">
+            <div class="alert alert-danger">
+                <h1>Что-то пошло не так.</h1>
+                <h4>Если вы видите это сообщение, значит, что-то пошло не так.</h4>
+                <br />
+                <p>Скорее всего, вам нужно очистить кэш браузера.</p>
+                <p><a href="http://blogvestor.ru/instrukcii/kak-ochistit-kesh-v-opere-xrome-mozile-internet-explorer-safari.html">Как очищается кэш браузера.</a></p>
+                <p>Очистив кэш, возвращайтесь ...</p>
+            </div>
+        </div>
+    </div>
+
+
+
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    <script src="~/Scripts/jquery-ui-1.11.4.min.js"></script>
+    <script src="~/app/infrastructure/momentjs/moment.js"></script>
+
+    <script src="~/Scripts/fullcalendar.min.js"></script>
+    <script src="~/Scripts/lang-all.js"></script>
+
+    @*underscore.js*@
+    <script src="~/Scripts/underscore.min.js"></script>
+
+    <script src="~/Scripts/angular.js"></script>
+    <script src="~/Scripts/i18n/angular-locale_ru-ru.js"></script>
+    <script src="~/Scripts/angular-resource.min.js"></script>
+    <script src="~/Scripts/angular-ui-router.min.js"></script>
+    <script src="~/Scripts/angular-sanitize.min.js"></script>
+
+    <script src="~/Scripts/angular-ui/ui-bootstrap.min.js"></script>
+    <script src="~/Scripts/angular-ui/ui-bootstrap-tpls.min.js"></script>
+    <script src="~/app/common/directives/ThirdParty/bootstrap-datetimepicker/datetimepicker.js"></script>
+
+    @* ui-grid *@
+    <script src="~/app/common/directives/ThirdParty/ui-grid/ui-grid.min.js"></script>
+    
+
+    @*TOASTR*@
+    <script src="~/Scripts/toastr.min.js"></script>
+
+    @* THIRD PARTY LIBRARIES *@
+
+    @* spinner and spin button *@
+
+    <script src="~/app/common/directives/ThirdParty/spin.js"></script>
+    <script src="~/app/common/directives/ThirdParty/indiClick.js"></script>
+
+    @* local storage *@
+    <script src="~/app/infrastructure/localStorage/localStorage.svc.js"></script>
+    
+    @* order templates *@
+    <script src="~/app/orders/orderTemplates/orderTemplate.mdl.js"></script>
+    <script src="~/app/orders/orderTemplates/orderTemplateFromOrderCreateModel.svc.js"></script>
+    <script src="~/app/orders/orderTemplates/orderTemplates.svc.js"></script>
+
+    @* ngTable *@
+
+    <script src="~/app/common/directives/ThirdParty/ngTable/js/ng-table.min.js"></script>
+
+    @*ui-select*@
+
+    <script src="~/app/common/directives/ThirdParty/ui-select/select.min.js"></script>
+    <script src="~/app/common/directives/ThirdParty/ui-select/propsFilter.js"></script>
+
+
+    @*page-slide.js*@
+    <script src="~/app/common/directives/ThirdParty/ng-pageslide/ng-pageslide.js"></script>
+
+    @*ui-layout*@
+    <script src="~/app/common/directives/ThirdParty/ui-layout/ui-layout.js"></script>
+
+    @*rzSlider*@
+    <script src="~/app/common/directives/ThirdParty/rz-slider/rzSlider.js"></script>
+
+    @*nsPopover*@
+    <script src="~/app/common/directives/ThirdParty/nsPopover/nsPopover.js"></script>
+
+    @*toTitleCase*@
+    <script src="~/app/infrastructure/titleCase/titleCase.js"></script>
+
+    @*intl phone number*@
+    <script src="~/app/common/directives/ThirdParty/internationalPhoneNumber/jQueryPlugin/js/tel-input.js"></script>
+    <script src="~/app/common/directives/ThirdParty/internationalPhoneNumber/ngWrapper/ngInternationalPhoneNumber.js"></script>
+
+    @*angular spinner*@
+    <script src="~/app/common/directives/ThirdParty/angularSpinner/angularSpinner.js"></script>
+
+    @*ng-text-truncate*@
+    <script src="~/app/common/directives/ThirdParty/ngTextTruncate/ngTextTruncate.js"></script>
+
+    @*ui-calendar*@
+
+    @*THIRD PARTY SERVICES*@
+    <script src="~/app/thirdPartyServices/thirdPartyServices.js"></script>
+
+    @* APPLICATION *@
+    <script src="~/app/common/directives/ThirdParty/ui-calendar/ui.calendar.js"></script>
+    @* custom directives *@
+
+    <script src="~/app/common/directives/traktat.ui/traktat.ui.mdl.js"></script>
+    <script src="~/app/common/directives/traktat.ui/traktatActiveNavbar.js"></script>
+
+    <script src="~/app/common/directives/traktat.ui/trkErrorSummary/trkErrorSummary.js"></script>
+
+    <script src="~/app/common/directives/traktat.ui/trkMatch.js"></script>
+    <script src="~/app/common/directives/traktat.ui/trkRequireMultiple.js"></script>
+
+    <script src="~/app/common/directives/traktat.ui/trkCollapseButton/trkCollapseButton.js"></script>
+
+    <script src="~/app/common/directives/traktat.ui/trkLanguagePicker/trkLanguagePicker.js"></script>
+    <script src="~/app/common/directives/traktat.ui/trkOfficePicker/trkOfficePicker.js"></script>
+    <script src="~/app/common/directives/traktat.ui/trkAvailabilityStatusPicker/trkAvailabilitystatusPicker.js"></script>
+    <script src="~/app/common/directives/traktat.ui/trkEmploymentstatusPicker/trkEmploymentstatusPicker.js"></script>
+    <script src="~/app/common/directives/traktat.ui/trkFreelancestatusPicker/trkFreelancestatusPicker.js"></script>
+    <script src="~/app/common/directives/traktat.ui/trkProvidertypePicker/trkProvidertypePicker.js"></script>
+    <script src="~/app/common/directives/traktat.ui/trkServiceTypePicker/trkServicetypePicker.js"></script>
+    <script src="~/app/common/directives/traktat.ui/trkRegionPicker/trkRegionPicker.js"></script>
+    <script src="~/app/common/directives/traktat.ui/trkTitlePicker/trkTitlePicker.js"></script>
+    <script src="~/app/common/directives/traktat.ui/trkCurrencyPicker/trkCurrencyPicker.js"></script>
+    <script src="~/app/common/directives/traktat.ui/trkServiceUomPicker/trkServiceuomPicker.js"></script>
+    <script src="~/app/common/directives/traktat.ui/trkStarsPicker/trkStarsPicker.js"></script>
+    <script src="~/app/common/directives/traktat.ui/trkProvidergroupPicker/trkProvidergroupPicker.js"></script>
+    <script src="~/app/common/directives/traktat.ui/trkDomainPicker/trkDomainPicker.js"></script>
+    <script src="~/app/common/directives/traktat.ui/trkConditionalComment/trkConditionalComment.js"></script>
+    <script src="~/app/common/directives/traktat.ui/trkSoftPicker/trkSoftPicker.js"></script>
+    <script src="~/app/common/directives/traktat.ui/trkGradeSemaphore/trkGradeSemaphore.js"></script>
+    <script src="~/app/common/directives/traktat.ui/trkTimeStamp/trkTimeStamp.js"></script>
+
+    <script src="~/app/providers/contacts/emails/trkEmailList.js"></script>
+    <script src="~/app/providers/contacts/telephones/trkPhoneList.js"></script>
+    <script src="~/app/providers/contacts/otherContacts/trkOtherContactsList.js"></script>
+    <script src="~/app/common/directives/traktat.ui/trkGlyphicon/trkGlyphicon.js"></script>
+    <script src="~/app/common/directives/traktat.ui/trkDatetime/trkDatetime.js"></script>
+
+    <script src="~/app/common/directives/traktat.ui/trkPersonName/trkPersonName.ctrl.js"></script>
+    <script src="~/app/common/directives/traktat.ui/trkGrade/trkGrade.js"></script>
+    <script src="~/app/common/directives/traktat.ui/trkDomainDescription/trkDomainDescription.js"></script>
+
+    <script src="~/app/providers/profile/contacts/otherContacts/trkProfileOtherContactsList.js"></script>
+
+
+    @* constants *@
+    <script src="~/app/infrastructure/constants.js"></script>
+    @*globals, user and token*@
+
+    <script src="~/app/globals/globals.js"></script>
+    <script src="~/app/user/user.js"></script>
+
+    @* authentication and authorization *@
+
+    <script src="~/app/auth/auth.mdl.js"></script>
+    <script src="~/app/auth/services/creds.svc.js"></script>
+    <script src="~/app/auth/services/token.svc.js"></script>
+    <script src="~/app/auth/services/login.svc.js"></script>
+    <script src="~/app/auth/services/profile.svc.js"></script>
+    <script src="~/app/auth/services/auhorization.svc.js"></script>
+    <script src="~/app/auth/services/stateGateKeeper.svc.js"></script>
+    <script src="~/app/auth/services/session.svc.js"></script>
+    <script src="~/app/auth/login/login.ctrl.js"></script>
+
+    @*dateTimeUtils *@
+    <script src="~/app/infrastructure/dateTimeUtils/dateTimeUtils.mdl.js"></script>
+    <script src="~/app/infrastructure/dateTimeUtils/taskDurationManager.js"></script>
+
+    @*infrastructure*@
+    <script src="~/app/infrastructure/infrastructure.js"></script>
+    <script src="~/app/infrastructure/confirmer.js"></script>
+
+    <script src="~/app/providers/profile/services/providers.profile.services.js"></script>
+    <script src="~/app/providers/profile/providers.profile.js"></script>
+    <script src="~/app/providers/providers.js"></script>
+
+    
+
+    @*grades*@
+    <script src="~/app/grades/grades.mdl.js"></script>
+    <script src="~/app/grades/defaultTableParams.js"></script>
+    <script src="~/app/grades/domainAddDialog.js"></script>
+    <script src="~/app/grades/domainAddDialogController.js"></script>
+    <script src="~/app/grades/gradesListController.js"></script>
+    <script src="~/app/grades/gradesService.js"></script>
+    <script src="~/app/grades/addUpdateGradeController.js"></script>
+    <script src="~/app/grades/gradeDialog.js"></script>
+    
+
+    @*orders*@
+
+    @*jobManager*@
+    <script src="~/app/orders/jobs/jobFactory.js"></script>
+    @*order list*@
+
+    <script src="~/app/orders/list/orderlist.mdl.js"></script>
+    <script src="~/app/orders/list/jobsViewModelToGridTransformer.js"></script>
+    <script src="~/app/orders/list/orderList.ctrl.js"></script>
+    <script src="~/app/orders/list/dateTime.filter.js"></script>
+    <script src="~/app/orders/list/jobsGridColumnDefs.js"></script>
+
+    <!-- appointment -->
+    <script src="~/app/orders/jobs/jobParts/appointDialog/appointmentEditModelFactory.js"></script>
+    <script src="~/app/orders/jobs/jobParts/appointDialog/appointmentRoles.js"></script>
+    <script src="~/app/orders/jobs/jobParts/appointDialog/resolveAppointmentRole.js"></script>
+    
+
+    <script src="~/app/orders/jobs/jobParts/appointDialog/jobPartEditDialog.svc.js"></script>
+    <script src="~/app/orders/jobs/jobParts/appointDialog/appointmentCreateModelFactory.js"></script>
+    <script src="~/app/orders/jobs/jobParts/appointDialog/appointDialog.svc.js"></script>
+    <script src="~/app/orders/jobs/jobParts/appointDialog/appointDialog.js"></script>
+    <!-- job edit -->
+    <script src="~/app/orders/jobs/jobEditDialog.svc.js"></script>
+    <script src="~/app/orders/jobs/jobEditController.js"></script>
+        @*order / job utilities*@
+        <script src="~/app/orders/utilities/volumeRoundingRules/volumeRoundingRules.js"></script>    
+        <script src="~/app/orders/utilities/utilities.mdl.js"></script>
+        <script src="~/app/orders/utilities/jobTypesManager.js"></script>
+        <script src="~/app/orders/utilities/volumeManager.js"></script>
+        <script src="~/app/orders/utilities/jobPriceCalculator.js"></script>
+        <script src="~/app/orders/utilities/pricelistManager.js"></script>
+        
+
+    <script src="~/app/orders/data/order.data.js"></script>
+    <script src="~/app/orders/data/customers.svc.js"></script>
+    <script src="~/app/orders/data/contactPersons.svc.js"></script>
+
+    <script src="~/app/orders/create/order.create.js"></script>
+    <script src="~/app/orders/create/documentsAutoSuggestOptions.js"></script>
+    <script src="~/app/orders/create/order.create.ctrl.js"></script>
+    <script src="~/app/orders/orders.js"></script>
+
+    <script src="~/app/orders/volAndPricing/trkVolumeAndPricingConroller.js"></script>
+    <script src="~/app/orders/volAndPricing/trkVolumeAndPricing.js"></script>
+
+    <script src="~/app/orders/jobs/validation/jobValidation.js"></script>
+    <script src="~/app/orders/jobs/trkJobLine.js"></script>
+    <script src="~/app/orders/jobs/jobLineController.js"></script>
+    
+    
+
+    <script src="~/app/app.js"></script>
+    <script src="~/app/admin/accounts/accounts.ctrl.js"></script>
+    <script src="~/app/home/home.ctrl.js"></script>
+    <script src="~/app/admin/accounts/account.create.ctrl.js"></script>
+    <script src="~/app/admin/accounts/account.edit.ctrl.js"></script>
+    <script src="~/app/providers/providers.ctrl.js"></script>
+
+    <script src="~/app/providers/create/individual/templates/individualCreateForm.ctrl.js"></script>
+    <script src="~/app/orders/create/jobsTable/jobsTable.ctrl.js"></script>
+    <script src="~/app/orders/create/jobsTable/jobsTable.dir.js"></script>
+    
+
+    @*more infrastructure*@
+
+    <script src="~/app/common/services/commonServices.js"></script>
+    <script src="~/app/common/services/PersonNamePreview/PersonNamePreview.js"></script>
+    <script src="~/app/common/directives/traktat.ui/trkUnique.js"></script>
+    @*business domain *@
+
+    <script src="~/app/providers/profile/services/trkServicesList.js"></script>
+    <script src="~/app/providers/profile/services/trkProviderService.js"></script>
+
+    <script src="~/app/providers/profile/services/languages/trkProviderLanguagesList.js"></script>
+    <script src="~/app/providers/profile/services/languages/trkProviderLanguage.js"></script>
+
+    <script src="~/app/providers/profile/services/languages/domains/trkProviderDomainsList.js"></script>
+    <script src="~/app/providers/profile/services/languages/domains/trkProviderDomain.js"></script>
+
+    <script src="~/app/providers/services/trkProviderServiceList/trkProviderServiceList.js"></script>
+    <script src="~/app/providers/services/trkProviderService/trkProviderServiceItem.js"></script>
+
+    <script src="~/app/providers/services/languages/trkProviderServiceLanguageList/trkProviderServiceLanguageList.js"></script>
+    <script src="~/app/providers/services/languages/trkProviderServiceLanguageItem/trkProviderServiceLanguageItem.js"></script>
+
+    <script src="~/app/providers/profile/contacts/emails/emailsList/trkProfileEmailsList.js"></script>
+
+    <script src="~/app/providers/services/languages/domains/domainsList/trkProviderServiceLanguageDomains.js"></script>
+
+    <script src="~/app/providers/employment/EmploymentService.svc.js"></script>
+    <script src="~/app/providers/freelance/FreelanceService.svc.js"></script>
+
+    <script src="~/app/providers/employment/formtemplate/trkProviderEmployment.js"></script>
+    <script src="~/app/providers/employment/employmentslist/trkEmploymentsList.ctrl.js"></script>
+    <script src="~/app/providers/freelance/freelancesList/trkFreelancesList.ctrl.js"></script>
+    <script src="~/app/providers/type/ProviderTypeService.js"></script>
+
+    <script src="~/app/providers/availability/availabilityCalendar/ProviderAvailabilityCalendarController.js"></script>
+    <script src="~/app/providers/availability/AvailabilityService.svc.js"></script>
+
+    <script src="~/app/providers/profile/contacts/phones/phonesList/trkProfilePhonesList.js"></script>
+    <script src="~/app/admin/accounts/AccountNamePreview.js"></script>
+
+    <script src="~/app/common/directives/traktat.ui/trkPositiveAmount/trkPositiveAmount.js"></script>
+    <script src="~/app/common/directives/traktat.ui/trkFormError/trkFormError.js"></script>
+
+    <script src="~/app/providers/services/CalendarDefaultOptions/calendarDefaultOptions.js"></script>
+    <script src="~/app/providers/profile/services/grades/trkGradeViewer.js"></script>
+    <script src="~/app/providers/profile/services/servicesManager.js"></script>
+
+    <script src="~/app/providers/profile/softs/providerSoftList.js"></script>
+    <script src="~/app/providers/profile/profileAddressController.js"></script>
+</body>
+</html>
+
+
+

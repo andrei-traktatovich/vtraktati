@@ -1,0 +1,36 @@
+﻿<tabset>
+    <tab ng-repeat="service in items"> <!-- active="$index==0" -->
+        <tab-heading>
+            
+            <h4><rating ng-model="service.qaStars" max="3" readonly="true"></rating>{{ service.serviceTypeName }}
+                <badge ng-show="service.qaGrade">{{ service.qaGrade}}</badge>
+            </h4>
+        
+        </tab-heading>
+        <div>
+            <trk-provider-service item="service" readonly="readonly" on-edit="edit(service)" on-remove="remove(service)">
+            </trk-provider-service>
+        </div>
+    </tab>
+    <tab heading="Добавить" ng-hide="readonly">
+        <tab-heading ng-click="addService()">
+            <button class="btn btn-small btn-success">
+                <span class="glyphicon glyphicon-plus text-success"></span>
+            </button>
+        </tab-heading>
+        <div>
+            Добавить услугу ...
+        </div>
+    </tab>
+</tabset>
+
+<!--<ul class="list-unstyled">    
+    <li ng-repeat="service in items">
+        <trk-provider-service item="service" readonly="readonly" on-edit="edit(service)" on-remove="remove(service)">
+        </trk-provider-service>
+    </li>
+</ul>
+<hr />
+<button ng-hide="readonly" class="btn btn-sm btn-success" ng-click="addService()">
+    <span class="glyphicon glyphicon-plus"></span>Добавить услугу
+</button>-->

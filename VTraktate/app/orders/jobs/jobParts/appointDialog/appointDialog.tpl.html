@@ -1,0 +1,205 @@
+﻿<div class="modal-header">
+    <h4 class="modal-title">
+        <span ng-if="!editing">Назначение исполнителя {{ view.providerName }}</span>
+        <span ng-if="editing">Редактирование исполнителя {{ view.providerName }}</span>
+    </h4>
+</div>
+<div class="modal-body form-horizontal" ng-form name="appointmentForm">
+    <div style="padding:10px;">
+        <div class="row">
+            <div class="col-sm-12">
+                <!-- providerId selector, TODO: only active if no person is supplied ... -->
+                <div ng-if="!editing && createMode === 'office'">
+                    <ui-select ng-model="model.providerId"
+                               name="inputOffice"
+                               autofocus
+                               ng-required="!editing && createMode === 'office'"
+                               on-select="getProfile($item, $model)"
+                               theme="bootstrap" style="width: 400px;">
+                        <ui-select-match placeholder="Офис...">{{$select.selected.title }}</ui-select-match>
+                        <ui-select-choices repeat="item.providerId as item in lists.officeProviders track by $index | filter : { title: $select.search }">
+                            <div ng-bind-html="item.title | highlight: $select.search"></div>
+                        </ui-select-choices>
+                    </ui-select>
+                    <trk-error-summary form="appointmentForm.inputOffice"></trk-error-summary>
+                </div>
+                <div ng-if="!editing && createMode === 'myOffice'"> 
+                    <select class="form-control" ng-model="model.providerId" ng-options="employee.id as employee.name for employee in myEmployees track by $index"></select>
+                </div>
+
+                <div ng-if="!editing && createMode === 'any'">
+                    <div style="visibility: hidden;">
+                        <!-- will not be shown -->
+                        <input type="checkbox" ng-model="showAllJobTypes" checked ng-change="refreshProviders('')" />Любой вид работ
+                        <input type="checkbox" ng-model="showAllLanguages" checked ng-change="refreshProviders('')" />Любой язык
+                        <input type="checkbox" ng-model="showAllDomains" checked ng-change="refreshProviders('')" />Любые тематики
+                    </div>
+                    <ui-select ng-model="model.providerId"
+                               autofocus
+                               name="inputProvider"
+                               ng-required="!editing && createMode === 'any'"
+                               on-select="getProfile($item, $model)"
+                               theme="bootstrap" style="width: 400px;">
+                        <ui-select-match placeholder="Исполнитель...">{{$select.selected.name}}</ui-select-match>
+                        <ui-select-choices repeat="item.id as item in providers track by $index"
+                                           refresh="refreshProviders($select.search)"
+                                           refresh-delay="100">
+
+                            <div ng-bind-html="item.name | highlight: $select.search"></div>
+                            <div ng-bind-html="item.typeName | highlight: $select.search" class="text-small"></div>
+
+                            <div ng-bind-html="item.employment.officeName | highlight: $select.search" class="text-small"></div>
+                            <div ng-bind-html="item.employment.titleName | highlight: $select.search" class="text-small"></div>
+                            <div class="text-danger">
+                                {{ item.availability.statusName }}
+                            </div>
+                            <div ng-show="item.qa.grade">
+                                <span class="badge">{{ item.qa.grade || "нет" }}</span>&nbsp; <rating ng-model="item.qa.stars" max="3"></rating>
+                                <span ng-show="item.rate.minRate ||item.rate.maxRate">
+                                    Тариф: {{ item.rate.minRate }}..{{ item.rate.maxRate }} {{ item.rate.currencyName}}/{{item.rate.uomName}}
+                                </span>
+                            </div>
+                            <hr />
+                        </ui-select-choices>
+                    </ui-select>
+                    <trk-error-summary for="appointmentForm.inputProvider"></trk-error-summary>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label class="control-label">Дата начала</label>
+                    <datetimepicker placeholder="дд.мм.гггг"
+                                    required
+                                    name="inputStartDate"
+                                    hour-step="1"
+                                    minute-step="10"
+                                    ng-model="model.startDate" show-meridian="false"
+                                    date-format="dd-MMM-yyyy"
+                                    date-options="dateOptions"
+                                    tabindex="-1"
+                                    readonly-time="false">
+                    </datetimepicker>
+                    <trk-error-summary for="appointmentForm.inputStartDate"></trk-error-summary>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label class="control-label">Дата завершения</label>
+                    <datetimepicker placeholder="дд.мм.гггг"
+                                    hour-step="1"
+                                    required
+                                    name="inputEndDate"
+                                    minute-step="10"
+                                    ng-model="model.endDate" show-meridian="false"
+                                    date-format="dd-MMM-yyyy"
+                                    date-options="dateOptions"
+                                    readonly-time="false">
+                    </datetimepicker>
+                    <trk-error-summary for="appointmentForm.inputEndDate"></trk-error-summary>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label class="control-label">Вид работ</label>
+                    <ui-select ng-model="model.jobTypeId"
+                               name="inputJobTypeId"
+                               required
+                               on-select="onJobTypeChanged($item, $model)"
+                               theme="bootstrap" style="width: 200px;">
+                        <ui-select-match placeholder="Вид работ...">{{$select.selected.name}}</ui-select-match>
+                        <ui-select-choices repeat="item.id as item in lists.jobTypes track by $index | filter: $select.search">
+                            <div ng-bind-html="item.name | highlight: $select.search"></div>
+                        </ui-select-choices>
+                    </ui-select>
+                    <trk-error-summary for="appointmentForm.inputJobTypeId"></trk-error-summary>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group" ng-show="isJobTypeLinguistic">
+                    <label class="control-label">Языковое направление</label>
+                    <ui-select ng-model="model.languageId"
+                               ng-required="isJobTypeLinguistic"
+                               name="inputLanguage"
+                               theme="bootstrap" style="width: 200px;">
+                        <ui-select-match placeholder="Вид работ...">{{$select.selected.title }}</ui-select-match>
+                        <ui-select-choices repeat="item.id as item in lists.languages track by $index | filter: $select.search">
+                            <div ng-bind-html="item.title | highlight: $select.search"></div>
+                        </ui-select-choices>
+                    </ui-select>
+                    <trk-error-summary for="appointmentForm.inputLanguage"></trk-error-summary>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="form-group">
+                    <strong><input type="checkbox" required name="inputWorkInHouse" ng-model="model.workInHouse" />Работа в штате</strong>
+                    <trk-error-summary for="appointmentForm.inputWorkInHouse"></trk-error-summary>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label for="" class="control-label">Единица</label>
+                    <select ng-model="model.UOMId" required name="inputUOM" ng-options="item.id as item.title for item in lists.uoms" class="form-control"></select>
+                    <trk-error-summary for="appointmentForm.inputUOM"></trk-error-summary>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label for="" class="control-label">Валюта</label>
+                    <select ng-model="model.currencyId" class="form-control" id="inputCurrency" name="inputCurrency" required ng-options="item.id as item.title for item in lists.currencies"></select>
+                    <trk-error-summary for="appointmentForm.inputCurrency"></trk-error-summary>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-12">
+                <h4>Первоначальные объем и цена</h4>
+                <trk-volume-and-pricing item="model.initial" show-chars-and-words="uomRequiresCharsAndWords()"></trk-volume-and-pricing>
+            </div>
+        </div>
+        <div class="row" ng-if="shouldShowFinals()">
+            <div class="col-sm-12">
+                <h4>
+                    Финальные объем и цена
+                    &nbsp;
+                    <a href="" ng-click="copyFinalFromInitial()">
+                        <i class="glyphicon glyphicon-copy"></i>
+                    </a>
+
+                </h4>
+                <trk-volume-and-pricing item="model.final" show-chars-and-words="uomRequiresCharsAndWords()"></trk-volume-and-pricing>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="form-group">
+                    <textarea placeholder="Комментарий" class="form-control" ng-model="model.comment"></textarea>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<div class="modal-footer">
+    <trk-form-error text="errorMessage"></trk-form-error>
+    <button class="btn btn-sm btn-success" ng-disabled="appointmentForm.$invalid" ng-click="save()">
+        <i class="glyphicon glyphicon-save"></i>
+        Ок
+    </button>
+    <button class="btn btn-sm btn-danger" ng-click="cancel()">
+        <i class="glyphicon glyphicon-remove"></i>
+        Отмена
+    </button>
+</div>

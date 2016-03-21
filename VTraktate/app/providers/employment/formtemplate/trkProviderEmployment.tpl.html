@@ -1,0 +1,33 @@
+﻿<div ng-form name="frmEmployment">
+    <div class="form-group">
+        <label for="inputEmploymentStatus">Статус</label>
+        <select id="inputEmploymentStatus" name="inputEmploymentStatus" class="form-control" ng-model="model.data.statusId" required
+                ng-options="item.id as item.title for item in model.lists.employmentStatuses"></select>
+        <trk-error-summary for="frmEmployment.inputEmploymentStatus"></trk-error-summary>
+    </div>
+
+    <div class="form-group">
+        <label for="inputEmploymentTitle">Должность</label>
+        <select id="inputEmploymentTitle" name="inputEmploymentTitle" class="form-control" ng-model="model.data.titleId" required
+                ng-options="item.id as item.title for item in model.lists.titles"></select>
+        <trk-error-summary for="frmEmployment.inputEmploymentTitle"></trk-error-summary>
+    </div>
+
+    <div class="form-group">
+        <label for="inputEmploymentOffice">Подразделение</label>
+        <select id="inputEmploymentOffice" name="inputEmploymentOffice" class="form-control" ng-model="model.data.officeId" required
+                ng-options="item.id as item.title for item in model.lists.offices"></select>
+        <trk-error-summary for="frmEmployment.inputEmploymentOffice"></trk-error-summary>
+    </div>
+
+    <div class="form-group">
+        <label for="inputEmploymentStartDate">Начиная с</label>
+        <datepicker name="inputEmploymentStartDate" id="inputEmploymentStartDate" ng-model="model.data.startDate" class="well well-sm" required></datepicker>
+        <trk-error-summary for="frmEmployment.inputEmploymentStartDate"></trk-error-summary>
+    </div>
+
+    <div class="form-group">
+        <label for="inputEmploymentComment">Комментарий</label>
+        <textarea id="inputEmploymentComment" class="form-control" style="height: 200px;" ng-model="model.data.comment"></textarea>
+    </div>
+</div>

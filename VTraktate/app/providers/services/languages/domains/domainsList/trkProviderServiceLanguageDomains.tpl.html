@@ -1,0 +1,36 @@
+﻿<p ng-show="!items || items.length === 0">Нет тематик</p>
+<table class="table table-condensed" ng-show="items.length > 0">
+    <thead>
+        <!-- make column width proportional to expected content -->
+        <tr>
+            <th>Наименование</th>
+
+            <th>Рейтинг</th>
+            <th>Комментарий</th>
+            <th><!-- action --></th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr ng-repeat="item in items | orderBy : [ '-stars', 'domain.Name' ]">
+            <td>{{ item.domain.name }}</td>
+            <td>
+                <rating ng-model="item.stars" max="3"></rating>
+            </td>
+            <td><input type="text" ng-model="item.comment" />
+            </td>
+
+            <td>
+                <button class="btn btn-sm btn-default" ng-click="remove(item)">
+                    <i class="glyphicon glyphicon-trash"></i>
+                </button>
+            </td>
+        </tr>
+    </tbody>
+</table>
+<button ng-show="!addingItems" class="btn btn-small btn-success" ng-click="beginAddItems()">Добавить</button>
+
+<div class="form-inline" ng-show="!!addingItems">
+    <trk-domain-picker selection="newItems.domains"></trk-domain-picker>
+    <button class="btn btn-small btn-success" ng-click="addItems()">Добавить</button>
+    <button class="btn btn-small btn-default" ng-click="cancelAddItems()">Отмена</button>
+</div>
