@@ -50,6 +50,24 @@ namespace VTraktate.Filtering
                 return null;
         }
 
+        public Expr LegalForms(dynamic value)
+        {
+            var val = value as IEnumerable<int>;
+            if (val != null)
+                return x => val.Contains(x.Provider.LegalFormId);
+            else
+                return null;
+        }
+
+        public Expr WorksNightly(dynamic value)
+        {
+            var val = value as bool?;
+            if (val.HasValue && val.Value)
+                return x => x.Provider.WorksNightly;
+            else
+                return null;
+        }
+
         public Expr Titles(dynamic value)
         {
             var val = value as IEnumerable<int>;

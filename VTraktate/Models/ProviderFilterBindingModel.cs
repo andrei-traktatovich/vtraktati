@@ -51,7 +51,7 @@ namespace VTraktate.Models
 
         public bool? Native { get; set; }
 
-        public bool? IsIp { get; set; }
+        public IEnumerable<int> LegalForms { get; set; } 
 
         public decimal? MinRate { get; set; }
         public decimal? MaxRate { get; set; }

@@ -145,7 +145,7 @@
 
                                 <div class="col-lg-6">
 
-                                    <div class=" form-group">
+                                    <div class="form-group">
 
                                         <trk-providertype-picker selection="tableParams.filter()['providerTypes']" id="providerTypeFilter"></trk-providertype-picker>
                                     </div>
@@ -229,6 +229,14 @@
                                 <div class="form-group">
                                     <label>Носитель</label>
                                     <select ng-model="tableParams.filter()['native']" placeholder="Носитель" ng-options="item.id as item.title for item in lists.tripleChoice"></select>
+                                </div>
+                                <div class="form-group">
+                                    <label>Орг.правовая форма</label>
+                                    <trk-legalform-picker selection="tableParams.filter()['legalFormId']" id="legalFormFilter"></trk-legalform-picker>
+                                </div>
+                                <div class="form-group">
+                                    <input ng-model="tableParams.filter()['worksNightly']"/>
+                                    <label>Только работающие ночью</label>
                                 </div>
                             </div>
 

@@ -233,6 +233,8 @@
     <Content Include="app\common\directives\traktat.ui\standardButtons\trkEditButton\trkEditButton.tpl.html" />
     <Content Include="app\common\directives\traktat.ui\standardButtons\trkSaveButton\trkSaveButton.dir.js" />
     <Content Include="app\common\directives\traktat.ui\standardButtons\trkSaveButton\trkSaveButton.tpl.html" />
+    <Content Include="app\common\directives\traktat.ui\trkLegalFormPicker\trkLegalFormPicker.js" />
+    <Content Include="app\common\directives\traktat.ui\trkLegalFormPicker\trkLegalFormPicker.tpl.html" />
     <Content Include="app\common\directives\traktat.ui\trkTimeDiff.spec.js\trkTimeDiff.ctrl.spec.js" />
     <Content Include="app\common\directives\traktat.ui\trkTimeDiff\trkTimeDiff.ctrl.js" />
     <Content Include="app\common\directives\traktat.ui\trkTimeDiff\trkTimeDiff.dir.js" />

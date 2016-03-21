@@ -1,0 +1,10 @@
+﻿<div>
+    <ui-select ng-model="model.selection" multiple search-enabled="true"
+               theme="select2" style="min-width: 200px;">
+        <ui-select-match placeholder="Орг.прав.формы">{{$item.title}}</ui-select-match>
+        <ui-select-choices repeat="item.id as item in items | filter: { name : $select.search }">
+            <div ng-bind-html="item.name | highlight: $select.search"></div>
+        </ui-select-choices>
+    </ui-select>
+    
+</div>
