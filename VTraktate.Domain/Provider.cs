@@ -61,8 +61,12 @@ namespace VTraktate.Domain
         public virtual ICollection<Grade> Grades { get; set; }
         public int? Old_Id { get; set; }
 
+        [ForeignKey("LegalFormId")]
         public virtual LegalForm LegalForm { get; set; }
 
+        public int LegalFormId { get; set; }
+
+        public bool WorksNightly { get; set; }
     }
 
 

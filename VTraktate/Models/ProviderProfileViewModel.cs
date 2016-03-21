@@ -20,6 +20,11 @@ namespace VTraktate.Models
 
         public string City { get; set; }
         public string Address { get; set; }
+
+        public decimal TimeDifference { get; set; }
+        public bool WorksNightly { get; set; }
+        public IdNamePairBindingModel LegalForm { get; set; }
+
         public IdNamePairBindingModel Region { get; set; }
 
         public ICollection<ContactPersonViewModel> ContactPersons { get; set; }

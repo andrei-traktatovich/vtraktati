@@ -47,19 +47,19 @@
                 name: { firstName : null, middleName : null, lastName : null }
             },
             details: {
-                regionId: 2, // Russia,
-                legalFormId: 0, // individual,
+                regionId: 2,            // Russia,
+                legalFormId: 0,         // individual,
                 worksNightly: false 
             },
             freelance: {
-                statusId : 1 // unchecked
+                statusId : 1            // unchecked
             },
             employment: {},
             emails: [{}],
             telephones: [
                 {
                      
-                    typeId: 2 // mobile
+                    typeId: 2           // mobile
                 }
             ],
             otherContacts: [],

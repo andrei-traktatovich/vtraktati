@@ -213,11 +213,18 @@ namespace VTraktate.Controllers
         {
             var userId = User.Identity.GetUserId<int>();
             var provider = await _providerRepo.Get(x => x.Id == providerId).SingleOrDefaultAsync();
+
             if (provider == null)
-                return BadRequest("Провайдер с ID = " + providerId.ToString() + " не найден");
+                return BadRequest(String.Format("Провайдер с ID = {0} не найден", providerId));
+
             provider.City = model.City;
             provider.Address = model.Address;
             provider.RegionId = model.RegionId;
+
+            provider.LegalFormId = model.LegalFormId;
+            provider.WorksNightly = model.WorksNightly;
+            provider.TimeDifference = model.TimeDifference;
+
             await _providerRepo.SaveAsUserAsync(userId);
             return Ok();
         }
@@ -239,6 +246,9 @@ namespace VTraktate.Controllers
                 RegionId = model.Details.Regionid,
                 City = model.Details.City,
                 Address = model.Details.Address,
+                LegalFormId = model.Details.LegalFormId,
+                TimeDifference = model.Details.TimeDifference,
+                WorksNightly = model.Details.WorksNightly,
                 Services = AutoMapper.Mapper.Map<IEnumerable<ServiceBindingModel>, ICollection<Service>>(model.Services),
             };
 

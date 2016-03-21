@@ -10,5 +10,8 @@ namespace VTraktate.Models
         public string Address { get; set; }
         public string City { get; set; }
         public int RegionId { get; set; }
+        public int LegalFormId { get; set; }
+        public bool WorksNightly { get; internal set; }
+        public decimal TimeDifference { get; internal set; }
     }
 }

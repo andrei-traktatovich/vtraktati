@@ -9,7 +9,7 @@
 
     <div class="panel-body" style="max-height: 85%; overflow-y: auto;">
         <!-- this will be abstracted into a self-contained directive to manage provider's groups -->
-        
+
         <div ng-show="item.groups.length">
             <h4>Группы:</h4>
             <ul class="list-unstyled list-inline">
@@ -21,9 +21,9 @@
 
         <tabset>
             <tab heading="Контактные данные ({{ contactsCount() }})">
-                
+
                 <!-- extract this ... -->
-                
+
                 <table class="table table-condensed text-small" ng-controller="profileAddressController">
                     <thead>
                         <tr>
@@ -68,7 +68,44 @@
                                     {{ model.region.name }}
                                 </span>
                                 <select ng-model="address.regionId" ng-show="addressEditing" ng-options="item.id as item.title for item in lists.regions"></select>
-                               
+
+                            </td>
+                            <td>
+                                <button class="btn btn-sm btn-danger" ng-click="CancelAddressChanges()" ng-show="addressEditing">
+                                    <i class="glyphicon glyphicon-remove" tooltip="Отмена"></i>
+                                </button>
+                            </td>
+                        </tr>
+                    <tr>
+                        <td>Разница во времени с МСК</td>
+                        <td>
+                            <time-diff enabled="addressEditing" diff="model.timeDifference"></time-diff>
+
+
+                        </td>
+                        <td>
+                            <button class="btn btn-sm btn-danger" ng-click="CancelAddressChanges()" ng-show="addressEditing">
+                                <i class="glyphicon glyphicon-remove" tooltip="Отмена"></i>
+                            </button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td>
+                            <input type="checkbox" ng-enabled="addressEditing" ng-model="model.worksNightly"/>Работает ночью
+
+
+                        </td>
+                        <td>
+                            <button class="btn btn-sm btn-danger" ng-click="CancelAddressChanges()" ng-show="addressEditing">
+                                <i class="glyphicon glyphicon-remove" tooltip="Отмена"></i>
+                            </button>
+                        </td>
+                    </tr>
+                        <tr>
+                            <td>Организационно-правовая форма</td>
+                            <td>
+                                <select ng-model="address.legalFormId" ng-show="addressEditing" ng-options="item.id as item.name for item in lists.legalForms"></select>
                             </td>
                             <td>
                                 <button class="btn btn-sm btn-danger" ng-click="CancelAddressChanges()" ng-show="addressEditing">
@@ -110,20 +147,20 @@
                     <trk-services-list items="model.services" parent="model.id" readonly="readonly"></trk-services-list>
                 </div>
             </tab>
-                <!--
-                    <tab heading="Работа в штате" ng-show="model.employments && model.employments.length > 0">
-                        <trk-employments-list items ="model.employments"></trk-employments-list>
-                    </tab>
-                    <tab heading="Фриланс" ng-show="model.freelances && model.freelances.length > 0">
-                        <trk-freelances-list items="model.freelances"></trk-freelances-list>
-                 
-                    </tab>
-                -->
+            <!--
+                <tab heading="Работа в штате" ng-show="model.employments && model.employments.length > 0">
+                    <trk-employments-list items ="model.employments"></trk-employments-list>
+                </tab>
+                <tab heading="Фриланс" ng-show="model.freelances && model.freelances.length > 0">
+                    <trk-freelances-list items="model.freelances"></trk-freelances-list>
+
+                </tab>
+            -->
             <table>
                 <tab heading="Софт">
                     <!--<div ng-include="app/providers/profile/softs/profiver-soft-list.tpl.html"></div>-->
                     <trk-profile-soft-list items="model.soft" provider-id="model.id" readonly="readonly"></trk-profile-soft-list>
-                    
+
                 </tab>
             </table>
         </tabset>

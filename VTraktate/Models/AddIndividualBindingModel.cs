@@ -53,8 +53,9 @@ namespace VTraktate.Models
         public string Address { get; set; }
         public string Comment { get; set; }
         public int[] Groups { get; set; }
-        public bool IsIP { get; set; }
-
+        public int LegalFormId { get; set; }
+        public bool WorksNightly { get; set; }
+        public int TimeDifference { get; set; }
         public string City { get; set; }
     }
 

@@ -7,7 +7,8 @@
         $scope.addressEditing = false;
 
         $scope.lists = {
-            regions: GlobalsService.get('regions')
+            regions: GlobalsService.get('regions'),
+            legalForms: GlobalsService.get('legalForms')
         };
 
         $scope.beginEditAddress = function () {
