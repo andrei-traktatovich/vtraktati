@@ -12,15 +12,27 @@
             return angular.module(name);
         } catch (e) {
             if (isDebug)
-                console.error(e);
+                console.info(`createModule: module ${  name } is unavailable, creating it ... (${ e })`);
 
             return angular.module(name, deps);
         }
     }
+
+    global.instantiateController = (name, props) => {
+        var scope, controller;
+        inject(($controller, $rootScope) => {
+            scope = $rootScope.$new();
+            Object.assign(scope, props);
+            controller = $controller(name, { $scope: scope });
+        });
+        return { scope, controller };
+    };
+
 })(window, true);
 
 (() => {
-    var mod = createModule("traktat.ui");
+    
+    var mod = window.createModule("traktat.ui");
     mod.controller("TimeDiffController", timeDiffController);
 
     function timeDiffController($scope) {
@@ -34,94 +46,79 @@
         function normalizeDiffValue() {
             $scope.diff = $scope.diff || 0;
 
-            if (Math.module($scope.value) > 12)
-                $scope.value = 0;
+            if (Math.abs($scope.diff) > 12)
+                $scope.diff = 0;
         }
 
         function dec() {
-            if ($scope.value > -12)
-                $scope.value += 1;
+            if ($scope.diff > -12)
+                $scope.diff -= 1;
         }
 
         function inc() {
-            if ($scope.value < 12)
-                $scope.value += 1;
+            if ($scope.diff < 12)
+                $scope.diff += 1;
         }
     }
 })();
 
+
 describe("time diff controller", () => {
 
-    var scope = {};
+    var scope, controller;
 
     beforeEach(module("traktat.ui"));
 
-    beforeEach(inject(($rootScope) => {
-        scope = $rootScope.$new();
-    }));
+    function getController(props) {
+        ({ scope, controller } = window.instantiateController("TimeDiffController", props));
+    }
 
-    it("if diff value is undefined, sets it to 0", inject(($controller, $rootScope) => {
-
-        var scope = $rootScope.$new();
-
-        $controller('TimeDiffController', { $scope: scope });
-
-        expect(scope.diff).toEqual(0);
-    }));
-
-    it("if diff is < -12, sets it to 0", () => {
-        var scope = {
-            diff: -13
-        };
-
-        // using controller ...
+    it("if diff value is undefined, sets it to 0", () => {
+        getController({});
         expect(scope.diff).toEqual(0);
     });
+    
+    it("if diff is < -12, sets it to 0", () => {
 
+        getController({ diff: -13 });
+        expect(scope.diff).toEqual(0);
+    });
+    
     it("if diff is > 12, sets it to 0", () => {
-        var scope = {
-            diff: 13
-        };
 
-        // using controller ...
+        getController({ diff: 13 });
+
         expect(scope.diff).toEqual(0);
     });
 
     it("decrements diff", () => {
-        var scope = {
-            diff: -11
-        };
-        // using controller
-        // decrement value 
+
+        getController({ diff: -11 });
+        scope.dec();
         expect(scope.diff).toEqual(-12);
     });
 
     it("decrements diff only if result does not fall below -12", () => {
-        var scope = {
-            diff: -12
-        };
-        // using controller
-        // decrement value 
+        
+        getController({ diff: -12 });
+        scope.dec();
         expect(scope.diff).toEqual(-12);
     });
 
     it("increments diff", () => {
-        var scope = {
-            diff: 11
-        };
-        // using controller
-        // decrement value 
+        
+        getController({ diff: 11 });
+        scope.inc();
+        
         expect(scope.diff).toEqual(12);
     });
 
     it("increments diff only if result does not exceed 12", () => {
-        var scope = {
-            diff: 12
-        };
-        // using controller
-        // decrement value 
+        
+        getController({ diff: 12 });
+        scope.inc();
+
         expect(scope.diff).toEqual(12);
     });
 
-    it("when incrementing value, max = -12");
 })
