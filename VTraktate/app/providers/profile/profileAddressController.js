@@ -15,7 +15,10 @@
             $scope.address = {
                 city: $scope.model.city,
                 address: $scope.model.address,
-                regionId: $scope.model.region.id
+                regionId: $scope.model.region.id,
+                legalFormid: $scope.model.legalFormId.id,
+                worksNightly: $scope.model.worksNightly,
+                timeDifference : $scope.model.timeDifference 
             };
             $scope.addressEditing = true;
         }
@@ -34,9 +37,16 @@
                     id: $scope.address.regionId,
                     name: getRegionById($scope.address.regionId)
                 };
+                $scope.model.timeDifference = $scope.address.timeDifference;
+                $scope.model.worksNightly = $scope.address.worksNightly;
+                $scope.model.legalForm = getLegalFormById($scope.address.legalFormId);
+
                 $scope.addressEditing = false;
                 toastr.info('Данные об адресе сохранены');
-
+                function getLegalFormById(id) {
+                    var result = _.find($scope.lists.legalForms, function (lf) { return lf.id === id; });
+                    return result;
+                }
                 function getRegionById(id) {
                     var result = _.find($scope.lists.regions, function(region){ return region.id === id; });
                     return result.title;
