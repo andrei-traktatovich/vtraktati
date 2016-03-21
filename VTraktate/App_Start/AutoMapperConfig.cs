@@ -119,6 +119,8 @@ namespace VTraktate
 
             Mapper.CreateMap<ProviderSoft, IdNamePairBindingModel>();
             Mapper.CreateMap<Region, IdNamePairBindingModel>();
+            Mapper.CreateMap<LegalForm, IdNamePairBindingModel>();
+
             Mapper.CreateMap<Provider, ProviderProfileViewModel>()
                 .ForMember(x => x.ModifiedByName, conf => conf.MapFrom(y => y.ModifiedBy.PersonName.FullName))
                 .ForMember(x => x.CreatedByName, conf => conf.MapFrom(y => y.ModifiedBy.PersonName.FullName))
