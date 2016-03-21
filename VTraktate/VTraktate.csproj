@@ -237,7 +237,9 @@
     <Content Include="app\common\directives\traktat.ui\trkTimeDiff\trkTimeDiff.ctrl.js" />
     <Content Include="app\common\directives\traktat.ui\trkTimeDiff\trkTimeDiff.dir.js" />
     <Content Include="app\common\directives\traktat.ui\trkTimeDiff\trkTimeDiff.tpl.html" />
+    <Content Include="app\common\filters.spec.js\addHoursToLocalTime.spec.js" />
     <Content Include="app\common\filters.spec.js\addPlus.spec.js" />
+    <Content Include="app\common\filters\addHoursToLocalTime.filter.js" />
     <Content Include="app\common\filters\addPlus.filter.js" />
     <Content Include="app\common\filters\filters.module.js" />
     <Content Include="app\customerContactPersons\edit\customerContactPersonEditor.dir.js" />
