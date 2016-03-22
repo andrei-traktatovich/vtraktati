@@ -618,6 +618,7 @@
     <Content Include="app\providers\profile\services\trkServicesList.js" />
     <Content Include="app\providers\profile\softs\provider-soft-list.tpl.html" />
     <Content Include="app\providers\profile\softs\providerSoftList.js" />
+    <Content Include="app\providers\profile\trkProviderAddress.tpl.html" />
     <Content Include="app\providers\providers.ctrl.js" />
     <Content Include="app\providers\providers.js" />
     <Content Include="app\providers\providers.view.html" />

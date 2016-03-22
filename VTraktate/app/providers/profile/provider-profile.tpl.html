@@ -22,94 +22,10 @@
         <tabset>
             <tab heading="Контактные данные ({{ contactsCount() }})">
 
-                <!-- extract this ... -->
+              
 
-                <table class="table table-condensed text-small" ng-controller="profileAddressController">
-                    <thead>
-                        <tr>
-                            <th></th>
-                            <th></th>
-                            <th></th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>Город</td>
-                            <td>
-                                <span ng-show="!addressEditing">
-                                    {{ model.city }}
-                                </span>
-                                <input ng-show="addressEditing" ng-model="address.city" class="form-control" />
-                            </td>
-                            <td>
-                                <button class="btn btn-sm btn-default" ng-click="beginEditAddress()" ng-hide="addressEditing">
-                                    <i class="glyphicon glyphicon-pencil" tooltip="редактировать данные об адресе и регионе"></i>
-                                </button>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>Адрес</td>
-                            <td>
-                                <span ng-show="!addressEditing">
-                                    {{ model.address }}
-                                </span>
-                                <input ng-show="addressEditing" ng-model="address.address" class="form-control">
-                            </td>
-                            <td>
-                                <button class="btn btn-sm btn-success" ng-click="SaveAddressChanges()" ng-show="addressEditing">
-                                    <i class="glyphicon glyphicon-ok" tooltip="Сохранить данные об адресе и регионе"></i>
-                                </button>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>Регион</td>
-                            <td>
-                                <span ng-hide="addressEditing">
-                                    {{ model.region.name }}
-                                </span>
-                                <select ng-model="address.regionId" ng-show="addressEditing" ng-options="item.id as item.title for item in lists.regions"></select>
-
-                            </td>
-                            <td>
-                                <button class="btn btn-sm btn-danger" ng-click="CancelAddressChanges()" ng-show="addressEditing">
-                                    <i class="glyphicon glyphicon-remove" tooltip="Отмена"></i>
-                                </button>
-                            </td>
-                        </tr>
-                    <tr>
-                        <td>Разница во времени с МСК</td>
-                        <td>
-                            <time-diff enabled="addressEditing" diff="model.timeDifference"></time-diff>
-
-
-                        </td>
-                        <td>
-                             
-                        </td>
-                    </tr>
-                    <tr>
-                        <td></td>
-                        <td>
-                            <input type="checkbox" disabled ng-hide="addressEditing" ng-model="model.worksNightly"/>
-                            <input type="checkbox" ng-show="addressEditing" ng-model="address.worksNightly" />
-                            Работает ночью
-                        </td>
-                        <td>
-                             
-                        </td>
-                    </tr>
-                        <tr>
-                            <td>Организационно-правовая форма</td>
-                            <td>
-                                <p  ng-hide="addressEditing"> {{ model.legalForm.name }}  </p>
-                                <select ng-model="address.legalFormId" ng-show="addressEditing" ng-options="item.id as item.name for item in lists.legalForms"></select>
-                            </td>
-                            <td>
-                                 
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
+                <trk-provider-address model="model"></trk-provider-address>
+                
                 <ul class="list-group">
                     <li class="list-group-item" ng-repeat="item in model.contactPersons">
                         <div class="list-group-item-heading">

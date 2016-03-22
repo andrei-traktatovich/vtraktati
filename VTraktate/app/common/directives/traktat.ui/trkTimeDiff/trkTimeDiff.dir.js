@@ -1,18 +1,19 @@
 ﻿
 (() => {
     "use strict";
+    console.log('enters trkTimeDiff directve');
 
     window.createModule("traktat.ui")
     .directive("trkTimeDiff", trkTimeDiff);
-
+    
     function trkTimeDiff() {
         return {
             scope: {
                 diff: "=",
-                enabled: "="
+                active: "="
             },
-            templateUrl: "/common/directive/traktat.ui/trkTimeDiff.trkTimeDiff.tpl.html",
+            templateUrl: "app/common/directives/traktat.ui/trkTimeDiff/trkTimeDiff.tpl.html",
             controller: "TimeDiffController"
         };
     }
-});
+})();

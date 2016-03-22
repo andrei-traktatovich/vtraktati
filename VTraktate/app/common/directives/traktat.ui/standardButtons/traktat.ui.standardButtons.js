@@ -1,3 +1,3 @@
 ﻿(function () {
-	angular.module('traktat.ui.standardButtons', []);
+	angular.module("traktat.ui.standardButtons", []);
 })();

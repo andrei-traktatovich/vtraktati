@@ -249,7 +249,7 @@ namespace VTraktate.Controllers
                 LegalFormId = model.Details.LegalFormId,
                 TimeDifference = model.Details.TimeDifference,
                 WorksNightly = model.Details.WorksNightly,
-                Services = AutoMapper.Mapper.Map<IEnumerable<ServiceBindingModel>, ICollection<Service>>(model.Services),
+                Services = Mapper.Map<IEnumerable<ServiceBindingModel>, ICollection<Service>>(model.Services),
             };
 
             

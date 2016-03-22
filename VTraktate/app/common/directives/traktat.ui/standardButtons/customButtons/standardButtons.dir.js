@@ -12,8 +12,8 @@
 
     function makeDirective(item) {
         var glyphName = item.glyph || item.name;
-        var directiveName = `btn${ toProper(glyphName) }`;
-
+        var directiveName = `trkBtn${toProper(item.name)}`;
+        console.log("creating directive", directiveName);
         var directive = () => {
             return {
                 replace: true,

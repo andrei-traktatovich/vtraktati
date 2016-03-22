@@ -1,9 +1,9 @@
 ﻿
-<btn-plus ng-show="enabled" onclick="inc()"></btn-plus>
+<trk-btn-dec class="btn-xs" ng-show="active" ng-click="dec()"></trk-btn-dec>
 
-<span> {{ diff | addPlus }}</span>
+<span> {{ diff | addPlus }} ч.</span>
 
-<btn-minus ng-show="enabled"onclick="inc()"></btn-minus>
+<trk-btn-inc class="btn-xs" ng-show="active" ng-click="inc()"></trk-btn-inc>
 
 &nbsp;
 

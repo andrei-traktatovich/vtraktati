@@ -1,8 +1,10 @@
 ﻿angular.module('app',
     [
         'ngSanitize',
+        
         'angularSpinner',
 
+        "traktat.filters",
         'ui.bootstrap.datetimepicker',
         'internationalPhoneNumber',
         'customDirectives',
@@ -26,7 +28,9 @@
         'providers',
         'grades',
 
-        'orders'
+        'orders',
+
+        "traktat.ui.standardButtons"
 
         // thirdPartystuff:  incorporate into a separate module
         /*'angularSpinner','internationalPhoneNumber','ngTable', 'ui.select',  'nsPopover', 'ui.bootstrap','pageslide-directive','ui.layout',  'rzModule','ngTextTruncate','ui.calendar',
@@ -192,12 +196,12 @@ angular.module('app')
                         var id = $stateParams.id;
 
                         $scope.readonly = !ActionAuthorizationService.isHR();
-                        console.log('readonly = ' + $scope.readonly)
 
                         $http.get('/api/provider', { params: { id: id } })
                             .success(function (result) {
+                                console.log("profile received", result);
                                 $scope.model = result;
-
+                                console.log("scope model is now", $scope.model)
                             });
 
                         $scope.contactsCount = function () {

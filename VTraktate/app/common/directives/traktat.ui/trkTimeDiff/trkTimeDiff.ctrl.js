@@ -1,15 +1,18 @@
 ﻿(() => {
     "use strict";
+    
 
     var mod = window.createModule("traktat.ui");
     mod.controller("TimeDiffController", timeDiffController);
 
     function timeDiffController($scope) {
+        
+        console.log("enters trkTimeDiff controller");
 
         normalizeDiffValue();
         
-        if ($scope.enabled === undefined)
-            $scope.enabled = true;
+        if ($scope.active === undefined)
+            $scope.active = true;
 
         $scope.inc = inc;
 

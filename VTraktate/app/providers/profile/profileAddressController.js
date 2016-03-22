@@ -1,30 +1,43 @@
-﻿(function () {
+﻿(function() {
     angular.module('app')
-    .controller('profileAddressController', profileAddressController);
+        .controller('profileAddressController', profileAddressController)
+        .directive("trkProviderAddress", function() {
+            return {
+                scope: {
+                    vm: "=model"
+                },
+                controller: "profileAddressController",
+                templateUrl: "app/providers/profile/trkProviderAddress.tpl.html"
+            };
+        });
 
     function profileAddressController($scope, $http, GlobalsService, _) {
-        
+        console.log("enter profileAddress controller");
+        console.log("scope = ", $scope);
+
         $scope.addressEditing = false;
 
         $scope.lists = {
             regions: GlobalsService.get('regions'),
             legalForms: GlobalsService.get('legalForms')
         };
-
+        
         $scope.beginEditAddress = function () {
+            console.log("view model is ", $scope.vm);
+            console.log("view model on $scope is ", $scope);
             $scope.address = {
-                city: $scope.model.city,
-                address: $scope.model.address,
-                regionId: $scope.model.region.id,
-                legalFormId: $scope.model.legalForm.id,
-                worksNightly: $scope.model.worksNightly,
-                timeDifference : $scope.model.timeDifference 
+                city: $scope.vm.city,
+                address: $scope.vm.address,
+                regionId: $scope.vm.region.id,
+                legalFormId: $scope.vm.legalForm.id,
+                worksNightly: $scope.vm.worksNightly,
+                timeDifference : $scope.vm.timeDifference 
             };
             $scope.addressEditing = true;
         }
-
+        
         $scope.SaveAddressChanges = function () {
-            var url = 'api/provider/' + $scope.model.id + '/address',
+            var url = 'api/provider/' + $scope.vm.id + '/address',
                 data = $scope.address;
             console.log("sending provider address update data", data);
 
@@ -33,22 +46,22 @@
             .error(displayError);
 
             function updateView() {
-                $scope.model.city = $scope.address.city;
-                $scope.model.address = $scope.address.address;
-                $scope.model.region = {
+                $scope.vm.city = $scope.address.city;
+                $scope.vm.address = $scope.address.address;
+                $scope.vm.region = {
                     id: $scope.address.regionId,
                     name: getRegionById($scope.address.regionId)
                 };
-                $scope.model.timeDifference = $scope.address.timeDifference;
-                $scope.model.worksNightly = $scope.address.worksNightly;
+                $scope.vm.timeDifference = $scope.address.timeDifference;
+                $scope.vm.worksNightly = $scope.address.worksNightly;
                 
-                $scope.model.legalForm = {
+                $scope.vm.legalForm = {
                     id: $scope.address.legalFormId,
                     name: getLegalFormNameById($scope.address.legalFormId)
                 }; 
 
                 $scope.addressEditing = false;
-                toastr.info('Данные об адресе сохранены');
+                toastr.info("Данные об адресе сохранены");
                 function getLegalFormNameById(id) {
                     var result = _.find($scope.lists.legalForms, function (lf) { return lf.id === id; });
                     return result.name;
@@ -60,7 +73,7 @@
             }
 
             function displayError() {
-                toastr.error('Я ошипко');
+                toastr.error("Я ошипко");
             }
         }
 
@@ -68,6 +81,7 @@
             $scope.addressEditing = false;
             $scope.address = {};
         }
+       
     }
 
 })();

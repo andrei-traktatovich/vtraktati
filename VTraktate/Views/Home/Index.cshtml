@@ -90,7 +90,10 @@
     <script src="~/Scripts/fullcalendar.min.js"></script>
     <script src="~/Scripts/lang-all.js"></script>
 
-    @*underscore.js*@
+@*TOASTR*@
+    <script src="~/Scripts/toastr.min.js"></script>
+
+@*underscore.js*@
     <script src="~/Scripts/underscore.min.js"></script>
 
     <script src="~/Scripts/angular.js"></script>
@@ -103,12 +106,22 @@
     <script src="~/Scripts/angular-ui/ui-bootstrap-tpls.min.js"></script>
     <script src="~/app/common/directives/ThirdParty/bootstrap-datetimepicker/datetimepicker.js"></script>
 
+    <!-- helpers -->
+    <script src="~/app/helpers/create-module.js"></script>
+
+    @*THIRD PARTY SERVICES*@
+    <script src="~/app/thirdPartyServices/thirdPartyServices.js"></script>
+
+    <!-- custom filters -->
+
+    <script src="~/app/common/filters/filters.module.js"></script>
+    <script src="~/app/common/filters/addHoursToLocalTime.filter.js"></script>
+    <script src="~/app/common/filters/addPlus.filter.js"></script>
+
     @* ui-grid *@
     <script src="~/app/common/directives/ThirdParty/ui-grid/ui-grid.min.js"></script>
 
 
-    @*TOASTR*@
-    <script src="~/Scripts/toastr.min.js"></script>
 
     @* THIRD PARTY LIBRARIES *@
 
@@ -162,8 +175,7 @@
 
     @*ui-calendar*@
 
-    @*THIRD PARTY SERVICES*@
-    <script src="~/app/thirdPartyServices/thirdPartyServices.js"></script>
+    
 
     @* APPLICATION *@
     <script src="~/app/common/directives/ThirdParty/ui-calendar/ui.calendar.js"></script>
@@ -212,7 +224,12 @@
 
     <script src="~/app/providers/profile/contacts/otherContacts/trkProfileOtherContactsList.js"></script>
 
+    
+    <script src="~/app/common/directives/traktat.ui/standardButtons/traktat.ui.standardButtons.js"></script>
+    <script src="~/app/common/directives/traktat.ui/standardButtons/customButtons/standardButtons.dir.js"></script>
 
+    <script src="~/app/common/directives/traktat.ui/trkTimeDiff/trkTimeDiff.ctrl.js"></script>
+    <script src="~/app/common/directives/traktat.ui/trkTimeDiff/trkTimeDiff.dir.js"></script>
     @* constants *@
     <script src="~/app/infrastructure/constants.js"></script>
     @*globals, user and token*@
@@ -370,6 +387,9 @@
 
     <script src="~/app/providers/profile/softs/providerSoftList.js"></script>
     <script src="~/app/providers/profile/profileAddressController.js"></script>
+
+    
+
 </body>
 </html>
 
