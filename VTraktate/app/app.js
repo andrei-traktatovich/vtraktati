@@ -88,7 +88,7 @@ angular.module('app')
             // configuring states
 
             $stateProvider.state('login', {
-                templateUrl: 'app/auth/login/login.view.html',
+                templateUrl: "app/auth/login/login.view.html",
                 url: '/login',
                 controller: 'loginCtrl',
                 data: { auth: { noLogin: true } }
