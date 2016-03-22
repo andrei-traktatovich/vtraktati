@@ -121,6 +121,16 @@ namespace VTraktate
             Mapper.CreateMap<Region, IdNamePairBindingModel>();
             Mapper.CreateMap<LegalForm, IdNamePairBindingModel>();
 
+
+            Mapper.CreateMap<Provider, ProviderProfileAddressViewModel>()
+                .ForMember(x => x.City, conf => conf.MapFrom(y => y.City))
+                .ForMember(x => x.Address, conf => conf.MapFrom(y => y.Address))
+                .ForMember(x => x.RegionId, conf => conf.MapFrom(y => y.Region.Id))
+                .ForMember(x => x.LegalFormId, conf => conf.MapFrom(y => y.LegalFormId))
+                .ForMember(x => x.WorksNightly, conf => conf.MapFrom(y => y.WorksNightly))
+                .ForMember(x => x.TimeDifference, conf => conf.MapFrom(y => y.TimeDifference))
+                .ForMember(x => x.Id, conf => conf.MapFrom(y => y.Id));
+
             Mapper.CreateMap<Provider, ProviderProfileViewModel>()
                 .ForMember(x => x.ModifiedByName, conf => conf.MapFrom(y => y.ModifiedBy.PersonName.FullName))
                 .ForMember(x => x.CreatedByName, conf => conf.MapFrom(y => y.ModifiedBy.PersonName.FullName))
@@ -128,9 +138,7 @@ namespace VTraktate
                 .ForMember(x => x.Services, conf => conf.MapFrom(y => y.Services))
                 .ForMember(x => x.Employments, conf => conf.MapFrom(y => y.Employments))
                 .ForMember(x => x.Soft, conf => conf.MapFrom(y => y.Soft))
-                .ForMember(x => x.City, conf => conf.MapFrom(y => y.City))
-                .ForMember(x => x.Address, conf => conf.MapFrom(y => y.Address))
-                .ForMember(x => x.Region, conf => conf.MapFrom(y => y.Region));
+                .ForMember(x => x.General, conf => conf.MapFrom(y => y));
             Mapper.AssertConfigurationIsValid();
 
             Mapper.CreateMap<DomainBindingModel, ServiceDomainInfo>()

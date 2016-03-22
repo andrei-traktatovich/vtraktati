@@ -23,8 +23,8 @@
             <tab heading="Контактные данные ({{ contactsCount() }})">
 
               
-
-                <trk-provider-address model="model"></trk-provider-address>
+                {{ model.general | json }}
+                <trk-provider-address model="model.general"></trk-provider-address>
                 
                 <ul class="list-group">
                     <li class="list-group-item" ng-repeat="item in model.contactPersons">

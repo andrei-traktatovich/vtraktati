@@ -200,11 +200,11 @@ namespace VTraktate.Controllers
 
             if (provider != null)
             {
-                var result = AutoMapper.Mapper.Map<ProviderProfileViewModel>(provider);
+                var result = Mapper.Map<ProviderProfileViewModel>(provider);
                 return Ok(result);
             }
             else
-                return BadRequest(string.Format("Данные не найдены, Id = {0}", id));
+                return BadRequest(String.Format("Данные не найдены, Id = {0}", id));
         }
 
         [Route("api/provider/{providerId}/address")]

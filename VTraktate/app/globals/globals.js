@@ -16,9 +16,25 @@
             getExcept: getExcept,
             clear: clear,
             getAndInsertAll: getAndInsertAll,
-            populateLists: populateLists
+            populateLists: populateLists,
+            getNameById: getNameById
         };
         
+        function getNameById(collectionName, id) {
+            console.log("getNameById: looking for collection " + collectionName);
+            var arr = globalVariables[collectionName];
+            if (!arr)
+                throw Error(`getNameById: collection ${collectionName} does not exist!`);
+            if (!arr.length)
+                throw Error(`getNameById: collection ${ collectionName } has zero length!`)
+            var item = _.find(arr, byId(id));
+            return item ? item.name || item.title || "something" : "Item not found";
+        }
+
+        function byId(id) {
+            return (element) => element.id === id;
+        }
+
         function set(value) {
             if (value) {
                 globalVariables = value;
@@ -81,10 +97,9 @@
         function getExcept(name, whatToExclude, idProperty) {
             var items = get(name);
             if (whatToExclude && whatToExclude.length) {
-                var path = idProperty || 'id';
-                var ids = whatToExclude.map(function (item) { return getProperty(item, path); });
-                //var ids = _.pluck(whatToExclude, idProperty || 'id');
-                items = _.filter(items, function (item) { return !_.contains(ids, item.id); });
+                var path = idProperty || "id";
+                var ids = whatToExclude.map(function(item) { return getProperty(item, path); });
+                items = _.filter(items, (item) => ids.indexOf(item.id) < 0);
             }
             return items;
         }

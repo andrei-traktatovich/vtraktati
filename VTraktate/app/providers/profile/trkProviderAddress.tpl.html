@@ -1,5 +1,5 @@
 ﻿
-
+{{ vm | json }}
 <table class="table table-condensed text-small">
     <thead>
         <tr>
@@ -32,7 +32,7 @@
                 <input ng-show="addressEditing" ng-model="address.address" class="form-control">
             </td>
             <td>
-                <button class="btn btn-sm btn-success" ng-click="SaveAddressChanges()" ng-show="addressEditing">
+                <button class="btn btn-sm btn-success" ng-click="saveAddressChanges()" ng-show="addressEditing">
                     <i class="glyphicon glyphicon-ok" tooltip="Сохранить данные об адресе и регионе"></i>
                 </button>
             </td>
@@ -41,13 +41,13 @@
             <td>Регион</td>
             <td>
                 <span ng-hide="addressEditing">
-                    {{ vm.region.name }}
+                    {{ getRegionName(vm.regionId) }}
                 </span>
                 <select ng-model="address.regionId" ng-show="addressEditing" ng-options="item.id as item.title for item in lists.regions"></select>
 
             </td>
             <td>
-                <button class="btn btn-sm btn-danger" ng-click="CancelAddressChanges()" ng-show="addressEditing">
+                <button class="btn btn-sm btn-danger" ng-click="cancelAddressChanges()" ng-show="addressEditing">
                     <i class="glyphicon glyphicon-remove" tooltip="Отмена"></i>
                 </button>
             </td>
@@ -73,7 +73,7 @@
         <tr>
             <td>Организационно-правовая форма</td>
             <td>
-                <p ng-hide="addressEditing"> {{ vm.legalForm.name }}  </p>
+                <p ng-hide="addressEditing"> {{ getLegalFormName(vm.legalFormId) }}  </p>
                 <select ng-model="address.legalFormId" ng-show="addressEditing" ng-options="item.id as item.name for item in lists.legalForms"></select>
             </td>
             <td></td>

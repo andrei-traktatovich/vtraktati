@@ -10,22 +10,18 @@ namespace VTraktate.Models
 {
     public class ProviderProfileViewModel
     {
-        public ProviderProfileViewModel()
-        {
-            ContactPersons = new List<ContactPersonViewModel>();
-            Services = new List<ServiceViewModel>();
-        }
+
+        //public ProviderProfileViewModel()
+        //{
+        //    This is redundant ... 
+        //    ContactPersons = new List<ContactPersonViewModel>();
+        //    Services = new List<ServiceViewModel>();
+        //}
+
         public int Id { get; set; }
         public string Name { get; set; }
 
-        public string City { get; set; }
-        public string Address { get; set; }
-
-        public decimal TimeDifference { get; set; }
-        public bool WorksNightly { get; set; }
-        public IdNamePairBindingModel LegalForm { get; set; }
-
-        public IdNamePairBindingModel Region { get; set; }
+        public ProviderProfileAddressViewModel General { get; set; }
 
         public ICollection<ContactPersonViewModel> ContactPersons { get; set; }
         public ICollection<ServiceViewModel> Services { get; set; }
@@ -40,5 +36,16 @@ namespace VTraktate.Models
 
         public string ModifiedByName { get; set; }
         public DateTime? ModifiedDate { get; set; }
+    }
+
+    public class ProviderProfileAddressViewModel
+    {
+        public int Id { get; set; }
+        public string City { get; set; }
+        public string Address { get; set; }
+        public decimal TimeDifference { get; set; }
+        public bool WorksNightly { get; set; }
+        public int LegalFormId { get; set; }
+        public int RegionId { get; set; }
     }
 }
