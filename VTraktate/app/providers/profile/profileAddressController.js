@@ -16,7 +16,7 @@
                 city: $scope.model.city,
                 address: $scope.model.address,
                 regionId: $scope.model.region.id,
-                legalFormid: $scope.model.legalFormId.id,
+                legalFormId: $scope.model.legalForm.id,
                 worksNightly: $scope.model.worksNightly,
                 timeDifference : $scope.model.timeDifference 
             };
@@ -26,6 +26,8 @@
         $scope.SaveAddressChanges = function () {
             var url = 'api/provider/' + $scope.model.id + '/address',
                 data = $scope.address;
+            console.log("sending provider address update data", data);
+
             $http.put(url, data)
             .success(updateView)
             .error(displayError);
@@ -39,13 +41,17 @@
                 };
                 $scope.model.timeDifference = $scope.address.timeDifference;
                 $scope.model.worksNightly = $scope.address.worksNightly;
-                $scope.model.legalForm = getLegalFormById($scope.address.legalFormId);
+                
+                $scope.model.legalForm = {
+                    id: $scope.address.legalFormId,
+                    name: getLegalFormNameById($scope.address.legalFormId)
+                }; 
 
                 $scope.addressEditing = false;
                 toastr.info('Данные об адресе сохранены');
-                function getLegalFormById(id) {
+                function getLegalFormNameById(id) {
                     var result = _.find($scope.lists.legalForms, function (lf) { return lf.id === id; });
-                    return result;
+                    return result.name;
                 }
                 function getRegionById(id) {
                     var result = _.find($scope.lists.regions, function(region){ return region.id === id; });

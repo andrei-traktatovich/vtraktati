@@ -84,33 +84,28 @@
 
                         </td>
                         <td>
-                            <button class="btn btn-sm btn-danger" ng-click="CancelAddressChanges()" ng-show="addressEditing">
-                                <i class="glyphicon glyphicon-remove" tooltip="Отмена"></i>
-                            </button>
+                             
                         </td>
                     </tr>
                     <tr>
                         <td></td>
                         <td>
-                            <input type="checkbox" ng-enabled="addressEditing" ng-model="model.worksNightly"/>Работает ночью
-
-
+                            <input type="checkbox" disabled ng-hide="addressEditing" ng-model="model.worksNightly"/>
+                            <input type="checkbox" ng-show="addressEditing" ng-model="address.worksNightly" />
+                            Работает ночью
                         </td>
                         <td>
-                            <button class="btn btn-sm btn-danger" ng-click="CancelAddressChanges()" ng-show="addressEditing">
-                                <i class="glyphicon glyphicon-remove" tooltip="Отмена"></i>
-                            </button>
+                             
                         </td>
                     </tr>
                         <tr>
                             <td>Организационно-правовая форма</td>
                             <td>
+                                <p  ng-hide="addressEditing"> {{ model.legalForm.name }}  </p>
                                 <select ng-model="address.legalFormId" ng-show="addressEditing" ng-options="item.id as item.name for item in lists.legalForms"></select>
                             </td>
                             <td>
-                                <button class="btn btn-sm btn-danger" ng-click="CancelAddressChanges()" ng-show="addressEditing">
-                                    <i class="glyphicon glyphicon-remove" tooltip="Отмена"></i>
-                                </button>
+                                 
                             </td>
                         </tr>
                     </tbody>
