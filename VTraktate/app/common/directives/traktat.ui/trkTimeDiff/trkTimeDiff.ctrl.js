@@ -9,7 +9,9 @@
         
         console.log("enters trkTimeDiff controller");
 
-        normalizeDiffValue();
+        // ACHTUNG: if I do this, I start having issues with inherited scope. 
+        
+        //normalizeDiffValue();
         
         if ($scope.active === undefined)
             $scope.active = true;
@@ -18,12 +20,12 @@
 
         $scope.dec = dec;
 
-        function normalizeDiffValue() {
-            $scope.diff = $scope.diff || 0;
+        //function normalizeDiffValue() {
+        //    $scope.diff = $scope.diff || 0;
 
-            if (Math.abs($scope.diff) > 12)
-                $scope.diff = 0;
-        }
+        //    if (Math.abs($scope.diff) > 12)
+        //        $scope.diff = 0;
+        //}
 
         function dec() {
             if ($scope.diff > -12)

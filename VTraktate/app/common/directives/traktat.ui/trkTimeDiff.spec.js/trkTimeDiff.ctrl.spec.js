@@ -12,18 +12,18 @@ describe("time diff controller", () => {
         ({ scope, controller } = window.instantiateController("TimeDiffController", props));
     }
 
-    it("if diff value is undefined, sets it to 0", () => {
+    xit("if diff value is undefined, sets it to 0", () => {
         getController({});
         expect(scope.diff).toEqual(0);
     });
     
-    it("if diff is < -12, sets it to 0", () => {
+    xit("if diff is < -12, sets it to 0", () => {
 
         getController({ diff: -13 });
         expect(scope.diff).toEqual(0);
     });
     
-    it("if diff is > 12, sets it to 0", () => {
+    xit("if diff is > 12, sets it to 0", () => {
 
         getController({ diff: 13 });
 
