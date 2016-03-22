@@ -218,6 +218,9 @@
     <Content Include="app\app_specs\orders\jobs\jobFactory.js" />
     <Content Include="app\app_specs\orders\services\ordermanager.js" />
     <Content Include="app\app_specs\orders\utilities\jobInfoStorage.js" />
+    <Content Include="app\blocks.spec\handleHttpError.spec.js" />
+    <Content Include="app\blocks\blocks.module.js" />
+    <Content Include="app\blocks\handleHttpError.svc.js" />
     <Content Include="app\common\directives\ThirdParty\bootstrap-datetimepicker\datetimepicker.css" />
     <Content Include="app\common\directives\ThirdParty\bootstrap-datetimepicker\datetimepicker.js" />
     <Content Include="app\common\directives\ThirdParty\bootstrap-datetimepicker\readme.txt" />
