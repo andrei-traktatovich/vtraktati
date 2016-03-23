@@ -44,12 +44,12 @@
         return {
             type: { id: type.id, name: type.title },
             personName: {
-                name: { firstName : null, middleName : null, lastName : null }
+                name: { firstName : "", middleName : "", lastName : "" }
             },
             details: {
                 regionId: 2,            // Russia,
                 timeDifference: 0,
-                legalFormId: 1,         // individual,
+                legalFormId: 1,         // individual 
                 worksNightly: false 
             },
             freelance: {

@@ -5,17 +5,17 @@
                 <div style="padding: 10px;">
                     <div class="form-group">
                         <label for="lastName">Фамилия</label>
-                        <input type="text" name="inputLastName" id="lastName" class="form-control" ng-model="model.name.lastName" required/>
+                        <input type="text" name="inputLastName" id="lastName" class="form-control" ng-blur="fixCase()" ng-model="model.name.lastName" required/>
                         <trk-error-summary for="personNameForm.inputLastName"></trk-error-summary>
                     </div>
                     <div class="form-group">
                         <label for="firstName">Имя</label>
-                        <input type="text" name="inputFirstName"id="firstName" class="form-control" ng-model="model.name.firstName" required/>
+                        <input type="text" name="inputFirstName"id="firstName" class="form-control" ng-model="model.name.firstName" ng-blur="fixCase()" required/>
                         <trk-error-summary for="personNameForm.inputFirstName"></trk-error-summary>
                     </div>
                     <div class="form-group">
                         <label for="middleName">Отчество</label>
-                        <input type="text" id="middletName" class="form-control" ng-model="model.name.middleName" />
+                        <input type="text" id="middletName" class="form-control" ng-blur="fixCase()" ng-model="model.name.middleName" />
                     </div>
                 </div>
             </div>
@@ -49,18 +49,10 @@
 
         <div class="row">
             <div class="col-sm-12">
-                <button class="btn btn-sm pull-left" ng-click="fixCase()">
-                    a&gt;A
-                </button>
-            </div>
-        </div>
-
-        <div class="row">
-            <div class="col-sm-12">
                 <div style="padding: 10px;">
                     <div class="form-group">
                         <label for="lastName">Альтернативное имя</label>
-                        <input type="text" id="lastName" class="form-control"
+                        <input type="text" id="lastName" class="form-control" ng-blur="fixCase()"
                                placeholder="Введите сюда какое-нибудь другое имя (Одинокий Змий и т.п.), под которым известен человечеству..."
                                ng-model="model.alternateName" />
                     </div>

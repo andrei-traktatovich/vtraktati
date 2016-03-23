@@ -1,46 +1,40 @@
 ﻿
-angular.module('traktat.ui')
-.directive('trkPersonName', function() {
+angular.module("traktat.ui")
+.directive("trkPersonName", function() {
     return {
-        templateUrl: 'app/common/directives/traktat.ui/trkPersonName/trkPersonName.tpl.html',
+        templateUrl: "app/common/directives/traktat.ui/trkPersonName/trkPersonName.tpl.html",
         scope: {
-            model: '=personName',
-            personId: '=personId'
+            model: "=personName",
+            personId: "=personId"
         },
-        controller: 'PersonNameController'
+        controller: "PersonNameController"
     };
 
 })
-.controller('PersonNameController', function($scope, PersonNamePreview) {
+.controller("PersonNameController", function($scope, PersonNamePreview) {
 
     $scope.service = PersonNamePreview;
 
     $scope.model = $scope.model || {
         name: {
-            firstName: '',
-            middleName: '',
-            lastName: ''
+            firstName: "",
+            middleName: "",
+            lastName: ""
         },
-        fullName: '',
-        address: '',
-        initials: '',
-        alternateName: ''
+        fullName: "",
+        address: "",
+        initials: "",
+        alternateName: ""
     };
 
     $scope.fixCase = function () {
-        
+
         $scope.model.name = {
-            firstName: ($scope.model.name.firstName || '').toTitleCase(),
-            middleName: ($scope.model.name.middleName || '').toTitleCase(),
-            lastName: ($scope.model.name.lastName || '').toTitleCase()
+            firstName: ($scope.model.name.firstName || "").toTitleCase(),
+            middleName: ($scope.model.name.middleName || "").toTitleCase(),
+            lastName: ($scope.model.name.lastName || "").toTitleCase()
         };
-        //$scope.$apply(function () {
-        //    $scope.model.name = {
-        //        firstName: $scope.model.name.firstName.toTitleCase(),
-        //        middleName: $scope.model.name.middleName.toTitleCase(),
-        //        lastName: $scope.model.name.lastName.toTitleCase()
-        //    };
-        //});
+        $scope.model.alternateName = ($scope.model.alternateName || "").toTitleCase();
     };
 
     var updateName = function() {
@@ -51,29 +45,29 @@ angular.module('traktat.ui')
     };
 
     function makeFullName(name) {
-        return [name.lastName, name.firstName, name.middleName].join(' ');
+        return [name.lastName, name.firstName, name.middleName].join(" ");
     }
 
     function makeAddress(name) {
-        return (name.firstName + ' ' + name.middleName);
+        return (name.firstName + " " + name.middleName);
     }
 
     function makeInitials(name) {
-        var result = name.lastName + ' ' + initial(name.firstName);
-        if (name.middleName !== '')
-            result = result + ' ' + initial(name.middleName);
+        var result = name.lastName + " " + initial(name.firstName);
+        if (name.middleName !== "")
+            result = result + " " + initial(name.middleName);
         return result;
 
         function initial(item) {
-            if (item && item !== '' && item.length > 1)
-                return item[0] + '.';
+            if (item && item !== "" && item.length > 1)
+                return item[0] + ".";
             else
-                return '';
+                return "";
         }
     }
 
-    $scope.$watch('model.name.lastName', updateName);
-    $scope.$watch('model.name.middleName', updateName);
-    $scope.$watch('model.name.firstName', updateName);
+    $scope.$watch("model.name.lastName", updateName);
+    $scope.$watch("model.name.middleName", updateName);
+    $scope.$watch("model.name.firstName", updateName);
 
 });
