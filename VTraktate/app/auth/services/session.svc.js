@@ -7,14 +7,19 @@ angular.module('auth')
     .factory('SessionService', ['$rootScope', 'StateGateKeeperService', function ($rootScope, StateGateKeeperService) {
 
         function checkAccess(event, toState) {
-            var result = StateGateKeeperService.validateStateChange(toState);
-
+            var result = {};
+            try {
+                result = StateGateKeeperService.validateStateChange(toState);
+            } catch (err) {
+                event.preventDefault();
+                $rootScope.$state.go("login");
+            }
             if (!result.ok) {
                 event.preventDefault();
                 if (result.authenticationRequired)
                     $rootScope.$state.go('login');
                 else if (result.nonAuthorized)
-                    $rootScope.$emit("auth-error-unauthorized");
+                    $rootScope.$state.go("login");// $rootScope.$emit("auth-error-unauthorized");
                 else
                     $rootScope.$emit("application-error", { message: "Неизвестная ошибка раутера" });
             }
