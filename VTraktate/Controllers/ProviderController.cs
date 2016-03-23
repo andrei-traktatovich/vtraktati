@@ -239,6 +239,10 @@ namespace VTraktate.Controllers
             var now = DateTime.Now;
             var date = now.Date;
 
+            // TEMPORARY 
+            
+            if (String.IsNullOrEmpty(model.PersonName.FullName.Trim()))
+                return BadRequest("Пустое имя исполнителя");
             
             var provider = new Provider { 
                 Name = model.PersonName.FullName, 

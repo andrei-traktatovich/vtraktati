@@ -24,7 +24,7 @@ describe("handleHttpError", () => {
 
     it("fires an http-error event on rootScope", () => {
         var spy = jasmine.createSpy(),
-            err = { status: 404, data: { error: "shit has happened " } },
+            err = { status: 404, data: { message: "shit has happened " } },
             errorMessage = "some error";
 
         $rootScope.$on("http-error", spy);
@@ -32,14 +32,14 @@ describe("handleHttpError", () => {
         expect(spy).toHaveBeenCalled();
         expect(spy.calls.first().args[1]).toEqual({
             title: errorMessage,
-            text: `${err.status} ${err.data.error}`,
+            text: `${err.status} ${err.data.message}`,
             error: err
         });
     });
 
     it("message, statuscode and error from http error & stack are fed http-error event", () => {
         var spy = jasmine.createSpy(),
-            err = { status: 404, data: { error: "shit has happened " }, stack: "some stack" },
+            err = { status: 404, data: { message: "shit has happened " }, stack: "some stack" },
             errorMessage = "some error";
 
         $rootScope.$on("http-error", spy);
@@ -47,7 +47,7 @@ describe("handleHttpError", () => {
         expect(spy).toHaveBeenCalled();
         expect(spy.calls.first().args[1]).toEqual({
             title: errorMessage,
-            text: `${err.status} ${err.data.error}`,
+            text: `${err.status} ${err.data.message}`,
             error: err
         });
     });

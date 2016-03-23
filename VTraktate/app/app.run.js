@@ -5,12 +5,14 @@
         .factory("handleAuthErrors", handleAuthErrors)
         .factory("handleApplicationErrors", handleApplicationErrors)
         .factory("handleStateChange", handleStateChange)
-        .run(($rootScope, $state, $stateParams, handleHttpErrors, handleAuthErrors, handleApplicationErrors, handleStateChange) => {
+        .run(($rootScope, $state, $stateParams, handleHttpErrors, handleAuthErrors, handleApplicationErrors, handleStateChange, $window) => {
 
             $rootScope.$state = $state;
             $rootScope.$stateParams = $stateParams;
 
-             
+            $rootScope.back = () => {
+                $window.history.back();
+            }
 
             handleHttpErrors();
 

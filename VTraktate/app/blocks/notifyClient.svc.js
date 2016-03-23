@@ -31,7 +31,7 @@
         }
 
         function showMessage(type, title, message, err) {
-            toastr[type](title, message);
+            toastr[type](message, title);
             if (DEBUG) {
                 console.log(title, message, err);
                 if (type === "error")

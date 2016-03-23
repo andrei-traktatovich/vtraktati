@@ -167,9 +167,11 @@
                 </div>
             </div>
         </section>
-
+        <div class="alert alert-warning" ng-hide="individualCreate.$valid">
+            Заполнены не все поля или некоторые поля заполнены неверно. Сохранение невозможно.
+        </div>
         <div class="pull-right">
-            <button class="btn btn-success" ng-click="save()" ng-disabled="individualCreate.$pristine || individualCreate.$invalid">ОК</button>
+            <trk-btn-save class="btn-success" ng-click="save()" ng-disabled="!individualCreate.$valid || individualCreate.$pristine">ОК</trk-btn-save>
             <button class="btn btn-default" ng-click="cancel()">Отмена</button>
         </div>
     </ng-form>

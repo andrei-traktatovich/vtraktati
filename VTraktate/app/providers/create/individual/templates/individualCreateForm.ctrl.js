@@ -7,7 +7,7 @@
         }
     };
 })
-.controller('individualCreateFormCtrl', function ($scope, GlobalsService, ProviderBackEndService, $stateParams, $window) {
+.controller('individualCreateFormCtrl', function ($rootScope, $scope, GlobalsService, ProviderBackEndService, $stateParams, notifyClient, handleHttpError) {
 
     $scope.model = createModel($stateParams.type); // resolve the model so this one can be used for editing stuff 
     
@@ -22,21 +22,19 @@
     
     $scope.save = function () {
         ProviderBackEndService.save($scope.model)
-        .then(success, failure);
+        .then(success, handleHttpError("Невозможно сохранить исполнителя"));
 
         function success() {
-            toastr.info('Информация успешно сохранена');
-            $window.history.back();
-        }
-
-        function failure() {
-            toastr.error('Я ошипко');
+            notifyClient.success("Информация успешно сохранена", `Информация об исполнителе ${$scope.model.personName.fullName} успешно сохранена`);
+            back();
         }
     };
 
-    $scope.cancel = function () {
-        $window.history.back();
-    };
+        $scope.cancel = back;
+
+        function back() {
+            $rootScope.back();
+        }
 
     function createModel(type) {
 
