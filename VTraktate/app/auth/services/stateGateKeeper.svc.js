@@ -3,18 +3,21 @@
 // if user is not set, redirects to login page
 // if user is set but doesn't have rights, throws error
 
-angular.module('auth')
-    .factory('StateGateKeeperService', ['$rootScope', 'AuthorizationService', 'User', function ($rootScope, AuthorizationService, User) {
+angular.module("auth")
+    
+    .factory("StateGateKeeperService", ["$rootScope", "AuthorizationService", "User", function ($rootScope, AuthorizationService, User) {
 
         function validateStateChange(state) {
             var registeredState = $rootScope.$state.get(state),
                 user = User.get(),
                 result = {};
-            console.log('validateStateChange');
+            console.log("validateStateChange");
             console.log(user);
 
-            if (!registeredState) // is state passed to this function always valid?
-                throw ('Ошибка раутера: не найдено состояние ' + (state.name || state));
+            if (!registeredState) { // is state passed to this function always valid? 
+                $rootScope.$emit("application-error", { message: `Ошибка роутера. Не найдено состояние ${state.name}` });
+                throw ("Ошибка раутера: не найдено состояние " + (state.name || state));
+            }
 
             if (registeredState.data && registeredState.data.auth) {
                 // if noLogin is falsy or doesn't exit and user is not authenticated, require redirect to login page

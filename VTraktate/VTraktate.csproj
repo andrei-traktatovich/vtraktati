@@ -214,16 +214,23 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="app.test-helpers\app-test-helpers.js" />
+    <Content Include="app\angular.dependencies.module.js" />
+    <Content Include="app\app.config.js" />
+    <Content Include="app\app.run.js" />
+    <Content Include="app\appController.ctrl.js" />
     <Content Include="app\app_specs\orders\create\order.create.ctrl.js" />
     <Content Include="app\app_specs\orders\jobs\jobFactory.js" />
     <Content Include="app\app_specs\orders\services\ordermanager.js" />
     <Content Include="app\app_specs\orders\utilities\jobInfoStorage.js" />
+    <Content Include="app\blocks.spec\notifyClient.spec.js" />
     <Content Include="app\blocks.spec\handleHttpError.spec.js" />
+    <Content Include="app\blocks\notifyClient.svc.js" />
     <Content Include="app\blocks\blocks.module.js" />
     <Content Include="app\blocks\handleHttpError.svc.js" />
     <Content Include="app\common\directives\ThirdParty\bootstrap-datetimepicker\datetimepicker.css" />
     <Content Include="app\common\directives\ThirdParty\bootstrap-datetimepicker\datetimepicker.js" />
     <Content Include="app\common\directives\ThirdParty\bootstrap-datetimepicker\readme.txt" />
+    <Content Include="app\common\directives\ThirdParty\indi-click.js" />
     <Content Include="app\common\directives\ThirdParty\ui-grid\ui-grid.min.css" />
     <Content Include="app\common\directives\ThirdParty\ui-grid\ui-grid.js" />
     <Content Include="app\common\directives\ThirdParty\ui-grid\ui-grid.min.js" />
@@ -254,10 +261,13 @@
     <Content Include="app\customerContactPersons\trkCustomerContactPersonGeneral\trkCustomerContactPersonGeneral.tpl.html" />
     <Content Include="app\customerContactPersons\trkCustomerContactPersonGeneral\trkCustomerContactPersonGeneral.ctrl.js" />
     <Content Include="app\helpers\create-module.js" />
+    <Content Include="app\httpInterceptors\reqAuthInterceptor.js" />
+    <Content Include="app\httpInterceptors\SpinInterceptor.js" />
     <Content Include="app\infrastructure\constants.js" />
     <Content Include="app\infrastructure\dateTimeUtils\dateTimeUtils.mdl.js" />
     <Content Include="app\infrastructure\dateTimeUtils\taskDurationManager.js" />
     <Content Include="app\infrastructure\modalStateProvider\modalStateProvider.js" />
+    <Content Include="app\mainNavMenu.js" />
     <Content Include="app\orders\create\documentsAutoSuggestOptions.js" />
     <Content Include="app\orders\jobs\jobFactory.js" />
     <Compile Include="App_Start\BundleConfig.cs" />
@@ -419,7 +429,6 @@
     <Content Include="app\auth\services\token.svc.js" />
     <Content Include="app\common\directives\ThirdParty\angularSpinner\angularSpinner.js" />
     <Content Include="app\common\directives\ThirdParty\angularSpinner\ReadMe.txt" />
-    <Content Include="app\common\directives\ThirdParty\indiClick.js" />
     <Content Include="app\common\directives\ThirdParty\internationalPhoneNumber\jQueryPlugin\img\flags.png" />
     <Content Include="app\common\directives\ThirdParty\internationalPhoneNumber\jQueryPlugin\css\tel-input.css" />
     <Content Include="app\common\directives\ThirdParty\internationalPhoneNumber\jQueryPlugin\js\ReadMe.txt" />
@@ -596,6 +605,7 @@
     <Content Include="app\providers\profile\contacts\phones\phonesList\trkProfilePhonesList.js" />
     <Content Include="app\providers\profile\contacts\phones\phonesList\trkProfilePhonesList.tpl.html" />
     <Content Include="app\providers\profile\provider-profile.tpl.html" />
+    <Content Include="app\providers\profile\providerProfileController.ctrl.js" />
     <Content Include="app\providers\profile\providers.profile.js" />
     <Content Include="app\providers\profile\services\addUpdate\addUpdateProviderService.tpl.html" />
     <Content Include="app\providers\profile\services\grades\trkGradeViewer.js" />
@@ -638,8 +648,11 @@
     <Content Include="app\providers\services\trkProviderService\trkProviderServiceItem.js" />
     <Content Include="app\providers\type\employeeFireDialog.dlg.tpl.html" />
     <Content Include="app\providers\type\ProviderTypeService.js" />
+    <Content Include="app\routes.js" />
     <Content Include="app\thirdPartyServices\thirdPartyServices.js" />
     <Content Include="app\user\user.js" />
+    <Content Include="app\vendor.module.js" />
+    <Content Include="app\version.js" />
     <Content Include="App_Readme\Elmah.txt" />
     <Content Include="Areas\HelpPage\HelpPage.css" />
     <Content Include="app\common\directives\ThirdParty\internationalPhoneNumber\jQueryPlugin\js\lib\utils.js" />

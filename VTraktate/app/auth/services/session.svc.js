@@ -13,12 +13,10 @@ angular.module('auth')
                 event.preventDefault();
                 if (result.authenticationRequired)
                     $rootScope.$state.go('login');
+                else if (result.nonAuthorized)
+                    $rootScope.$emit("auth-error-unauthorized");
                 else
-                    if (result.nonAuthorized)
-                        $rootScope.alertNonAuthorized();
-                    else
-                        $rootScope.alertUnknownError('Неизвестная ошибка раутера.');
-                
+                    $rootScope.$emit("application-error", { message: "Неизвестная ошибка раутера" });
             }
         }
 

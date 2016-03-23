@@ -93,8 +93,6 @@
 @*TOASTR*@
     <script src="~/Scripts/toastr.min.js"></script>
 
-@*underscore.js*@
-    <!-- <script src="~/Scripts/underscore.min.js"></script> DEPRECATED, USING LODASH INSTEAD !!! -->
     @*LODASH*@
     <script src="~/Scripts/lodash.min.js"></script>
 
@@ -103,6 +101,9 @@
     <script src="~/Scripts/angular-resource.min.js"></script>
     <script src="~/Scripts/angular-ui-router.min.js"></script>
     <script src="~/Scripts/angular-sanitize.min.js"></script>
+
+    <script src="~/app/angular.dependencies.module.js"></script>
+
 
     <script src="~/Scripts/angular-ui/ui-bootstrap.min.js"></script>
     <script src="~/Scripts/angular-ui/ui-bootstrap-tpls.min.js"></script>
@@ -127,11 +128,10 @@
 
     @* THIRD PARTY LIBRARIES *@
 
-    @* spinner and spin button *@
+    @* spinner *@
 
     <script src="~/app/common/directives/ThirdParty/spin.js"></script>
-    <script src="~/app/common/directives/ThirdParty/indiClick.js"></script>
-
+    
     @* local storage *@
     <script src="~/app/infrastructure/localStorage/localStorage.svc.js"></script>
 
@@ -182,7 +182,7 @@
     @* APPLICATION *@
     <script src="~/app/common/directives/ThirdParty/ui-calendar/ui.calendar.js"></script>
     @* custom directives *@
-
+    <script src="~/app/common/directives/ThirdParty/indi-click.js"></script>
     <script src="~/app/common/directives/traktat.ui/traktat.ui.mdl.js"></script>
     <script src="~/app/common/directives/traktat.ui/traktatActiveNavbar.js"></script>
 
@@ -263,7 +263,7 @@
     <script src="~/app/providers/profile/providers.profile.js"></script>
     <script src="~/app/providers/providers.js"></script>
 
-
+    <script src="~/app/providers/profile/providerProfileController.ctrl.js"></script>
 
     @*grades*@
     <script src="~/app/grades/grades.mdl.js"></script>
@@ -326,9 +326,20 @@
     <script src="~/app/orders/jobs/trkJobLine.js"></script>
     <script src="~/app/orders/jobs/jobLineController.js"></script>
 
+    <script src="~/app/vendor.module.js"></script>
 
+    @*blocks*@
+    
+    <script src="~/app/blocks/handleHttpError.svc.js"></script>
+    <script src="~/app/blocks/notifyClient.svc.js"></script>
+    <script src="~/app/blocks/blocks.module.js"></script>
 
     <script src="~/app/app.js"></script>
+
+    @*http interceptors*@ 
+    <script src="~/app/httpInterceptors/reqAuthInterceptor.js"></script>
+    <script src="~/app/httpInterceptors/SpinInterceptor.js"></script>
+
     <script src="~/app/admin/accounts/accounts.ctrl.js"></script>
     <script src="~/app/home/home.ctrl.js"></script>
     <script src="~/app/admin/accounts/account.create.ctrl.js"></script>
@@ -390,8 +401,15 @@
     <script src="~/app/providers/profile/softs/providerSoftList.js"></script>
     <script src="~/app/providers/profile/profileAddressController.js"></script>
 
+    <script src="~/app/version.js"></script>
+    <script src="~/app/routes.js"></script>
+    <script src="~/app/mainNavMenu.js"></script>
+    <script src="~/app/appController.ctrl.js"></script>
+    @*app config && run*@
     
 
+    <script src="~/app/app.config.js"></script>
+    <script src="~/app/app.run.js"></script>
 </body>
 </html>
 

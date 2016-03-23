@@ -10,14 +10,14 @@
                 .then(function () {
                     console.log('username and password ok');
                     ProfileService.get()
-                        .then(function (data) {
-                            console.log('profile ok');
-                            User.set(data.user);
-                            GlobalsService.set(data.globals);
-                            deferred.resolve(data);
+                        .then(function(data) {
+                                console.log('profile ok');
+                                User.set(data.user);
+                                GlobalsService.set(data.globals);
+                                deferred.resolve(data);
 
-                        },
-                        function (err) { deferred.reject(err); })
+                            },
+                            function(err) { deferred.reject(err); });
                 }, function (err) {
                     deferred.reject(err);
                 });
@@ -29,8 +29,8 @@
             User.clear();
             TokenService.clear();
             GlobalsService.clear();
-            
-            $rootScope.$state.go('login');
+
+            $rootScope.$emit("logout");
         }
 
         return {
