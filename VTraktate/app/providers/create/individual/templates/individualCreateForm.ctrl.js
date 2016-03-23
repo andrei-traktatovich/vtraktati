@@ -48,7 +48,8 @@
             },
             details: {
                 regionId: 2,            // Russia,
-                legalFormId: 0,         // individual,
+                timeDifference: 0,
+                legalFormId: 1,         // individual,
                 worksNightly: false 
             },
             freelance: {

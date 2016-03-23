@@ -41,7 +41,7 @@
                 
                 <div class="form-group">
                     <label for="inputDetailsTimeDiff">Разница времени с МСК</label>
-                    <trk-time-diff id="inputDetailsTimeDiff" diff="model.details.timeDifference"></trk-time-diff>
+                    <trk-time-diff id="inputDetailsTimeDiff" active="true" diff="model.details.timeDifference"></trk-time-diff>
                 </div>
 
                 <div class="form-group">
@@ -98,7 +98,7 @@
         <section id="employment" ng-if="model.type.id == 0">
 
             <h3>Штатная работа</h3>
-            <!-- TODO: encapsulate in a separate directive? -->
+            
             <div class="well">
                 <div ng-form>
                     <trk-provider-employment employment="model.employment"></trk-provider-employment>

@@ -5,6 +5,8 @@
     var mod = window.createModule("traktat.ui");
     mod.controller("TimeDiffController", timeDiffController);
 
+    const DEFAULT_TRUTH_VALUE = true;
+    
     function timeDiffController($scope) {
         
         console.log("enters trkTimeDiff controller");
@@ -13,8 +15,8 @@
         
         //normalizeDiffValue();
         
-        if ($scope.active === undefined)
-            $scope.active = true;
+        if ([false, true].indexOf($scope.active) < 0)
+            $scope.active = DEFAULT_TRUTH_VALUE;
 
         $scope.inc = inc;
 
