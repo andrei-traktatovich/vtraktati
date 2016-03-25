@@ -50,14 +50,15 @@ namespace VTraktate.BL.Tests
             var result = await sut.FindAndDeleteAsync(42);
             Assert.IsTrue(result.Success);
         }
-
+        
         [TestMethod]
-        public async Task WhenDeletingProviderReturnsProviderWithIsDeletedSet()
+        public async Task WhenDeletingProviderSavesChanges()
         {
             mockCerberos.Setup(x => x.CanDeleteProvidersAsync()).ReturnsAsync(true);
             mockProviderRepo.Setup(x => x.FindByIdAsync(It.Is<int>(id => id == FAKEID))).ReturnsAsync(new Provider() { Id = FAKEID });
+            mockProviderRepo.Setup(x => x.SaveAsUserAsync(It.IsAny<int>())).ReturnsAsync(1);
             var result = await sut.FindAndDeleteAsync(42);
-            Assert.IsTrue(result.Data.IsDeleted);
+            mockProviderRepo.Verify(x => x.SaveAsUserAsync(It.IsAny<int>()));
         }
 
         [TestMethod]

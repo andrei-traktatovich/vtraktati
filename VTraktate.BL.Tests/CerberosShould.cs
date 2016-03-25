@@ -21,7 +21,7 @@ namespace VTraktate.BL.Tests
         [TestInitialize]
         public void Setup()
         {
-            sut = new CerberosMum().MakeCerberos(mockContext.Object, FAKEUSERID);
+            sut = new CerberosMum().MakeCerberos(mockContext.Object, () => FAKEUSERID);
         }
 
         [TestMethod]

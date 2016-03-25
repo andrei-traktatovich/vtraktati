@@ -36,7 +36,10 @@ namespace VTraktate.BL.Providers
             {
                 return OperationResult<Provider>.NotFound(String.Format("не найден исполнитель с Id {0}", providerId));
             }
-            provider.IsDeleted = true;
+
+            Repo.DeleteItem(provider);
+
+            await Repo.SaveAsUserAsync(Cerberos.UserId);
             return OperationResult<Provider>.Ok(provider);
         }
     }

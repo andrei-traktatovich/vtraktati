@@ -33,6 +33,8 @@ namespace VTraktate.Core.Repository.Interfaces
 
         Task DeleteAsync(int id);
 
-        Task SaveAsUserAsync(int userId);
+        void DeleteItem(T item);
+
+        Task<int> SaveAsUserAsync(int userId);
     }    
 }

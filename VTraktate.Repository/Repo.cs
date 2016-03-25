@@ -84,7 +84,7 @@ namespace VTraktate.Repository
             DeleteItem(item);
         }
 
-        protected void DeleteItem(T item)
+        public void DeleteItem(T item)
         {
             Context.Set<T>().Remove(item);
         }
@@ -96,9 +96,9 @@ namespace VTraktate.Repository
             return item;
         }
 
-        public async Task SaveAsUserAsync(int userId)
+        public async Task<int> SaveAsUserAsync(int userId)
         {
-            await Context.SaveChangesAsync(userId);
+            return await Context.SaveChangesAsync(userId);
         }
 
 

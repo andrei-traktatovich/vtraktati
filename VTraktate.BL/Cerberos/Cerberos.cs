@@ -11,15 +11,13 @@ namespace VTraktate.BL.Cerberos
     public class Cerberos : ICerberos
     {
         public ITraktatContext Context { get; private set; }
-        public int UserId { get; private set; }
+        private Func<int> _userIdFunc;
+        public int UserId => _userIdFunc();
 
-        public Cerberos(ITraktatContext context, int userId)
+        public Cerberos(ITraktatContext context, Func<int> userIdFunc)
         {
             Context = context;
-            if(userId == 0)
-                throw new ArgumentException("userId");
-
-            UserId = userId;
+            _userIdFunc = userIdFunc;
         }
 
         private AspNetUser _user;

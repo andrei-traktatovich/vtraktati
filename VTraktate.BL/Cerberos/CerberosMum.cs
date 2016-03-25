@@ -9,9 +9,9 @@ namespace VTraktate.BL.Cerberos
 {
     public class CerberosMum : ICerberosMum
     {
-        public ICerberos MakeCerberos(ITraktatContext context, int userId)
+        public ICerberos MakeCerberos(ITraktatContext context, Func<int> userIdFunc)
         {
-            return new Cerberos(context, userId);
+            return new Cerberos(context, userIdFunc);
         }
     }
 }

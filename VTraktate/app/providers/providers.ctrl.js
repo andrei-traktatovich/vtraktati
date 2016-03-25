@@ -12,9 +12,9 @@
     $scope.deleteItem = function(item) {
         // TODO: make it good.
         console.log("trying to delete", item);
-        Api.delete({ id: item.id })
+        Api.delete({ id: item.id }).$promise 
             .then(() => {
-                console.log("item deleted");
+                setTableParams(); // TODO: report deletion to client
             }, (err) => {
                 console.log("error deleting item");
                 console.log(err);
