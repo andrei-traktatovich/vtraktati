@@ -488,6 +488,10 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\VTraktate.Core\VTraktate.Core.csproj">
+      <Project>{501136e5-5b5d-435f-930b-8ac0acefa8a1}</Project>
+      <Name>VTraktate.Core</Name>
+    </ProjectReference>
     <ProjectReference Include="..\VTraktate.Domain\VTraktate.Domain.csproj">
       <Project>{cebdfb8c-be5d-4f8e-84d8-06bfd32c33eb}</Project>
       <Name>VTraktate.Domain</Name>

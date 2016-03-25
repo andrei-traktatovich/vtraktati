@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using System.Web.Http;
 using VTraktate.Repository.SnapshotProviders;
 using System.Data.Entity;
+using System.Web.Http.Controllers;
 using VTraktate.Core.Interfaces.Filtering;
 using VTraktate.Domain.Snapshots;
 using VTraktate.Models;
@@ -18,34 +19,38 @@ using VTraktate.Domain.ComplexTypes;
 using Microsoft.AspNet.Identity;
 using AutoMapper;
 using VTraktate.Core.Interfaces;
+using VTraktate.Core.Interfaces.BusinessLogic.Providers;
+using VTraktate.DataAccess;
 
 namespace VTraktate.Controllers
 {
     [Authorize]
-    public class ProviderController : ApiController
+    public class ProviderController : AuthenticatedControllerBase
     {
         private IQueryFilterService<ExtendedProviderSnapshot> _queryFilterService;
         private ISnapshotProvider<ExtendedProviderSnapshot> _extendedSnapshotProvider;
         private IRepo<Provider> _providerRepo;
         private Validator _validator;
-        protected int UserId
-        {
-            get { return User.Identity.GetUserId<int>(); }
-        }
+        
 
         protected ICalendarService<Freelance> FreelanceCalendarService { get; private set; }
         protected ICalendarService<Employment> EmploymentCalendarService { get; private set; }
         protected ICalendarService<FreelanceCalendarPeriod> AvailabilityCalendarService { get; private set; }
 
+        protected IProviderManager ProviderManager { get; private set; }
+
         public ProviderController(ISnapshotProvider<ExtendedProviderSnapshot> extendedSnapshotProvider, 
             IQueryFilterService<ExtendedProviderSnapshot> queryFilterService, 
             Validator validator,
             IRepo<Provider> providerRepo,
+            IProviderManagerFactory providerManagerFactory,
             ICalendarService<Freelance> calendarService,
             ICalendarService<Employment> employmentCalendarService,
-            ICalendarService<FreelanceCalendarPeriod> availabilityCalendarService
-            )
+            ICalendarService<FreelanceCalendarPeriod> availabilityCalendarService, 
+            TraktatContext context, ICerberosMum cerberosMum
+            ) : base(context, cerberosMum)
         {
+            ProviderManager = providerManagerFactory.Create(Cerberos, providerRepo);
             _extendedSnapshotProvider = extendedSnapshotProvider;
             _queryFilterService = queryFilterService;
             _validator = validator;
@@ -149,9 +154,17 @@ namespace VTraktate.Controllers
                 return InternalServerError(ex);
             }
         }
+
+        protected override void Initialize(HttpControllerContext controllerContext)
+        {
+            base.Initialize(controllerContext);
+            var userId = User.Identity.GetUserId<int>();
+            userId.ToString();
+        }
+
         public async Task<IHttpActionResult> Get([FromUri] ProviderFilterBindingModel search)
         {
-
+            var userId = User.Identity.GetUserId<int>();
             var query = _extendedSnapshotProvider.Get();
             
             try
@@ -431,6 +444,22 @@ namespace VTraktate.Controllers
                 AvailabilityStatuses = Mapper.Map<IEnumerable<FreelanceCalendarPeriodViewModel>>(freelanceCalendarPeriods)
             };
             return Ok(result);
+        }
+
+        [HttpDelete]
+        [Route("api/provider/{providerId}")]
+        public async Task<IHttpActionResult> Delete(int providerId)
+        {
+            try
+            {
+                var result = await ProviderManager.FindAndDeleteAsync(providerId);
+                return FromOperationResult(result);
+            }
+            catch (Exception ex)
+            {
+                Log(ex);
+                return InternalServerError();
+            }
         }
 
         [HttpPost]

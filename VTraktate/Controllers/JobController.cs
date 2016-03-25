@@ -5,9 +5,11 @@ using System.Net;
 using System.Net.Http;
 using System.Threading.Tasks;
 using System.Web.Http;
+using VTraktate.Core.Interfaces;
 using VTraktate.Core.Interfaces.BusinessLogic.Orders;
 using VTraktate.Core.Interfaces.BusinessLogic.Orders.JobParts;
 using VTraktate.Core.Interfaces.Filtering;
+using VTraktate.DataAccess;
 using VTraktate.Domain;
 using VTraktate.Models.Order;
 using VTraktate.Models.Order.JobPart;
@@ -17,7 +19,11 @@ namespace VTraktate.Controllers
 {
     public class JobController : AuthenticatedControllerBase
     {
-        public JobController(IJobManager jobManager, IQueryFilterService<Job> jobFilterService, IJobPartManager jobPartManager)
+        public JobController(IJobManager jobManager, 
+            IQueryFilterService<Job> jobFilterService, 
+            IJobPartManager jobPartManager,
+            TraktatContext context, 
+            ICerberosMum cerberosMum) : base(context, cerberosMum)
         {
             this._jobManager = jobManager;
             this._filterService = jobFilterService;

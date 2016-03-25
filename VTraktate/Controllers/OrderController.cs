@@ -14,13 +14,16 @@ using VTraktate.Models.Order.ManagerOrderGrid;
 using VTraktate.Domain.Snapshots;
 using AutoMapper;
 using AutoMapper.QueryableExtensions;
+using VTraktate.Core.Interfaces;
+using VTraktate.DataAccess;
 
 
 namespace VTraktate.Controllers
 {
     public class OrderController : AuthenticatedControllerBase
     {
-        public OrderController(IOrderManager orderManager)
+        public OrderController(IOrderManager orderManager, TraktatContext context, ICerberosMum cerberosMum)
+            : base(context, cerberosMum)
         {
             this._orderManager = orderManager;
         }

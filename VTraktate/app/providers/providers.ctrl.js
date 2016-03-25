@@ -1,13 +1,25 @@
 ﻿angular.module('app')
 .controller('providersCtrl', function ($q, $scope, $timeout, $resource, $http, ngTableParams, $state, $modal,
     GlobalsService, LocalStorageService, EmploymentService, FreelanceService, ProviderTypeService, AvailabilityService, ActionAuthorizationService) {
-    var Api = $resource('/api/provider');
+    var Api = $resource('/api/provider/:id', { id: '@id' });
 
     $scope.filtersVisible = true;
 
     $scope.toggleAdditionalFilter = function () {
         $scope.showAdditionalFilter = !$scope.showAdditionalFilter;
     };
+
+    $scope.deleteItem = function(item) {
+        // TODO: make it good.
+        console.log("trying to delete", item);
+        Api.delete({ id: item.id })
+            .then(() => {
+                console.log("item deleted");
+            }, (err) => {
+                console.log("error deleting item");
+                console.log(err);
+            });
+    }
 
     $scope.showAdditionalFilter = false;
 

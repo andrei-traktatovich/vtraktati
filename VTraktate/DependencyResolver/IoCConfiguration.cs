@@ -15,12 +15,15 @@ using VTraktate.Domain.Snapshots;
 using VTraktate.Validation;
 using VTraktate.Controllers;
 using VTraktate.BL;
+using VTraktate.BL.Cerberos;
 using VTraktate.Core.Interfaces.BusinessLogic.Customers;
 using VTraktate.Core.Interfaces.BusinessLogic.Orders;
 using VTraktate.BL.Orders;
 using VTraktate.BL.Customers;
+using VTraktate.BL.Providers;
 using VTraktate.Core.Interfaces.BusinessLogic.Orders.JobParts;
 using VTraktate.Core.Interfaces.BusinessLogic.Orders.Netting;
+using VTraktate.Core.Interfaces.BusinessLogic.Providers;
 
 namespace VTraktate.DependencyResolver
 {
@@ -74,7 +77,13 @@ namespace VTraktate.DependencyResolver
             container.RegisterInstance<ICalendarService<Freelance>>(new FreelanceCalendarService());
             container.RegisterInstance<ICalendarService<Employment>>(new EmploymentCalendarService());
             container.RegisterInstance<ICalendarService<FreelanceCalendarPeriod>>(new AvailabilityCalendarService());
-            
+
+            container.RegisterType<ICerberosMum, CerberosMum>();
+
+            container.RegisterType<ITraktatContext, TraktatContext>();
+
+            container.RegisterType<IProviderManagerFactory, ProviderManagerFactory>();
+
         }
     }
 }

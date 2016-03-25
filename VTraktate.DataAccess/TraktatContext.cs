@@ -1,19 +1,19 @@
+using System.Linq.Expressions;
+
 namespace VTraktate.DataAccess
 {
     using System;
     using System.Data.Entity;
-    using System.ComponentModel.DataAnnotations.Schema;
     using System.Linq;
     using VTraktate.DataAccess.Mappings;
-    using VTraktate.Domain.ComplexTypes;
     using VTraktate.Domain;
     using VTraktate.Domain.Interfaces;
     using System.Data.Entity.Infrastructure;
     using System.Collections.Generic;
     using System.Threading.Tasks;
-    using System.Data.Entity.Validation;
+    using VTraktate.Core.Interfaces;
 
-    public partial class TraktatContext : DbContext
+    public partial class TraktatContext : DbContext, ITraktatContext
     {
         public TraktatContext()
             : base("name=TraktatContext")
@@ -88,6 +88,20 @@ namespace VTraktate.DataAccess
             return this.Set<T>().Where(x => !x.IsDeleted);
         }
 
+        public IQueryable<T> Get<T>(Expression<Func<T, bool>> predicate)
+            where T : class, IEntity 
+        {
+            return Set<T>().Where(predicate);
+        }
+
+        public async Task<AspNetUser> GetUserGraphAsync(int userId)
+        {
+            return await AspNetUsers
+                .Where(x => x.Id == userId)
+                .Include(x => x.AspNetRoles)
+                .FirstOrDefaultAsync();
+        }
+
         private async Task<int> GetPersonIdAsync(int aspNetUserId)
         {
             var result = await AspNetUsers
@@ -101,39 +115,14 @@ namespace VTraktate.DataAccess
         public async Task<int> SaveChangesAsync(int aspNetUserId)
         {
             var personId = await GetPersonIdAsync(aspNetUserId);
+
+            var entries = ChangeTracker.Entries();
+
+            entries.TimeStamp(personId).SoftDelete();
             
-            var entries = ChangeTracker.Entries().Where(e => e.State != EntityState.Unchanged);
-            
-            foreach (var entry in entries)
-            {
-                var timeStamped = entry.Entity as ITimeStamped;
-
-                if (timeStamped != null)
-                {
-                    if (entry.State == EntityState.Added)
-                    {
-                        timeStamped.CreatedById = personId;
-                        timeStamped.CreatedDate = DateTime.Now;
-                    }
-
-                    timeStamped.ModifiedById = personId;
-                    timeStamped.ModifiedDate = DateTime.Now;
-                }
-            }
-
-            foreach(var entry in entries.Where(x => x.State == EntityState.Deleted))
-            {
-                var deleted = entry.Entity as ISoftDelete;
-                if (deleted != null)
-                {
-                    entry.State = EntityState.Modified;
-                    deleted.IsDeleted = true;
-                }
-            }
-
             return await SaveChangesAsync();
         }
-
+        
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             modelBuilder.Entity<AspNetRole>()
@@ -155,6 +144,70 @@ namespace VTraktate.DataAccess
             modelBuilder.Configurations.Add(new PersonMap());
             modelBuilder.Configurations.Add(new JobPartMapping());
             modelBuilder.Configurations.Add(new JobMapping());
+        }
+
+        public async Task<T> GetByIdAsync<T>(int id) 
+            where T : class, IEntity
+        {
+            return await Set<T>().FindAsync(id);
+        }
+    }
+    
+    public static class DbEntryExtensions
+    {
+        public static IEnumerable<DbEntityEntry> TimeStamp(this IEnumerable<DbEntityEntry> entries, int personId, DateTime? dateTime = null)
+        {
+            var unchangedEntries = entries.Where(e => e.State != EntityState.Unchanged);
+
+            var now = dateTime ?? DateTime.Now;
+
+            foreach (var entry in unchangedEntries)
+            {
+                entry.TimeStamp(personId, now);
+            }
+
+            return entries;
+        }
+
+        public static bool TimeStamp(this DbEntityEntry @this, int personId, DateTime now)
+        {
+            var timeStamped = @this.Entity as ITimeStamped;
+            if (timeStamped == null)
+                return false;
+
+            if (@this.State == EntityState.Added)
+            {
+                timeStamped.CreatedById = personId;
+                timeStamped.CreatedDate = now;
+            }
+
+            timeStamped.ModifiedById = personId;
+            timeStamped.ModifiedDate = now;
+
+            return true;
+        }
+
+        public static IEnumerable<DbEntityEntry> SoftDelete(this IEnumerable<DbEntityEntry> entries)
+        {
+            var deletedEntries = entries.Where(x => x.State == EntityState.Deleted);
+
+            foreach (var entry in deletedEntries)
+            {
+                SoftDelete(entry);
+            }
+
+            return entries;
+        }
+
+        public static bool SoftDelete(DbEntityEntry entry)
+        {
+            var deletedEntry = entry.Entity as ISoftDelete;
+            if (deletedEntry == null)
+                return false;
+
+            entry.State = EntityState.Modified;
+            deletedEntry.IsDeleted = true;
+            return true;
         }
     }
 }

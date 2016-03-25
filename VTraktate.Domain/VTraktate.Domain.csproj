@@ -60,6 +60,7 @@
     <Compile Include="Extensions\IVolumeAndPricingExtension.cs" />
     <Compile Include="Grade.cs" />
     <Compile Include="IEntity.cs" />
+    <Compile Include="EntityUtils.cs" />
     <Compile Include="Interfaces\ICompletableCalendarPeriod.cs" />
     <Compile Include="Interfaces\IEnumerated.cs" />
     <Compile Include="Interfaces\IVolumeAndPricing.cs" />
@@ -127,6 +128,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+    <Compile Include="AspNetRole.Constants.cs" />
     <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
