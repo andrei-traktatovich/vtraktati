@@ -1,4 +1,5 @@
-﻿<div class="panel panel-info" style="height: 100%; margin: 0;">
+﻿
+<div style="height: 100%; margin: 0;" ng-if="model"> <!-- class="panel panel-info"  -->
 
     <div class="panel-heading">
         <div class="panel-title">
@@ -9,73 +10,76 @@
 
     <div class="panel-body" style="max-height: 85%; overflow-y: auto;">
         <!-- this will be abstracted into a self-contained directive to manage provider's groups -->
-
-        <div ng-show="item.groups.length">
-            <h4>Группы:</h4>
-            <ul class="list-unstyled list-inline">
-                <li ng-repeat="group in item.groups">
-                    {{ group.name }}
-                </li>
-            </ul>
-        </div>
-
-        <tabset>
-            <tab heading="Контактные данные ({{ contactsCount() }})">
-
-              
-                {{ model.general | json }}
-                <trk-provider-address model="model.general"></trk-provider-address>
-                
-                <ul class="list-group">
-                    <li class="list-group-item" ng-repeat="item in model.contactPersons">
-                        <div class="list-group-item-heading">
-                            {{ item.fullName }}
-                        </div>
-                        <div class="list-group-item-text">
-                            <!-- emailList -->
-                            <h4>Электропочта</h4>
-                            <trk-profile-emails-list items="item.emails" contact-person-id="item.id" readonly="readonly"></trk-profile-emails-list>
-                            <hr />
-
-                            <!-- emailList -->
-                            <h4>Телефоны</h4>
-                            <trk-profile-phones-list items="item.phones" contact-person-id="item.id" readonly="readonly"></trk-profile-phones-list>
-
-                            <hr />
-
-                            <!-- emailList -->
-                            <h4>Другое</h4>
-                            <trk-profile-other-contacts-list items="item.otherContacts" contact-person-id="item.id" readonly="readonly"></trk-profile-other-contacts-list>
-
-                        </div>
+        <div ng-if="model">
+            <div ng-show="item.groups.length">
+                <h4>Группы:</h4>
+                <ul class="list-unstyled list-inline">
+                    <li ng-repeat="group in item.groups">
+                        {{ group.name }}
                     </li>
                 </ul>
+            </div>
 
-            </tab>
+            <tabset>
+                <tab heading="Контактные данные ({{ contactsCount() }})">
 
-            <tab heading="Услуги ({{ servicesCount() }})">
-                <div style="overflow-y: auto">
-                    <trk-services-list items="model.services" parent="model.id" readonly="readonly"></trk-services-list>
-                </div>
-            </tab>
-            <!--
+
+                    {{ model.general | json }}
+                    <trk-provider-address model="model.general"></trk-provider-address>
+
+                    <ul class="list-group">
+                        <li class="list-group-item" ng-repeat="item in model.contactPersons">
+                            <div class="list-group-item-heading">
+                                {{ item.fullName }}
+                            </div>
+                            <div class="list-group-item-text">
+                                <!-- emailList -->
+                                <h4>Электропочта</h4>
+                                <trk-profile-emails-list items="item.emails" contact-person-id="item.id" readonly="readonly"></trk-profile-emails-list>
+                                <hr/>
+
+                                <!-- emailList -->
+                                <h4>Телефоны</h4>
+                                <trk-profile-phones-list items="item.phones" contact-person-id="item.id" readonly="readonly"></trk-profile-phones-list>
+
+                                <hr/>
+
+                                <!-- emailList -->
+                                <h4>Другое</h4>
+                                <trk-profile-other-contacts-list items="item.otherContacts" contact-person-id="item.id" readonly="readonly"></trk-profile-other-contacts-list>
+
+                            </div>
+                        </li>
+                    </ul>
+
+                </tab>
+
+                <tab heading="Услуги ({{ servicesCount() }})">
+                    <div style="overflow-y: auto">
+                        <trk-services-list items="model.services" parent="model.id" readonly="readonly"></trk-services-list>
+                    </div>
+                </tab>
+                <!--
                 <tab heading="Работа в штате" ng-show="model.employments && model.employments.length > 0">
-                    <trk-employments-list items ="model.employments"></trk-employments-list>
+                    <trk-employments-list items="model.employments"></trk-employments-list>
                 </tab>
                 <tab heading="Фриланс" ng-show="model.freelances && model.freelances.length > 0">
                     <trk-freelances-list items="model.freelances"></trk-freelances-list>
 
                 </tab>
-            -->
-            <table>
-                <tab heading="Софт">
-                    <!--<div ng-include="app/providers/profile/softs/profiver-soft-list.tpl.html"></div>-->
-                    <trk-profile-soft-list items="model.soft" provider-id="model.id" readonly="readonly"></trk-profile-soft-list>
+                -->
+                <table>
+                    <tab heading="Софт">
+                        <!--<div ng-include="app/providers/profile/softs/profiver-soft-list.tpl.html"></div>-->
+                        <trk-profile-soft-list items="model.soft" provider-id="model.id" readonly="readonly"></trk-profile-soft-list>
 
-                </tab>
-            </table>
-        </tabset>
-
+                    </tab>
+                </table>
+            </tabset>
+        </div>
+        <div ng-if="!model">
+            <p>Нет никаких данных ...</p>
+        </div>
     </div>
 
 </div>

@@ -11,11 +11,7 @@ namespace VTraktate.BL.ExtensionMethods.ProviderSnapshotExtensions
     {
         public static int? GetCurrentOfficeId(this ProviderSnapshot @this)
         {
-            if (@this.CurrentCalendarPeriod != null)
-                return @this.CurrentCalendarPeriod.OfficeId;
-            if (@this.CurrentEmployment != null)
-                return @this.CurrentEmployment.OfficeID;
-            return null;
+            return @this.CurrentCalendarPeriod?.OfficeId ?? @this.CurrentEmployment?.OfficeID;
         }
     }
 }

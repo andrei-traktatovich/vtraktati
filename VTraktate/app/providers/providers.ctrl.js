@@ -1,5 +1,5 @@
 ﻿angular.module('app')
-.controller('providersCtrl', function ($q, $scope, $timeout, $resource, $http, ngTableParams, $state, $modal,
+.controller('providersCtrl', function ($q, $scope, $timeout, $resource, $http, ngTableParams, $state, $modal,notifyClient, handleHttpError,
     GlobalsService, LocalStorageService, EmploymentService, FreelanceService, ProviderTypeService, AvailabilityService, ActionAuthorizationService) {
     var Api = $resource('/api/provider/:id', { id: '@id' });
 
@@ -10,17 +10,23 @@
     };
 
     $scope.deleteItem = function(item) {
-        // TODO: make it good.
-        console.log("trying to delete", item);
-        Api.delete({ id: item.id }).$promise 
-            .then(() => {
-                setTableParams(); // TODO: report deletion to client
-            }, (err) => {
-                console.log("error deleting item");
-                console.log(err);
-            });
+        if (confirm(`Вы действительно хотите удалить ${item.name}?`)) {
+            Api.delete({ id: item.id }).$promise
+                .then(() => {
+                    notifyClient.success(`Данные о ${item.name} удалены`);
+                    $scope.reloadTable();
+                        if ($scope.selectedItemId === item.id)
+                            $scope.clearSelection();
+                    },
+                handleHttpError(`Ошибка при удалении ${item.name}`));
+        }
     }
 
+    $scope.clearSelection = () => {
+        $scope.select(null);
+        if($state.current.name === "hr.employees.profile") 
+            $state.go($state.current, {id: null}, {reload: true});
+    }
     $scope.showAdditionalFilter = false;
 
     $scope.toggleFilters = function (value) {

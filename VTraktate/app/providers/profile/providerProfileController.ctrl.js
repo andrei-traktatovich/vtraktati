@@ -7,13 +7,15 @@
         var id = $stateParams.id;
 
         $scope.readonly = !ActionAuthorizationService.isHR();
+        if (id)
+            $http.get("/api/provider", { params: { id: id } })
+                .success(function(result) {
 
-        $http.get("/api/provider", { params: { id: id } })
-            .success(function(result) {
-                console.log("profile received", result);
-                $scope.model = result;
-                console.log("scope model is now", $scope.model)
-            });
+                    $scope.model = result;
+
+                });
+        else
+            $scope.model = null;
 
         $scope.contactsCount = function() {
             return $scope.model && $scope.model.contactPersons && $scope.model.contactPersons.length || "нет";

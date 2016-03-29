@@ -1,6 +1,6 @@
 ﻿<div ui-layout="{ flow : 'column' }" style="margin-top: 50px;">
     <div ui-layout-container class="layout-container">
-        <div class="panel panel-info">
+        <div > <!-- class="panel panel-info" -->
             <div class="panel-heading">
                 <div class="row">
                     <div class="col-sm-3">
@@ -268,7 +268,9 @@
                                 </td>
 
                                 <td data-title="'Наименование'" sortable="'name'">
-                                    <a ng-click="deleteItem(item)">
+                                    <a ng-click="deleteItem(item)"
+                                       class="cell-action" 
+                                       tooltip="Удалить исполнителя">
                                         <span class="glyphicon glyphicon-trash"></span>
                                     </a>
 
@@ -356,10 +358,6 @@
 
         <ui-view>
 
-            <div class="alert alert-info">
-                <h3>Подробная информация об исполнителе.</h3>
-                <p>Кликните на фамилию исполнителя, чтобы отобразить подробную информацию о нем.</p>
-            </div>
 
         </ui-view>
 

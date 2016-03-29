@@ -452,8 +452,8 @@ namespace VTraktate.Controllers
         {
             try
             {
-                var result = await ProviderManager.FindAndDeleteAsync(providerId);
-                return FromOperationResult(result);
+                var deletion = await ProviderManager.FindAndDeleteAsync(providerId);
+                return FromOperationResult<Provider, ProviderProfileViewModel>(deletion);
             }
             catch (Exception ex)
             {

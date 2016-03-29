@@ -53,7 +53,7 @@ namespace VTraktate.Repository.SnapshotProviders
                 BusyThrough = x.BusyThrough,
                 PendingJobParts = x.PendingJobParts
             });
-
+            result = result.Where(x => !x.Provider.IsDeleted);
             return result;
         }
 

@@ -18,7 +18,7 @@ namespace VTraktate.Models
             this.Roles = account.AspNetUser.AspNetRoles.Select(x => x.Id).ToArray();
             this.Naming = account.Person.PersonName;
             this.Id = account.Person.Id;
-            this.OfficeId = account.ProviderSnapShot != null ? account.ProviderSnapShot.GetCurrentOfficeId() : null;
+            this.OfficeId = account.ProviderSnapShot?.GetCurrentOfficeId();
         }
         public int[] Roles { get; private set; }
         public IndividualName Naming { get; private set; }

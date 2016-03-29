@@ -36,7 +36,7 @@ namespace VTraktate.Repository.SnapshotProviders
             var currentFreelances = _context.Freelances.ExistingCurrent()
                 .Include(x => x.FreelanceStatus);
 
-            var query = from provider in _context.Providers.Include(x => x.Soft)
+            var query = from provider in _context.Providers.Include(x => x.Soft).Existing()
                         join existingEmployment in existingEmployments on provider.Id equals existingEmployment.ProviderId into innerEmpl
                         from innerExistingEmployment in innerEmpl.DefaultIfEmpty()
                         join existingCalendarPeriod in existingCalendarPeriods on provider.Id equals existingCalendarPeriod.ProviderId into innerCal

@@ -23,7 +23,6 @@ namespace VTraktate.Controllers
         public override Task OnAuthorizationAsync(HttpActionContext actionContext, CancellationToken cancellationToken)
         {
             var x = actionContext.ControllerContext.RequestContext.Principal.Identity.Name;
-            var y = x.Length;
             return base.OnAuthorizationAsync(actionContext, cancellationToken);
             
         }
@@ -47,10 +46,14 @@ namespace VTraktate.Controllers
             _cerberosMum = cerberosMum;
         }
         
-        internal virtual IHttpActionResult FromOperationResult<T>(OperationResult<T> result)
+        internal virtual IHttpActionResult FromOperationResult<T, TResult>(OperationResult<T> result)
         {
             if (result.Success)
-                return Ok(result.Data);
+            {
+                var mapped = AutoMapper.Mapper.Map<T, TResult>(result.Data);
+                return Ok(mapped);
+            }
+                
 
             switch (result.StatusCode)
             {
