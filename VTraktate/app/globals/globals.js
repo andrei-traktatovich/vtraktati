@@ -1,12 +1,12 @@
 ﻿(function () {
-    angular.module('globals', [ 'thirdPartyServices' ])
-    .factory('GlobalsService', globals);
+    angular.module("globals", [ "thirdPartyServices" ])
+    .factory("GlobalsService", globals);
 
     function globals($q, _) {
 
         var globalVariables = null,
             lists = {
-                tripleChoice: [{ title: '-' }, { id: true, title: 'Да' }, { id: false, title: 'Нет' }]
+                tripleChoice: [{ title: "-" }, { id: true, title: "Да" }, { id: false, title: "Нет" }]
             };
 
         return {
@@ -41,19 +41,19 @@
                 globalVariables.tripleChoice = angular.copy(lists.tripleChoice);
             }
             else
-                throw new Error('GlobalsService: попытка присвоить пустое значение globals');
+                throw new Error("GlobalsService: попытка присвоить пустое значение globals");
         }
         function getAndInsertAll(name) {
-            return get(name, { id: -1, title: 'Все' });
+            return get(name, { id: -1, title: "Все" });
         }
 
         // private helper
         function forceArray(source, delimiter) {
-            var DEFAULT_DELIMITER = ',',
+            var DEFAULT_DELIMITER = ",",
                 isArr = angular.isArray(source);
             
             if (!isArr && !angular.String(source))
-                throw 'Type is not supported. Arg should be array or string';
+                throw "Type is not supported. Arg should be array or string";
 
             return isArr ? source : source.split(delimiter || DEFAULT_DELIMITER);
         }
@@ -105,7 +105,7 @@
         }
         
         function getProperty(obj, path) {
-            var arr = path.split('.');
+            var arr = path.split(".");
             if (arr.length === 1)
                 return obj[arr];
             else return traverse(obj, arr);

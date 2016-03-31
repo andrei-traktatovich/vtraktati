@@ -1,6 +1,7 @@
 ﻿<div ui-layout="{ flow : 'column' }" style="margin-top: 50px;">
     <div ui-layout-container class="layout-container">
-        <div > <!-- class="panel panel-info" -->
+        <div>
+            <!-- class="panel panel-info" -->
             <div class="panel-heading">
                 <div class="row">
                     <div class="col-sm-3">
@@ -34,228 +35,33 @@
 
                     <div class="col-sm-9">
                         <div class="btn-group btn-group-sm pull-right">
-                            <btn class="btn btn-sm btn-default" ng-click="reloadTable()" tooltip="Обновить" tooltip-placement="bottom">
+                            <trk-btn-refresh class="btn btn-sm btn-default" ng-click="reloadTable()" tooltip="Обновить" tooltip-placement="bottom">
                                 <i class="glyphicon glyphicon-refresh"></i>
-                            </btn>
-                            <btn class="btn btn-sm btn-default" ng-click="saveFilterSettings()" tooltip="Сохранить эти настройки фильтра" tooltip-placement="bottom">
-                                <i class="glyphicon glyphicon-floppy-save"></i>
-                            </btn>
-                            <btn class="btn btn-sm btn-default" ng-click="loadFilterSettings()" tooltip="Восстановить настройки фильтра" tooltip-placement="bottom">
-                                <i class="glyphicon glyphicon-floppy-open"></i>
-                            </btn>
-                            <btn class="btn btn-sm btn-default" ng-click="clearFilterSettings()" tooltip="Сбросить настройки фильтра" tooltip-placement="bottom">
-                                <i class="glyphicon glyphicon-unchecked"></i>
-                            </btn>
+                            </trk-btn-refresh>
+
                         </div>
                     </div>
                 </div>
 
             </div>
-            <div class="panel-body">
-                <div class="text-small">
-                    <div class="row">
-                        <div class="form-horizontal">
-                            <div class="col-lg-3">
-                                <div class="form-group">
-                                    <div class="input-group">
-                                        <input type="text" id="inputName"
-                                               class="form-control"
-                                               placeholder="Имя (наименование)"
-                                               ng-model="tableParams.filter()['name']"
-                                               ng-change="toggleFilters()"
-                                               aria-describedby="search-addon" />
-                                        <!--<span class="input-group-addon" id="search-addon">
-                                            <i class="glyphicon glyphicon-search"></i>
-                                        </span>-->
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-lg-1">
-                                <!--<button class="btn btn-sm btn-default"
-                                        ng-show="filtersVisible"
-                                        tooltip="Дополнительные фильтры"
-                                        ns-popover
-                                        ns-popover-template='app/providers/providersFilter/providersFilter.tpl.html' ns-placement='bottom'
-                                        ns-popover-hide-on-click="false">
-                                    <i class="glyphicon glyphicon-filter"></i>
-                                </button>-->
 
-                            </div>
-                            <div class="col-lg-4">
-                                <div class="form-group">
-                                    <trk-freelancestatus-picker ng-show="filtersVisible" selection="tableParams.filter()['freelanceStatuses']" id="freelanceStatusFilter"></trk-freelancestatus-picker>
 
-                                </div>
-                            </div>
-                            <div class="col-lg-4">
-                                <div class="form-group">
-
-                                    <trk-availabilitystatus-picker ng-show="filtersVisible" selection="tableParams.filter()['availabilityStatuses']" id="availabilityFilter"></trk-availabilitystatus-picker>
-                                </div>
-                            </div>
-                        </div>
+            <div class="slide-container">
+                <div class="slide">
+                    <div class="slide-header">
+                        <div class="slide-header-title">Фильтр</div>
                     </div>
-
-                    <div class="row">
-                        <div class="form-horizontal">
-                            <div class="col-lg-4">
-                                <div class="form-group">
-                                    <trk-servicetype-picker selection="tableParams.filter()['serviceTypes']"
-                                                            ng-show="filtersVisible"
-                                                            id="serviceTypesFilter"></trk-servicetype-picker>
-                                </div>
-                            </div>
-                            <div class="col-lg-4">
-                                <div class="form-group">
-                                    <trk-language-picker ng-show="filtersVisible && tableParams.filter()['serviceTypes'].length"
-                                                         selection="tableParams.filter()['languages']"
-                                                         id="languagesFilter">
-                                    </trk-language-picker>
-
-                                </div>
-                            </div>
-                            <div class="col-lg-4">
-                                <div class="form-group">
-                                    <trk-domain-picker ng-show="filtersVisible && tableParams.filter()['serviceTypes'].length"
-                                                       selection="tableParams.filter()['domains']"
-                                                       id="domainsFilter">
-                                    </trk-domain-picker>
-
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row">
-
-
-
-                        <div class="panel panel-default" ng-show="filtersVisible">
-                            <div class="panel-heading">
-                                <h4 class="panel-title">
-                                    <a href="" ng-click="toggleAdditionalFilter()">
-                                        Дополнительные параметры
-
-                                        <i ng-show="showAdditionalFilter" class="glyphicon glyphicon-chevron-down pull-right"></i>
-                                        <i ng-hide="showAdditionalFilter" class="glyphicon glyphicon-chevron-up pull-right"></i>
-                                    </a>
-                                </h4>
-
-                            </div>
-                            <div class="panel-body" style="overflow:auto;" ng-show="showAdditionalFilter">
-
-                                <div class="col-lg-6">
-
-                                    <div class="form-group">
-
-                                        <trk-providertype-picker selection="tableParams.filter()['providerTypes']" id="providerTypeFilter"></trk-providertype-picker>
-                                    </div>
-
-                                    <div class="form-group">
-
-                                        <trk-office-picker selection="tableParams.filter()['offices']" id="officeFilter"></trk-office-picker>
-                                    </div>
-
-                                    <div class="form-group">
-
-                                        <trk-employmentstatus-picker selection="tableParams.filter()['emplStatuses']" id="employmentStatusFilter"></trk-employmentstatus-picker>
-                                    </div>
-
-                                    <div class="form-group">
-
-                                        <trk-title-picker selection="tableParams.filter()['titles']" id="employeeTitleFilter"></trk-title-picker>
-                                    </div>
-
-
-                                    <div class="form-group">
-
-                                        <trk-region-picker selection="tableParams.filter()['regions']" id="regionFilter"></trk-region-picker>
-                                    </div>
-
-                                    <div class="form-group">
-
-                                        <trk-providergroup-picker selection="tableParams.filter()['providerGroups']" id="providergroupsFilter"></trk-providergroup-picker>
-                                    </div>
-
-                                    <div class="form-group">
-
-                                        <trk-soft-picker selection="tableParams.filter()['soft']" id="softwareFilter"></trk-soft-picker>
-                                    </div>
-
-
-                                </div>
-
-                                <div class="col-lg-6">
-
-                                    <div class="form-group">
-
-                                        <input type="number" ng-model="tableParams.filter()['minRate']" placeholder="тариф неср." class="form-control" style="width: 200px;" />
-                                    </div>
-                                    <div class="form-group">
-
-                                        <input type="number" ng-model="tableParams.filter()['maxRate']" placeholder="тариф сроч." class="form-control" style="width: 200px;" />
-                                    </div>
-                                    <div class="form-group">
-
-                                        <trk-serviceuom-picker selection="tableParams.filter()['uoms']"></trk-serviceuom-picker>
-                                    </div>
-                                    <div class="form-group">
-
-                                        <trk-currency-picker selection="tableParams.filter()['currencies']"></trk-currency-picker>
-                                    </div>
-
-
-
-                                    <div class="form-group">
-
-                                        <trk-stars-picker selection="tableParams.filter()['stars']" id="starFilter"></trk-stars-picker>
-                                    </div>
-
-                                    <div class="form-group">
-
-
-
-                                        <input type="number" ng-model="tableParams.filter()['minGrade']" placeholder="оценка min" class="form-control" style="width: 200px;" />
-                                    </div>
-                                    <div class="form-group">
-                                        <input type="number" ng-model="tableParams.filter()['maxGrade']" placeholder="оценка max" class="form-control" style="width: 200px;" />
-                                    </div>
-
-
-
-
-                                </div>
-                                <hr />
-
-                                <div class="form-group">
-                                    <label>Носитель</label>
-                                    <select ng-model="tableParams.filter()['native']" placeholder="Носитель" ng-options="item.id as item.title for item in lists.tripleChoice"></select>
-                                </div>
-                                <div class="form-group">
-                                    <label>Орг.правовая форма</label>
-                                    <trk-legal-form-picker selection="tableParams.filter()['legalForms']" id="legalFormFilter"></trk-legal-form-picker>
-                                </div>
-                                <div class="form-group">
-                                    <input type="checkbox" ng-model="tableParams.filter()['worksNightly']"/>
-                                    <label>Только работающие ночью</label>
-                                </div>
-                            </div>
-
-
-
-                        </div>
-
-
+                    <div class="slide-content">
+                        <trk-providers-filter filters="tableParams.$params.filter"></trk-providers-filter>
                     </div>
                 </div>
-                <p ng-hide="filtersVisible">Поиск по имени (наименованию)</p>
-                <div>
-
+                <div class="slide-container-main">
                     <table ng-table="tableParams" class="table noselect table-condensed ng-table-responsive text-small">
                         <tbody>
                             <tr ng-repeat="item in $data" ng-class="{ 'item-deleted' : item.isDeleted, 'provider-busy' : item.isBusy, 'provider-unavailable' : item.isUnavailable }"
                                 ng-click="select(item.id)">
 
-                                <td data-title="' '" ng-class=" { 'selected-table-row' : item.id === selectedItemId }" sortable="'promotion'">
+                                <td data-title="' '" ng-class="{ 'selected-table-row' : item.id ===selectedItemId }" sortable="'promotion'">
                                     <span ng-if="item.isPromoted" class="glyphicon glyphicon-arrow-up text-success"></span>
                                 </td>
 
@@ -269,7 +75,7 @@
 
                                 <td data-title="'Наименование'" sortable="'name'">
                                     <a ng-click="deleteItem(item)"
-                                       class="cell-action" 
+                                       class="cell-action"
                                        tooltip="Удалить исполнителя">
                                         <span class="glyphicon glyphicon-trash"></span>
                                     </a>
@@ -348,8 +154,9 @@
                         </tbody>
                     </table>
                 </div>
-
             </div>
+
+
         </div>
     </div>
 

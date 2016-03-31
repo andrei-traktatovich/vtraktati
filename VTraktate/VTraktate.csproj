@@ -249,6 +249,8 @@
     <Content Include="app\common\directives\traktat.ui\trkTimeDiff\trkTimeDiff.ctrl.js" />
     <Content Include="app\common\directives\traktat.ui\trkTimeDiff\trkTimeDiff.dir.js" />
     <Content Include="app\common\directives\traktat.ui\trkTimeDiff\trkTimeDiff.tpl.html" />
+    <Content Include="app\common\directives\traktat.ui\trkTripleChoice\trkTripleChoicePicker.dir.js" />
+    <Content Include="app\common\directives\traktat.ui\trkTripleChoice\trkTripleChoicePicker.tpl.html" />
     <Content Include="app\common\filters.spec.js\addHoursToLocalTime.spec.js" />
     <Content Include="app\common\filters.spec.js\addPlus.spec.js" />
     <Content Include="app\common\filters\addHoursToLocalTime.filter.js" />
@@ -634,7 +636,12 @@
     <Content Include="app\providers\profile\trkProviderAddress.tpl.html" />
     <Content Include="app\providers\providers.ctrl.js" />
     <Content Include="app\providers\providers.js" />
+    <Content Include="app\providers\providers.svc.js" />
     <Content Include="app\providers\providers.view.html" />
+    <Content Include="app\providers\providersFilterCache.svc.js" />
+    <Content Include="app\providers\providersFilter\providersFilter.ctrl.js" />
+    <Content Include="app\providers\providersFilter\trkProvidersFilter.dir.js" />
+    <Content Include="app\providers\providersFilter\providersFilter.tpl.html" />
     <Content Include="app\providers\services\CalendarDefaultOptions\calendarDefaultOptions.js" />
     <Content Include="app\providers\services\languages\domains\domainsList\trkProviderServiceLanguageDomains.js" />
     <Content Include="app\providers\services\languages\domains\domainsList\trkProviderServiceLanguageDomains.tpl.html" />
@@ -673,6 +680,7 @@
     <Content Include="Content\jasmine\jasmine_favicon.png" />
     <Content Include="Content\navbar\navbar-fixed-top.css" />
     <Content Include="Content\navbar\navbar-multilevel.css" />
+    <Content Include="Content\sideslide.css" />
     <Content Include="Content\stacked-tabs.css" />
     <Content Include="Content\themes\base\accordion.css" />
     <Content Include="Content\themes\base\all.css" />

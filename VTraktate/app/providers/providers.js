@@ -1,5 +1,5 @@
 ﻿(function () {
 
-    angular.module('providers', ['providers.profile']);
+    angular.module("providers", ["providers.profile"]);
 
 })();
