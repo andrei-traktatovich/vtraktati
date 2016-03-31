@@ -5,8 +5,8 @@
             // filter is stored in $scope.filters 
             // implicit: $scope.applyFilter() -- func to call when search button clicked 
 
-            $scope.showAdditionalFilter = false;
-            $scope.filtersVisible = false;
+            $scope.showAdditionalFilter = true;
+            $scope.filtersVisible = true;
 
             $scope.toggleAdditionalFilter = toggleAdditionalFilter;
             $scope.toggleFilters = toggleFilters;

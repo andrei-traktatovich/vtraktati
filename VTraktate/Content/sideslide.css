@@ -1,11 +1,9 @@
 ﻿.slide-container {
     width: 400px;
     height: 600px;
-    position: relative;
 }
 
 .slide-header {
-    position: absolute;
     width: 20px;
 }
 
@@ -25,15 +23,6 @@
     -o-transform: rotate(-90deg);
     /* Internet Explorer */
     filter: progid: DXImageTransform.Microsoft.BasicImage(rotation=3);
-    /* Safari */
-    -webkit-transform: rotate(-90deg);
-    /* Firefox */
-    -moz-transform: rotate(-90deg);
-    /* IE */
-    -ms-transform: rotate(-90deg);
-    /* Opera */
-    -o-transform: rotate(-90deg);
-    /* Internet Explorer */
 }
 
 .slide-container-main {
@@ -43,7 +32,7 @@
 }
 
 .slide {
-    position: fixed;
+    position: absolute;
     background-color: silver;
     float: left;
     top: 0;
@@ -60,12 +49,12 @@
     }
 
 .slide-content {
-    position: relative;
     margin-left: 20px;
     padding: 5px;
     height: 100%;
     visibility: hidden;
     background-color: #eee;
+    overflow: scroll;
 }
 
 .slide:hover .slide-content {
