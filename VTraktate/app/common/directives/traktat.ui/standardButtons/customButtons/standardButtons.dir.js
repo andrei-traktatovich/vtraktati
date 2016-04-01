@@ -1,11 +1,14 @@
 ﻿(() => {
+    "use strict";
 
     var buttons = [
         { name: "cancel", glyph: "erase" },
         { name: "edit", glyph: "pencil" },
         { name: "save", glyph: "floppy-save" },
         { name: "inc", glyph: "plus" },
-        { name: "dec", glyph: "minus" }
+        { name: "dec", glyph: "minus" },
+        { name: "load", glyph: "floppy-open" },
+        { name: "reset", glyph: "unchecked" }
     ];
 
     buttons.forEach(makeDirective);
@@ -13,7 +16,7 @@
     function makeDirective(item) {
         var glyphName = item.glyph || item.name;
         var directiveName = `trkBtn${toProper(item.name)}`;
-        console.log("creating directive", directiveName);
+        
         var directive = () => {
             return {
                 replace: true,
