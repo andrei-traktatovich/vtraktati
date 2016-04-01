@@ -5,6 +5,7 @@
         <div class="panel-title">
             <span class="glyphicon glyphicon-user"></span>
             {{ model.name }}
+            <!-- TODO: Add 1st (default) contact person here -->
             <trk-btn-edit ng-hide="readonly" tooltip="Переименовать" ng-click="renameProvider(model)"></trk-btn-edit>
         </div>
     </div>
@@ -24,14 +25,13 @@
             <tabset>
                 <tab heading="Контактные данные ({{ contactsCount() }})">
 
-
-                    {{ model.general | json }}
                     <trk-provider-address model="model.general"></trk-provider-address>
 
                     <ul class="list-group">
                         <li class="list-group-item" ng-repeat="item in model.contactPersons">
                             <div class="list-group-item-heading">
-                                {{ item.fullName }}
+                                {{ item.fullName }} <span ng-show="item.personName.alternateName">(aka ) {{ item.personName.alternateName }}</span>
+                                <trk-btn-edit ng-hide="readonly" ng-click="renameContactPerson(item)"></trk-btn-edit>
                             </div>
                             <div class="list-group-item-text">
                                 <!-- emailList -->

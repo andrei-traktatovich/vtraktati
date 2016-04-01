@@ -312,9 +312,9 @@ namespace VTraktate.Controllers
                     FullName = model.PersonName.FullName,
                     Initials = model.PersonName.Initials,
                     
-                    LastName = model.PersonName.Name.LastName,
-                    FirstName = model.PersonName.Name.FirstName,
-                    MiddleName = model.PersonName.Name.MiddleName
+                    LastName = model.PersonName.LastName,
+                    FirstName = model.PersonName.FirstName,
+                    MiddleName = model.PersonName.MiddleName
                 },
                 Emails = Mapper.Map<IEnumerable<EmailBindingModel>, ICollection<Email>>(model.Emails),
                 Phones = Mapper.Map<IEnumerable<PhoneBindingModel>, ICollection<Phone>>(model.Telephones),

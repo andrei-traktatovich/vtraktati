@@ -577,6 +577,7 @@
     <Content Include="app\orders\utilities\utilities.mdl.js" />
     <Content Include="app\orders\utilities\volumeManager.js" />
     <Content Include="app\orders\utilities\volumeRoundingRules\volumeRoundingRules.js" />
+    <Content Include="app\providers\contacts\contactPersonName\contactPersons.svc.js" />
     <Content Include="app\providers\profile\profileAddressController.js" />
     <Content Include="app\providers\availability\availabilityCalendar\availabilityCalendar.dlg.tpl.html" />
     <Content Include="app\providers\availability\availabilityCalendar\ProviderAvailabilityCalendar.tpl.html" />
@@ -653,8 +654,8 @@
     <Content Include="app\providers\services\trkProviderServiceList\trkProviderServiceList.tpl.html" />
     <Content Include="app\providers\services\trkProviderService\trkProviderService.tpl.html" />
     <Content Include="app\providers\services\trkProviderService\trkProviderServiceItem.js" />
-    <Content Include="app\providers\setProviderName\dialog.tpl.html" />
-    <Content Include="app\providers\setProviderName\setProviderName.svc.js" />
+    <Content Include="app\providers\contacts\contactPersonName\dialog.tpl.html" />
+    <Content Include="app\providers\contacts\contactPersonName\setContactPersonName.svc.js" />
     <Content Include="app\providers\type\employeeFireDialog.dlg.tpl.html" />
     <Content Include="app\providers\type\ProviderTypeService.js" />
     <Content Include="app\routes.js" />
@@ -1608,6 +1609,7 @@
     <Content Include="Scripts\version.json" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="app\providers\contactPersonName\" />
     <Folder Include="app\providers\profile\services\languages\domains\edit\" />
     <Folder Include="App_Data\" />
   </ItemGroup>

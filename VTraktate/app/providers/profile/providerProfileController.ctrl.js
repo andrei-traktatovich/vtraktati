@@ -2,7 +2,7 @@
     angular.module("providers.profile")
         .controller("providerProfileController", providerProfileController);
 
-    function providerProfileController($scope, $state, $stateParams, $http, notifyClient, ActionAuthorizationService, setProviderName) {
+    function providerProfileController($scope, $state, $stateParams, $http, notifyClient, ActionAuthorizationService, setContactPersonName) {
         
         var id = $stateParams.id;
 
@@ -16,7 +16,7 @@
                 });
         else
             $scope.model = null;
-
+            
         $scope.contactsCount = function() {
             return $scope.model && $scope.model.contactPersons && $scope.model.contactPersons.length || "нет";
         }
@@ -24,11 +24,10 @@
             return $scope.model && $scope.model.services && $scope.model.services.length || "нет";
         }
 
-        $scope.renameProvider = renameProvider;
+        $scope.renameContactPerson = renameContactPerson;
 
-        function renameProvider(provider) {
-            setProviderName(provider).then($state.current.reload, notifyClient.error);
+        function renameContactPerson(person) {
+            setContactPersonName(person.id, person.personName).then($state.current.reload, notifyClient.error);
         }
     }
-
 })();

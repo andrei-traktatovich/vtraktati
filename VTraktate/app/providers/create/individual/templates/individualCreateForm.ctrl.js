@@ -42,7 +42,7 @@
         return {
             type: { id: type.id, name: type.title },
             personName: {
-                name: { firstName : "", middleName : "", lastName : "" }
+                firstName : "", middleName : "", lastName : "" 
             },
             details: {
                 regionId: 2,            // Russia,

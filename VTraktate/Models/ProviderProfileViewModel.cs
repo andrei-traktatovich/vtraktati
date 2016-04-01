@@ -11,13 +11,6 @@ namespace VTraktate.Models
     public class ProviderProfileViewModel
     {
 
-        //public ProviderProfileViewModel()
-        //{
-        //    This is redundant ... 
-        //    ContactPersons = new List<ContactPersonViewModel>();
-        //    Services = new List<ServiceViewModel>();
-        //}
-
         public int Id { get; set; }
         public string Name { get; set; }
 

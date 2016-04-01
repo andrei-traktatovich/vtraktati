@@ -32,18 +32,13 @@ namespace VTraktate.Models
 
     public class PersonExtendedNameBindingModel
     {
-        public PersonNameBindingModel Name { get; set; }
+        public string FirstName { get; set; }
+        public string MiddleName { get; set; }
+        public string LastName { get; set; }
         public string FullName { get; set; }
         public string Address { get; set; }
         public string Initials { get; set; }
         public string AlternateName { get; set; }
-    }
-
-    public class PersonNameBindingModel
-    {
-        public string FirstName { get; set; }
-        public string MiddleName { get; set; }
-        public string LastName { get; set; }
     }
 
     public class IndividualDetailsBindingModel

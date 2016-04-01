@@ -5,17 +5,17 @@
                 <div style="padding: 10px;">
                     <div class="form-group">
                         <label for="lastName">Фамилия</label>
-                        <input type="text" name="inputLastName" id="lastName" class="form-control" ng-blur="fixCase()" ng-model="model.name.lastName" required/>
+                        <input type="text" name="inputLastName" id="lastName" class="form-control" ng-blur="fixCase()" ng-model="model.lastName" required/>
                         <trk-error-summary for="personNameForm.inputLastName"></trk-error-summary>
                     </div>
                     <div class="form-group">
                         <label for="firstName">Имя</label>
-                        <input type="text" name="inputFirstName"id="firstName" class="form-control" ng-model="model.name.firstName" ng-blur="fixCase()" required/>
+                        <input type="text" name="inputFirstName"id="firstName" class="form-control" ng-model="model.firstName" ng-blur="fixCase()" required/>
                         <trk-error-summary for="personNameForm.inputFirstName"></trk-error-summary>
                     </div>
                     <div class="form-group">
                         <label for="middleName">Отчество</label>
-                        <input type="text" id="middletName" class="form-control" ng-blur="fixCase()" ng-model="model.name.middleName" />
+                        <input type="text" id="middletName" class="form-control" ng-blur="fixCase()" ng-model="model.middleName" />
                     </div>
                 </div>
             </div>

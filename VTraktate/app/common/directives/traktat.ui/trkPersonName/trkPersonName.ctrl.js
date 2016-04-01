@@ -15,33 +15,31 @@ angular.module("traktat.ui")
 
     $scope.service = PersonNamePreview;
 
-    $scope.model = $scope.model || {
-        name: {
+        $scope.model = $scope.model || {
             firstName: "",
             middleName: "",
-            lastName: ""
-        },
-        fullName: "",
-        address: "",
-        initials: "",
-        alternateName: ""
-    };
+            lastName: "",
 
-    $scope.fixCase = function () {
-
-        $scope.model.name = {
-            firstName: ($scope.model.name.firstName || "").toTitleCase(),
-            middleName: ($scope.model.name.middleName || "").toTitleCase(),
-            lastName: ($scope.model.name.lastName || "").toTitleCase()
+            fullName: "",
+            address: "",
+            initials: "",
+            alternateName: ""
         };
-        $scope.model.alternateName = ($scope.model.alternateName || "").toTitleCase();
-    };
 
-    var updateName = function() {
+        $scope.fixCase = fixCase;
 
-        $scope.model.fullName = makeFullName($scope.model.name);
-        $scope.model.address = makeAddress($scope.model.name);
-        $scope.model.initials = makeInitials($scope.model.name);
+        function fixCase() {
+            $scope.model.firstName = ($scope.model.firstName || "").toTitleCase();
+            $scope.model.middleName = ($scope.model.name.middleName || "").toTitleCase();
+            $scope.model.lastName = ($scope.model.name.lastName || "").toTitleCase();
+            $scope.model.alternateName = ($scope.model.alternateName || "").toTitleCase();
+        };
+
+        var updateName = function() {
+
+        $scope.model.fullName = makeFullName($scope.model);
+        $scope.model.address = makeAddress($scope.model);
+        $scope.model.initials = makeInitials($scope.model);
     };
 
     function makeFullName(name) {
@@ -66,8 +64,8 @@ angular.module("traktat.ui")
         }
     }
 
-    $scope.$watch("model.name.lastName", updateName);
-    $scope.$watch("model.name.middleName", updateName);
-    $scope.$watch("model.name.firstName", updateName);
+    $scope.$watch("model.lastName", updateName);
+    $scope.$watch("model.middleName", updateName);
+    $scope.$watch("model.firstName", updateName);
 
 });
