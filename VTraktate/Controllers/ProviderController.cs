@@ -161,7 +161,7 @@ namespace VTraktate.Controllers
             var userId = User.Identity.GetUserId<int>();
             userId.ToString();
         }
-
+        
         public async Task<IHttpActionResult> Get([FromUri] ProviderFilterBindingModel search)
         {
             var userId = User.Identity.GetUserId<int>();

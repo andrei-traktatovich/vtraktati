@@ -1,0 +1,30 @@
+﻿<div class="modal-header">
+    <h4 class="modal-title">
+        Переименование исполнителя
+    </h4>
+</div>
+<div class="modal-body">
+    <div class="container" ng-form name="setProviderName">
+        <div class="row">
+            <div class="col-sm-12">
+                {{ model | json }}
+                <trk-person-name person-name="model"></trk-person-name>
+
+            </div>
+        </div>
+    </div>
+
+
+</div>
+
+<div class="modal-footer">
+    <trk-form-error text="errorMessage"></trk-form-error>
+    <button class="btn btn-sm btn-success" ng-disabled="!setProviderName.$valid || setProviderName.$pristine" ng-click="ok()">
+        <i class="glyphicon glyphicon-save"></i>
+        Ок
+    </button>
+    <button class="btn btn-sm btn-danger" ng-click="cancel()">
+        <i class="glyphicon glyphicon-remove"></i>
+        Отмена
+    </button>
+</div>

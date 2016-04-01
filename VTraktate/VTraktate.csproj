@@ -653,6 +653,8 @@
     <Content Include="app\providers\services\trkProviderServiceList\trkProviderServiceList.tpl.html" />
     <Content Include="app\providers\services\trkProviderService\trkProviderService.tpl.html" />
     <Content Include="app\providers\services\trkProviderService\trkProviderServiceItem.js" />
+    <Content Include="app\providers\setProviderName\dialog.tpl.html" />
+    <Content Include="app\providers\setProviderName\setProviderName.svc.js" />
     <Content Include="app\providers\type\employeeFireDialog.dlg.tpl.html" />
     <Content Include="app\providers\type\ProviderTypeService.js" />
     <Content Include="app\routes.js" />

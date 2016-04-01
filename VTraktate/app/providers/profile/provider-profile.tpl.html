@@ -5,6 +5,7 @@
         <div class="panel-title">
             <span class="glyphicon glyphicon-user"></span>
             {{ model.name }}
+            <trk-btn-edit ng-hide="readonly" tooltip="Переименовать" ng-click="renameProvider(model)"></trk-btn-edit>
         </div>
     </div>
 

@@ -2,13 +2,8 @@
     angular.module("providers")
         .controller("providersFilterCtrl", ($scope, providersFilterCache) => {
 
-            // filter is stored in $scope.filters 
-            // implicit: $scope.applyFilter() -- func to call when search button clicked 
-
-            $scope.showAdditionalFilter = true;
             $scope.filtersVisible = true;
 
-            $scope.toggleAdditionalFilter = toggleAdditionalFilter;
             $scope.toggleFilters = toggleFilters;
             $scope.save = save;
             $scope.load = load;
@@ -26,12 +21,9 @@
                 $scope.filters = {};
             }
 
-            function toggleFilters(value) {
-                $scope.filtersVisible = !value;
+            function toggleFilters() {
+                $scope.filtersVisible = !$scope.filters.name;
             }
 
-            function toggleAdditionalFilter() {
-                $scope.showAdditionalFilter = !$scope.showAdditionalFilter;
-            };
         });
 })();
