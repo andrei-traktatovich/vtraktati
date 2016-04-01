@@ -4,6 +4,7 @@
 }
 
 .slide-header {
+    position: absolute;
     width: 20px;
 }
 
@@ -32,14 +33,15 @@
 }
 
 .slide {
-    position: absolute;
-    background-color: silver;
+    position: fixed;
+    background-color: #daa520;
     float: left;
     top: 0;
     left: 0;
     width: 20px;
     height: 100%;
     transition: width;
+    padding-top: 50px;
 }
 
     .slide:hover {
@@ -50,10 +52,11 @@
 
 .slide-content {
     margin-left: 20px;
+    background-color: rgba(100%, 100%, 100%, .8);
     padding: 5px;
     height: 100%;
     visibility: hidden;
-    background-color: #eee;
+    
     overflow: scroll;
 }
 
