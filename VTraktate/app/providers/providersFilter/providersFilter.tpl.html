@@ -1,0 +1,94 @@
+﻿
+<div class="form-horizontal text-small">
+
+    <ul class="list-group">
+
+        <li class="list-group-item list-group-item-heading">
+            <trk-btn-save ng-click="save()" tooltip="Сохранить эти настройки фильтра" tooltip-placement="right"></trk-btn-save>
+            <trk-btn-load ng-click="load()" tooltip="Восстановить настройки фильтра" tooltip-placement="right"></trk-btn-load>
+            <trk-btn-reset ng-click="clear()" tooltip="Сбросить настройки фильтра" tooltip-placement="right"></trk-btn-reset>
+        </li>
+        
+        <li class="list-group-item form-group">
+                        <input type="text" id="inputName"
+                               class="form-control"
+                               placeholder="Имя (наименование)"
+                               ng-model="filters.name"
+                               ng-change="toggleFilters()"
+                               aria-describedby="search-addon" />
+        </li>
+
+        <li class="list-group-item form-group" ng-show="filtersVisible">
+            
+            <trk-freelancestatus-picker selection="filters.freelanceStatuses" id="freelanceStatusFilter"></trk-freelancestatus-picker>
+
+            <trk-availabilitystatus-picker ng-show="filtersVisible" selection="filters.availabilityStatuses" id="availabilityFilter"></trk-availabilitystatus-picker>
+        </li>
+
+        <li class="list-group-item form-group" ng-show="filtersVisible">
+            
+                    <trk-servicetype-picker selection="filters.serviceTypes"
+                                            id="serviceTypesFilter"></trk-servicetype-picker>
+
+                    <trk-language-picker ng-show="filters.serviceTypes.length"
+                                         selection="filters.languages"
+                                         id="languagesFilter">
+                    </trk-language-picker>
+
+
+                    <trk-domain-picker ng-show="filters.serviceTypes.length"
+                                       selection="filters.domains"
+                                       id="domainsFilter">
+                    </trk-domain-picker>
+        </li>
+
+        <li class="list-group-item form-group" ng-show="filtersVisible">
+
+                        <trk-providertype-picker selection="filters.providerTypes" id="providerTypeFilter"></trk-providertype-picker>
+            
+
+                        <trk-office-picker selection="filters.offices" id="officeFilter"></trk-office-picker>
+
+
+                        <trk-employmentstatus-picker selection="filters.emplStatuses" id="employmentStatusFilter"></trk-employmentstatus-picker>
+
+
+                        <trk-title-picker selection="filters.titles" id="employeeTitleFilter"></trk-title-picker>
+
+
+
+                        <trk-region-picker selection="filters.regions" id="regionFilter"></trk-region-picker>
+
+
+                        <trk-providergroup-picker selection="filters.providerGroups" id="providergroupsFilter"></trk-providergroup-picker>
+
+
+                        <trk-soft-picker selection="filters.soft" id="softwareFilter"></trk-soft-picker>
+
+                        <input type="number" ng-model="filters.minRate" placeholder="тариф неср." class="form-control" style="width: 200px;" />
+
+                        <input type="number" ng-model="filters.maxRate" placeholder="тариф сроч." class="form-control" style="width: 200px;" />
+
+                        <trk-serviceuom-picker selection="filters.uoms"></trk-serviceuom-picker>
+
+                        <trk-currency-picker selection="filters.currencies"></trk-currency-picker>
+
+                        <trk-stars-picker selection="filters.stars" id="starFilter"></trk-stars-picker>
+
+                        <input type="number" ng-model="filters.minGrade" placeholder="оценка min" class="form-control" style="width: 200px;" />
+                        <input type="number" ng-model="filters.maxGrade" placeholder="оценка max" class="form-control" style="width: 200px;" />
+
+                        <label>Носитель</label>
+                        <trk-triple-choice-picker selection="filters.native" placeholder="Носитель"></trk-triple-choice-picker>
+
+                        <label>Орг.правовая форма</label>
+                        <trk-legal-form-picker selection="filters.legalForms" id="legalFormFilter"></trk-legal-form-picker>
+
+                        <input type="checkbox" ng-model="filters.worksNightly" />
+                        <label>Только работающие ночью</label>
+
+        </li>
+    </ul>
+
+</div>
+
