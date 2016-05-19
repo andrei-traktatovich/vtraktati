@@ -36,5 +36,32 @@ namespace VTraktate.Core.Repository.Interfaces
         void DeleteItem(T item);
 
         Task<int> SaveAsUserAsync(int userId);
+
+        Task<DbResult> TrySaveAsUserAsync(int userId);
     }    
+
+    public class DbResult
+    {
+        public string ErrorMessage => string.Join("; ", ErrorMessages);
+        public IEnumerable<string> ErrorMessages { get; }
+        public bool Success { get; }
+        private DbResult(bool success, IEnumerable<string> errorMessages = null)
+        {
+            if (success && errorMessages == null)
+                throw new InvalidOperationException();
+
+            Success = success;
+            ErrorMessages = errorMessages;
+        }
+
+        public static DbResult Ok()
+        {
+            return new DbResult(true);
+        }
+
+        public static DbResult Error(params string[] errorMessages)
+        {
+            return new DbResult(false, errorMessages);
+        }
+    }
 }

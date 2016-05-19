@@ -15,6 +15,7 @@ using Microsoft.AspNet.Identity;
 using VTraktate.Core.Infrastructure;
 using VTraktate.Core.Interfaces;
 using VTraktate.DataAccess;
+using VTraktate.Extensions;
 
 namespace VTraktate.Controllers
 {
@@ -32,6 +33,8 @@ namespace VTraktate.Controllers
     public class AuthenticatedControllerBase : ApiController
     {
         protected int UserId => User.Identity.GetUserId<int>();
+
+        protected string ModelValidationErrorMessage => ModelState?.GetModelValidationErrorMessage();
 
         private ICerberos _cerberos;
         private ICerberosMum _cerberosMum;

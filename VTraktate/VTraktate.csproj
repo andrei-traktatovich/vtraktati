@@ -329,6 +329,7 @@
     <Compile Include="DependencyResolver\IoCConfiguration.cs" />
     <Compile Include="DependencyResolver\UnityResolver.cs" />
     <Compile Include="ExceptionLoggers\ElmahExceptionLogger.cs" />
+    <Compile Include="Extensions\ModelStateDictionaryExt.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>

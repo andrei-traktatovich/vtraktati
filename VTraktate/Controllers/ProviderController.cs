@@ -24,6 +24,8 @@ using VTraktate.DataAccess;
 
 namespace VTraktate.Controllers
 {
+     
+
     [Authorize]
     public class ProviderController : AuthenticatedControllerBase
     {
@@ -242,95 +244,26 @@ namespace VTraktate.Controllers
             return Ok();
         }
 
+
         [Route("api/provider/individual")]
         public async Task<IHttpActionResult> Post([FromBody] IndividualProviderModel model)
         {
-            // REFACTOR ::: this should be delegated to a separate class ...
-            
-            var userId = User.Identity.GetUserId<int>();
-
-            var now = DateTime.Now;
-            var date = now.Date;
-
-            // TEMPORARY 
-            
-            if (String.IsNullOrEmpty(model.PersonName.FullName.Trim()))
-                return BadRequest("Пустое имя исполнителя");
-            
-            var provider = new Provider { 
-                Name = model.PersonName.FullName, 
-                ProviderTypeId = (ProviderTypes)model.Type.Id,
-                RegionId = model.Details.Regionid,
-                City = model.Details.City,
-                Address = model.Details.Address,
-                LegalFormId = model.Details.LegalFormId,
-                TimeDifference = model.Details.TimeDifference,
-                WorksNightly = model.Details.WorksNightly,
-                Services = Mapper.Map<IEnumerable<ServiceBindingModel>, ICollection<Service>>(model.Services),
-            };
-
-            
-            if (model.Freelance != null)
+            if (ModelState.IsValid)
             {
-                var freelance = new Freelance { FreelanceStatusID = model.Freelance.StatusId, Comment = model.Freelance.Comment, StartDate = DateTime.Today };
-                provider.Freelances = new List<Freelance> { freelance };
+                var provider = Mapper.Map<Provider>(model);
+                _providerRepo.AddOrUpdate(provider);
+
+                var result = await _providerRepo.TrySaveAsUserAsync(UserId);
+
+                if (result.Success)
+                    return Ok();
+                else 
+                    return BadRequest(result.ErrorMessage);
             }
-
-            if (provider.ProviderTypeId == ProviderTypes.Inhouse)
-            {
-                var employment = AutoMapper.Mapper.Map<EmploymentBindingModel, Employment>(model.Employment);
-                if (employment != null)
-                    provider.Employments = new List<Employment> { employment };
-            }
-            // Add Promotion 
-
-            if (model.Promote)
-            {
-                provider.Promotions = new List<Promotion> { 
-                    new Promotion { 
-                        StartDate = date, 
-                        EndDate = date.AddMonths(4),
-                        PromotedById = userId, 
-                        Promotee = provider 
-                    }
-                };
-            }
-
-            var providerAsContactPerson = new Person
-            {
-                BirthDate = model.Details.BirthDay,
-                Comment = model.Details.Comment,
-                CreatedById = userId,
-                CreatedDate = now,
-                ModifiedById = userId,
-                ModifiedDate = now,
-                PersonName = new IndividualName
-                {
-                    AddressName = model.PersonName.Address,
-                    AlternateName = model.PersonName.AlternateName,
-                    
-                    FullName = model.PersonName.FullName,
-                    Initials = model.PersonName.Initials,
-                    
-                    LastName = model.PersonName.LastName,
-                    FirstName = model.PersonName.FirstName,
-                    MiddleName = model.PersonName.MiddleName
-                },
-                Emails = Mapper.Map<IEnumerable<EmailBindingModel>, ICollection<Email>>(model.Emails),
-                Phones = Mapper.Map<IEnumerable<PhoneBindingModel>, ICollection<Phone>>(model.Telephones),
-                OtherContacts = Mapper.Map<IEnumerable<OtherContactsBindingModel>, ICollection<OtherContact>>(model.OtherContacts)
-                // TODO: add other stuff 
-            };
-
-            provider.ContactPersons = new List<Person> { providerAsContactPerson };
-
-            this._providerRepo.AddOrUpdate(provider);
-            await this._providerRepo.SaveAsUserAsync(userId);
-
-            return Ok();
+            else
+                return BadRequest(ModelValidationErrorMessage);
         }
-        
-        
+
         [Route("api/provider/{id}/freelance")]
         public async Task<IHttpActionResult> PostFreelance(int id, [FromBody] FreelanceBindingModel model)
         {

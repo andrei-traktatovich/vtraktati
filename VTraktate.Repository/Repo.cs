@@ -2,13 +2,13 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
-using System.Text;
 using System.Threading.Tasks;
 using VTraktate.Core.Repository.Interfaces;
 using VTraktate.DataAccess;
 using VTraktate.Domain.Interfaces;
 using System.Data.Entity;
-using VTraktate.Domain; 
+using VTraktate.Domain;
+using System.Data.Entity.Validation;
 
 namespace VTraktate.Repository
 {
@@ -101,6 +101,27 @@ namespace VTraktate.Repository
             return await Context.SaveChangesAsync(userId);
         }
 
+        public async Task<DbResult> TrySaveAsUserAsync(int userId)
+        {
+            try
+            {
+                await SaveAsUserAsync(userId);
+                return DbResult.Ok();
+            }
+            catch(DbEntityValidationException ex)
+            {
+                string[] errorMessages = GetValidationErrors(ex).ToArray();
+                return DbResult.Error(errorMessages);
+            }
+        }
+
+        private IEnumerable<string> GetValidationErrors(DbEntityValidationException ex)
+        {
+            return ex
+                .EntityValidationErrors
+                .SelectMany(x => x.ValidationErrors)
+                .Select(x => x.ErrorMessage);
+        }
 
         public abstract IQueryable<T> GetGraphs(Expression<Func<T, bool>> predicate = null);
 

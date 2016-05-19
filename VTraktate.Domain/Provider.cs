@@ -1,4 +1,5 @@
-﻿using System;
+﻿using CodeContracts;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
@@ -67,5 +68,47 @@ namespace VTraktate.Domain
         public int LegalFormId { get; set; }
 
         public bool WorksNightly { get; set; }
+
+        public void Promote(DateTime date, int userId, int? duration = null)
+        {
+            Requires.NotNull(Promotions, nameof(Promotions));
+            Promotions.Add(Promotion.Create(date, userId, duration));
+            
+        }
+
+        private void MakeEmployee()
+        {
+            ProviderTypeId = ProviderTypes.Inhouse;
+        }
+
+        public virtual bool IsEmployee => ProviderTypeId == ProviderTypes.Inhouse;
+        public virtual bool IsOffice => ProviderTypeId == ProviderTypes.Office;
+
+        public void Employ(Employment employment, bool force = false)
+        {
+            Requires.NotNull(employment, nameof(employment));
+            Requires.NotNull(Employments, nameof(Employments));
+
+            if (IsOffice)
+                throw new InvalidOperationException(); // TODO: specify text
+
+            if (!IsEmployee)
+            {
+                if (force)
+                    MakeEmployee();
+                else
+                    throw new InvalidOperationException(); // TODO: specify text
+            }
+                
+            Employments.Add(employment);
+        }
+
+        public void AddFreelance(Freelance freelance)
+        {
+            Requires.NotNull(freelance, nameof(freelance));
+            Requires.NotNull(Freelances, nameof(Freelances));
+
+            Freelances.Add(freelance);
+        }
     }
 }
