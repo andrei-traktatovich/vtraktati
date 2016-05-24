@@ -5,6 +5,7 @@ using System.Linq.Expressions;
 using System.Web;
 using VTraktate.Domain;
 using VTraktate.Domain.Interfaces;
+using VTraktate.Models.Helpers;
 
 namespace VTraktate.Models
 {

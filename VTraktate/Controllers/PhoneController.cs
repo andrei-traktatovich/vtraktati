@@ -11,6 +11,7 @@ using Microsoft.AspNet.Identity;
 using System.Data.Entity;
 using System.Threading.Tasks;
 using AutoMapper;
+using VTraktate.Models.Person;
 
 namespace VTraktate.Controllers
 {

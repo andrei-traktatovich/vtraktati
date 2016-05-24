@@ -358,10 +358,11 @@
       <DependentUpon>201507230905001_addcustomer.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
+    <Compile Include="ModelMappings\Converters\SingleToCollectionConverter.cs" />
+    <Compile Include="ModelMappings\Providers\Creation\IndividualProviders\IndividualProviderModelToProvider.cs" />
     <Compile Include="Models\AccountBindingModels.cs" />
     <Compile Include="Models\AccountFilterBindingModel.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
-    <Compile Include="Models\AddIndividualBindingModel.cs" />
     <Compile Include="Models\CustomerAutoSuggestModel.cs" />
     <Compile Include="Models\CustomerContactPersonBindingModelBase.cs" />
     <Compile Include="Models\CustomerProfileViewModel.cs" />
@@ -374,6 +375,7 @@
     <Compile Include="Models\GradeBindingModel.cs" />
     <Compile Include="Models\GradeFilterModel.cs" />
     <Compile Include="Models\GradeViewModel.cs" />
+    <Compile Include="Models\Helpers\IdNamePairBindingModel.cs" />
     <Compile Include="Models\NamePreviewBindingModel.cs" />
     <Compile Include="Models\Order\JobCreateModel.cs" />
     <Compile Include="Models\Order\JobEditBindingModel.cs" />
@@ -387,6 +389,9 @@
     <Compile Include="Models\Order\OrderGraphViewModel.cs" />
     <Compile Include="Models\Order\VolumeModel.cs" />
     <Compile Include="Models\OtherContactViewModel.cs" />
+    <Compile Include="Models\Person\OtherContactsBindingModel.cs" />
+    <Compile Include="Models\Person\PersonExtendedNameBindingModel.cs" />
+    <Compile Include="Models\Person\PhoneBindingModel.cs" />
     <Compile Include="Models\PhoneViewModel.cs" />
     <Compile Include="Models\ProviderDomainUpdateBindingModel.cs" />
     <Compile Include="Models\ProviderProfileOtherContactBindingModel.cs" />
@@ -402,6 +407,14 @@
     <Compile Include="Models\ProviderProfileViewModel.cs" />
     <Compile Include="Models\ProvidersViewModel.cs" />
     <Compile Include="Models\ProviderUpdateLanguageBindingModel.cs" />
+    <Compile Include="Models\Provider\Creation\EmploymentBindingModel.cs" />
+    <Compile Include="Models\Provider\Creation\FreelanceBindingModel.cs" />
+    <Compile Include="Models\Provider\Creation\IndividualProvider\IndividualDetailsBindingModel.cs" />
+    <Compile Include="Models\Provider\Creation\IndividualProvider\IndividualProviderModel.cs" />
+    <Compile Include="Models\Provider\Creation\PromotionModel.cs" />
+    <Compile Include="Models\Provider\Creation\Services\DomainBindingModel.cs" />
+    <Compile Include="Models\Provider\Creation\Services\LanguageBindingModel.cs" />
+    <Compile Include="Models\Provider\Creation\Services\ServiceBindingModel.cs" />
     <Compile Include="Models\ServiceDomainViewModel.cs" />
     <Compile Include="Models\ServiceLanguageViewModel.cs" />
     <Compile Include="Models\ServiceViewModel.cs" />

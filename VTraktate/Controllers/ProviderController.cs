@@ -21,6 +21,8 @@ using AutoMapper;
 using VTraktate.Core.Interfaces;
 using VTraktate.Core.Interfaces.BusinessLogic.Providers;
 using VTraktate.DataAccess;
+using VTraktate.Models.Provider.Creation.IndividualProvider;
+using VTraktate.Models.Provider.Creation;
 
 namespace VTraktate.Controllers
 {

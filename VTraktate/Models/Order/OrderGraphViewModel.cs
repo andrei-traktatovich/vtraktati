@@ -4,6 +4,7 @@ using System.Linq;
 using System.Linq.Expressions;
 using System.Web;
 using VTraktate.Domain.Snapshots;
+using VTraktate.Models.Helpers;
 
 namespace VTraktate.Models.Order
 {

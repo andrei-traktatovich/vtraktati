@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using VTraktate.Core.Infrastructure;
+using VTraktate.Models.Helpers;
 
 namespace VTraktate.Models
 {

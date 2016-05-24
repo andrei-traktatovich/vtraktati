@@ -2,20 +2,18 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Linq;
-using System.Linq.Expressions;
-using System.Text;
-using System.Threading.Tasks;
 using VTraktate.Domain.Interfaces;
 
 namespace VTraktate.Domain
 {
     public class Provider : ISoftDelete, ITimeStamped, IEntity
-    {
-        
+    { 
         public int Id { get; set; }
+
         public string Name { get; set; }
+
         public ProviderTypes ProviderTypeId { get; set; }
+
         public ProviderType ProviderType { get; set; }
 
         // depending on provider type, there may be a cap on the number of contact persons (1 : 1) enforced in the business logic
@@ -69,12 +67,7 @@ namespace VTraktate.Domain
 
         public bool WorksNightly { get; set; }
 
-        public void Promote(DateTime date, int userId, int? duration = null)
-        {
-            Requires.NotNull(Promotions, nameof(Promotions));
-            Promotions.Add(Promotion.Create(date, userId, duration));
-            
-        }
+        
 
         private void MakeEmployee()
         {
