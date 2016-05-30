@@ -479,6 +479,10 @@
     <Compile Include="Migrations\201603211355367_fix-legalform.Designer.cs">
       <DependentUpon>201603211355367_fix-legalform.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201605301025272_promotion_to_timestamped.cs" />
+    <Compile Include="Migrations\201605301025272_promotion_to_timestamped.Designer.cs">
+      <DependentUpon>201605301025272_promotion_to_timestamped.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TraktatContext.cs" />
@@ -812,6 +816,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201603211355367_fix-legalform.resx">
       <DependentUpon>201603211355367_fix-legalform.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201605301025272_promotion_to_timestamped.resx">
+      <DependentUpon>201605301025272_promotion_to_timestamped.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

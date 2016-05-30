@@ -34,6 +34,16 @@ namespace VTraktate
         
         public static void RegisterMappings()
         {
+            #region general
+
+            Mapper.CreateMap<IdNamePairBindingModel, int>()
+                .ForMember(x => x, conf => conf.MapFrom(y => y.Id));
+
+            Mapper.CreateMap<PersonExtendedNameBindingModel, IndividualName>();
+
+            #endregion
+
+
             Mapper.CreateMap<Email, EmailViewModel>()
                 .ForMember(x => x.CreatedByName, conf => conf.MapFrom(y => y.CreatedBy.PersonName.FullName))
                 .ForMember(x => x.ModifiedByName, conf => conf.MapFrom(y => y.ModifiedBy.PersonName.FullName))

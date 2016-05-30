@@ -409,9 +409,7 @@
     <Compile Include="Models\ProviderUpdateLanguageBindingModel.cs" />
     <Compile Include="Models\Provider\Creation\EmploymentBindingModel.cs" />
     <Compile Include="Models\Provider\Creation\FreelanceBindingModel.cs" />
-    <Compile Include="Models\Provider\Creation\IndividualProvider\IndividualDetailsBindingModel.cs" />
     <Compile Include="Models\Provider\Creation\IndividualProvider\IndividualProviderModel.cs" />
-    <Compile Include="Models\Provider\Creation\PromotionModel.cs" />
     <Compile Include="Models\Provider\Creation\Services\DomainBindingModel.cs" />
     <Compile Include="Models\Provider\Creation\Services\LanguageBindingModel.cs" />
     <Compile Include="Models\Provider\Creation\Services\ServiceBindingModel.cs" />

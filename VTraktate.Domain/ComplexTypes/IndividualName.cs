@@ -13,7 +13,7 @@ namespace VTraktate.Domain.ComplexTypes
         public string LastName { get; set; }
         public string FullName { get; set; }
         public string AlternateName { get; set; }
-        public string AddressName { get; set; }
+        public string Address { get; set; }
         public string Initials { get; set; }
     }
 }

@@ -7,19 +7,26 @@ using VTraktate.Domain.Interfaces;
 
 namespace VTraktate.Domain
 {
-    public class Promotion : ICalendarPeriod, IEntity
+    public class Promotion : ICalendarPeriod, IEntity, ITimeStamped
     {
         public int Id { get; set; }
 
         public int PromoteeId { get; set; }
         public Provider Promotee { get; set; }
-        public int PromotedById { get; set; }
-        public Person PromotedBy { get; set; }
 
         public DateTime StartDate { get; set; }
         
         public DateTime? EndDate { get; set;}
+
+        public DateTime CreatedDate { get; set; }
+
+        public int? CreatedById { get; set; }
+        public Person CreatedBy { get; set; }
+
+        public DateTime? ModifiedDate { get; set; }
+
+        public int? ModifiedById { get; set; }
+        public Person ModifiedBy { get; set; }
         
-        internal const int DEFAULT_PROMOTION_DURATION = 4;
     }
 }
